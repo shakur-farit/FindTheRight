@@ -1,7 +1,6 @@
 using Infrastructure.Services.StaticData;
-using UnityEngine;
 
-namespace Infrastructure.States
+namespace Infrastructure.States.Game
 {
 	public class LoadStaticDataState : IState
 	{

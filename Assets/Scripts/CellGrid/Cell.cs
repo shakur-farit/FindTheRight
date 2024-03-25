@@ -19,7 +19,7 @@ namespace CellGrid
 
 		private void SetupCellSize()
 		{
-			_size = _staticDataService.ForGrid.CellSize;
+			_size = _staticDataService.ForEasyLevelGrid.CellSize;
 			transform.localScale = new Vector2(_size, _size);
 		}
 	}

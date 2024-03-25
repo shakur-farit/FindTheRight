@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2266e2120f3156489353f1395740be1, type: 3}
-  m_Name: Grid Static Data
+  m_Name: Easy Level Grid Static Data
   m_EditorClassIdentifier: 
   RowsNumber: 1
-  ColumnsNumber: 4
+  ColumnsNumber: 3
   CellSize: 2

@@ -1,3 +1,4 @@
+using CellGrid;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -13,10 +14,8 @@ namespace Infrastructure.Factory
 		public GameFactory(Assets assets) => 
 			_assets = assets;
 
-		public void CreateGrid()
-		{
+		public void CreateGrid() => 
 			Grid = _assets.Instantiate(AssetsPath.GridPath);
-		}
 
 		public GameObject CreateCell(Transform transform) => 
 			Cell = _assets.Instantiate(AssetsPath.CellPath, transform);

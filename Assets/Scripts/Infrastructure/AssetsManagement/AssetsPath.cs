@@ -4,5 +4,6 @@ namespace Infrastructure.AssetsManagement
 	{
 		public const string GridPath = "Prefabs/CellGrid/Grid";
 		public const string CellPath = "Prefabs/CellGrid/Cell";
+		public const string ContentPath = "Prefabs/Content";
 	}
 }

@@ -2,7 +2,8 @@ using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgressService;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.StaticData;
-using Infrastructure.States;
+using Infrastructure.States.Game;
+using StaticEvents;
 using UnityEngine;
 using Zenject;
 
@@ -32,6 +33,12 @@ namespace Infrastructure
 			_game = new Game(_staticDataService, _gameFactory, _persistentProgressService, _loadService);
 
 			_game.GameStateMachine.Enter<LoadStaticDataState>();
+		}
+
+		private void Update()
+		{
+			if(Input.GetKeyDown(KeyCode.T))
+				StaticEventsHandler.CallLevelCompleteEvent();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgressService;
+using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.StaticData;
 using Zenject;
@@ -16,6 +17,7 @@ namespace Installers
 			RegisterAssets();
 			RegisterPersistentProgressService();
 			RegisterSaveLoadService();
+			RegisterRandomService();
 		}
 
 		private void RegisterStaticDataService() => 
@@ -32,5 +34,8 @@ namespace Installers
 
 		private void RegisterSaveLoadService() => 
 			Container.BindInterfacesAndSelfTo<SaveLoadService>().AsSingle();
+
+		private void RegisterRandomService() => 
+			Container.Bind<RandomService>().AsSingle();
 	}
 }

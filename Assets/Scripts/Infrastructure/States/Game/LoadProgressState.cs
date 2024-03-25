@@ -1,9 +1,8 @@
 using Data;
 using Infrastructure.Services.PersistentProgressService;
 using Infrastructure.Services.SaveLoad;
-using Infrastructure.Services.StaticData;
 
-namespace Infrastructure.States
+namespace Infrastructure.States.Game
 {
 	public class LoadProgressState : IState
 	{
