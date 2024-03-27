@@ -24,9 +24,8 @@ namespace Infrastructure.Services.SceneManagement
 
 		public async void RestartScene()
 		{
+			await CleanScene();
 			OpenLoadScene();
-
-			CleanScene();
 			CleanLists();
 
 			await CreateGameObjects();
@@ -41,7 +40,7 @@ namespace Infrastructure.Services.SceneManagement
 		private void OpenLoadScene() => 
 			_windowsService.Open(WindowId.Load);
 
-		private void CleanScene()
+		private async Task CleanScene()
 		{
 			_gameFactory.DestroyGrid();
 			_gameFactory.DestroyHud();

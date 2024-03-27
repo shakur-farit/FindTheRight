@@ -48,8 +48,8 @@ namespace Infrastructure.States.Game
 		private async Task LoadSceneGameObjects()
 		{
 			await CreateGrid();
-			await CreateHud();
 			await CreateUIRoot();
+			await CreateHud();
 		}
 
 		private async Task CreateGrid() => 

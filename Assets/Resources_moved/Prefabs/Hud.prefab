@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 8427190108724122184}
   - component: {fileID: 535169580531415024}
   - component: {fileID: 6448053064562822930}
+  - component: {fileID: 5481190724273366377}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -258,6 +259,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8427190108724122184}
+--- !u!210 &5481190724273366377
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101519477161234322}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -45
 --- !u!1 &5163521368534056661
 GameObject:
   m_ObjectHideFlags: 0

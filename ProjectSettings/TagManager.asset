@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Hud
+    uniqueID: 4091431963
+    locked: 0
+  - name: UIRoot
+    uniqueID: 1160110679
+    locked: 0
