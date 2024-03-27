@@ -7,5 +7,6 @@ namespace Data
 	{
 		public GridData GridData = new GridData();
 		public ContentData ContentData = new ContentData();
+		public SearchIntentData SearchIntentData = new SearchIntentData();
 	}
 }

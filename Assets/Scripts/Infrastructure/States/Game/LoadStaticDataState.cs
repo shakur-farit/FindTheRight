@@ -20,10 +20,6 @@ namespace Infrastructure.States.Game
 			LoadProgressState();
 		}
 
-		public void Exit()
-		{
-		}
-
 		private void LoadProgressState() =>
 			_gameStateMachine.Enter<LoadProgressState>();
 	}

@@ -1,9 +1,12 @@
 using Infrastructure.Factory;
-using Infrastructure.Services.PersistentProgressService;
+using Infrastructure.Services.Animation;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.Game;
-using Infrastructure.States.LevelDifficultly;
+using UI.Services.Factory;
+using UI.Services.Window;
 
 namespace Infrastructure
 {
@@ -11,14 +14,12 @@ namespace Infrastructure
 	{
 		public GameStateMachine GameStateMachine { get; }
 
-		public Game(StaticDataService staticDataService, GameFactory gameFactory,
-			PersistentProgressService persistentProgressService, ILoadService loadService)
+		public Game(StaticDataService staticDataService, GameFactory gameFactory, UIFactory uiFactory,
+			PersistentProgressService persistentProgressService, ILoadService loadService,
+			RandomService randomService, WindowService windowService, IBouncer bouncer)
 		{
-			LevelStateMachine levelStateMachine =
-				new LevelStateMachine(persistentProgressService, staticDataService, gameFactory);
-			
-			GameStateMachine = new GameStateMachine(staticDataService, gameFactory, persistentProgressService,
-				loadService, levelStateMachine);
+			GameStateMachine = new GameStateMachine(staticDataService, gameFactory, uiFactory, persistentProgressService,
+				loadService, randomService, windowService, bouncer);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 using Data;
-using Infrastructure.Services.PersistentProgressService;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.SaveLoad;
 
 namespace Infrastructure.States.Game
@@ -26,10 +26,6 @@ namespace Infrastructure.States.Game
 
 		private void EnterLoadSceneState() => 
 			_gameStateMachine.Enter<LoadSceneState>();
-
-		public void Exit()
-		{
-		}
 
 		private void LoadProgressOrInitNew() =>
 			_progressService.Progress = _loadService.LoadProgress() ?? InitNewProgress();

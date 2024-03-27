@@ -8,6 +8,6 @@ namespace Data
 	{
 		public int RowsNumber;
 		public int ColumnNumber;
-		[FormerlySerializedAs("Size")] public float CellSize;
+		public float CellSize;
 	}
 }
