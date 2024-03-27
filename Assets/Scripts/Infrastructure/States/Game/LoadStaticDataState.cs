@@ -1,4 +1,7 @@
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -6,11 +9,13 @@ namespace Infrastructure.States.Game
 	{
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly StaticDataService _staticDataService;
+		private readonly PersistentProgressService _persistentProgressService;
 
-		public LoadStaticDataState(GameStateMachine gameStateMachine, StaticDataService staticDataService)
+		public LoadStaticDataState(GameStateMachine gameStateMachine, StaticDataService staticDataService, PersistentProgressService persistentProgressService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_staticDataService = staticDataService;
+			_persistentProgressService = persistentProgressService;
 		}
 
 		public void Enter()

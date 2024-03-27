@@ -22,8 +22,8 @@ namespace Infrastructure.Factory
 		public GameObject CreateCell(Transform parentTransform) => 
 			Cell = _assets.Instantiate(AssetsPath.CellPath, parentTransform);
 
-		public void CreateContent(GameObject prefab, Transform parentTransform) => 
-			Content = _assets.Instantiate(prefab, parentTransform);
+		public GameObject CreateContent(Transform parentTransform) => 
+			Content = _assets.Instantiate(AssetsPath.ContentPath, parentTransform);
 
 		public void CreateHud() => 
 			Hud = _assets.Instantiate(AssetsPath.Hud);

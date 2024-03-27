@@ -1,17 +1,24 @@
+using System.Collections.Generic;
+using CellContent;
 using CellGrid;
-using FX;
 using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using SearchIntent;
+using StaticData;
 using StaticEvents;
+using UnityEngine;
 
 namespace Infrastructure.States.LevelDifficultly
 {
 	public class EasyLevel : IExitable
 	{
+		private const string LevelEasy = "easy";
+
+		private LevelStaticData _level;
+
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly StaticDataService _staticData;
 		private readonly LevelStateMachine _levelStateMachine;
@@ -34,7 +41,9 @@ namespace Infrastructure.States.LevelDifficultly
 		{
 			StaticEventsHandler.OnLevelComplete += EnterMediumLevelState;
 
+			SetupLevel();
 			SetupGridData();
+			SetupContent();
 			GenerateGrid();
 			GenerateSearchIntent();
 		}
@@ -49,17 +58,35 @@ namespace Infrastructure.States.LevelDifficultly
 		private void EnterMediumLevelState() => 
 			_levelStateMachine.Enter<MediumLevel>();
 
+		private void SetupLevel()
+		{
+			foreach (LevelStaticData level in _staticData.ForLevels)
+			{
+				if (level.LevelId == LevelEasy)
+				{
+					_persistentProgressService.Progress.LevelData.Level = level;
+					_level = level;
+				}
+			}
+		}
+
 		private void SetupGridData()
 		{
-			_persistentProgressService.Progress.GridData.RowsNumber = _staticData.ForEasyLevelGrid.RowsNumber;
-			_persistentProgressService.Progress.GridData.ColumnNumber= _staticData.ForEasyLevelGrid.ColumnsNumber;
-			_persistentProgressService.Progress.GridData.CellSize= _staticData.ForEasyLevelGrid.CellSize;
+			_persistentProgressService.Progress.GridData.RowsNumber = _level.RowsNumber;
+			_persistentProgressService.Progress.GridData.ColumnNumber = _level.ColumnsNumber;
+			_persistentProgressService.Progress.GridData.CellSize = _level.CellSize;
+		}
+
+		private void SetupContent()
+		{
+			ContentTypeRandomizer randomizer = new ContentTypeRandomizer(_persistentProgressService, _randomService);
+			List<ContentStaticData> currentContent = randomizer.GetRandomContentList();
+			_persistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
 		private void GenerateGrid()
 		{
-			GridGenerator generator = new GridGenerator(_gameFactory, _persistentProgressService, 
-				_staticData, _randomService, _bouncer);
+			GridGenerator generator = new GridGenerator(_gameFactory, _persistentProgressService, _randomService, _bouncer);
 			generator.GenerateGrid(true);
 		}
 
@@ -68,6 +95,7 @@ namespace Infrastructure.States.LevelDifficultly
 			SearchIntentGenerator generator = new SearchIntentGenerator(_randomService, _persistentProgressService);
 			generator.GenerateSearchIntent();
 		}
+
 
 		private void CleanGird()
 		{

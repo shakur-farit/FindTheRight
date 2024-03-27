@@ -1,27 +1,27 @@
 using System.Collections.Generic;
-using System.Linq;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.StaticData;
+using StaticData;
 
 namespace CellContent
 {
 	public class ContentTypeRandomizer
 	{
-		private readonly StaticDataService _staticDataService;
 		private readonly RandomService _randomService;
+		private readonly PersistentProgressService _persistentProgressService;
 
-		public ContentTypeRandomizer(StaticDataService staticDataService, RandomService randomService)
+		public ContentTypeRandomizer(PersistentProgressService persistentProgressService, RandomService randomService)
 		{
-			_staticDataService = staticDataService;
 			_randomService = randomService;
+			_persistentProgressService = persistentProgressService;
 		}
 
-		public List<Content> GetRandomContentList()
+		public List<ContentStaticData> GetRandomContentList()
 		{
-			List<List<Content>> contentList = new List<List<Content>>
+			List<List<ContentStaticData>> contentList = new List<List<ContentStaticData>>
 			{
-				_staticDataService.ForLettersContent.ToList(),
-				_staticDataService.ForNumbersContent.ToList()
+				_persistentProgressService.Progress.ContentData.Letters,
+				_persistentProgressService.Progress.ContentData.Numbers
 			};
 
 			int randomIndex = _randomService.Next(0, contentList.Count);

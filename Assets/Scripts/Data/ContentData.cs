@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
-using CellContent;
-using CellGrid;
+using StaticData;
 
 namespace Data
 {
 	[Serializable]
 	public class ContentData
 	{
-		public List<Content> UsedInGame = new List<Content>();
-		public List<Content> UsedInLevel = new List<Content>();
+		public List<ContentStaticData> UsedInGame = new List<ContentStaticData>();
+		public List<ContentStaticData> UsedInLevel = new List<ContentStaticData>();
+
+		public List<ContentStaticData> Letters = new List<ContentStaticData>();
+		public List<ContentStaticData> Numbers = new List<ContentStaticData>();
+
+		public List<ContentStaticData> CurrentContent = new List<ContentStaticData>();
 	}
 }

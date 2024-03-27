@@ -1,15 +1,14 @@
 using System.Collections.Generic;
-using CellContent;
-using CellGrid;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
+using StaticData;
 using StaticEvents;
 
 namespace SearchIntent
 {
 	public class SearchIntentGenerator
 	{
-		private List<Content> _contentList = new List<Content>();
+		private List<ContentStaticData> _contentList = new List<ContentStaticData>();
 
 		private readonly RandomService _randomService;
 		private readonly PersistentProgressService _persistentProgressService;

@@ -22,8 +22,8 @@ namespace Infrastructure.States.Game
 		{
 			_statesDictionary = new Dictionary<Type, IState>()
 			{
-				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService),
-				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService, loadService),
+				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService,persistentProgressService),
+				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService, loadService, staticDataService),
 				[typeof(LoadSceneState)] = new LoadSceneState(this, gameFactory, uiFactory),
 				[typeof(GameLoopingState)] = new GameLoopingState(this, persistentProgressService, staticDataService, 
 					gameFactory, randomService, bouncer),

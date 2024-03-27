@@ -1,10 +1,10 @@
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.StaticData;
 using System.Collections.Generic;
 using CellContent;
 using Infrastructure.Services.Animation;
+using StaticData;
 using UnityEngine;
 
 namespace CellGrid
@@ -19,33 +19,27 @@ namespace CellGrid
 
 		private readonly GameFactory _gameFactory;
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly StaticDataService _staticDataService;
 		private readonly RandomService _randomService;
 		private readonly IBouncer _bouncer;
 
-		public GridGenerator(GameFactory gameFactory, PersistentProgressService persistentProgressService, 
-			StaticDataService staticDataService, RandomService randomService, IBouncer bouncer)
+		public GridGenerator(GameFactory gameFactory, PersistentProgressService persistentProgressService, RandomService randomService, IBouncer bouncer)
 		{
 			_gameFactory = gameFactory;
 			_persistentProgressService = persistentProgressService;
-			_staticDataService = staticDataService;
 			_randomService = randomService;
 			_bouncer = bouncer;
 		}
 
 		public void GenerateGrid(bool canAnimate)
 		{
-			CellGenerator generator = new CellGenerator(_gameFactory, _staticDataService,
-				_persistentProgressService, _randomService);
+			CellGenerator generator = new CellGenerator(_gameFactory ,_persistentProgressService, _randomService);
 
 			ResetGridPosition();
 			SetupGridData();
 
-			List<Content> content = GetRandomContent();
-
 			for (int row = 0; row < _rowsNumber; row++)
 				for (int column = 0; column < _columnsNumber; column++)
-					generator.CreateCell(column, row, _cellSize, _gridTransform, content);
+					generator.CreateCell(column, row, _cellSize, _gridTransform);
 
 			RecenterGrid();
 
@@ -77,11 +71,11 @@ namespace CellGrid
 		private void ResetGridPosition() => 
 			_gameFactory.Grid.transform.position = Vector2.zero;
 
-		private List<Content> GetRandomContent()
+		private List<ContentStaticData> GetRandomContent()
 		{
-			ContentTypeRandomizer randomizer = new ContentTypeRandomizer(_staticDataService, _randomService);
+			ContentTypeRandomizer randomizer = new ContentTypeRandomizer(_persistentProgressService, _randomService);
 
-			List<Content> currentContentList = randomizer.GetRandomContentList();
+			List<ContentStaticData> currentContentList = randomizer.GetRandomContentList();
 
 			return currentContentList;
 		}
