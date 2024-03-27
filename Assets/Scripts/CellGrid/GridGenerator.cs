@@ -2,6 +2,7 @@ using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CellContent;
 using Infrastructure.Services.Animation;
 using StaticData;
@@ -30,7 +31,7 @@ namespace CellGrid
 			_bouncer = bouncer;
 		}
 
-		public void GenerateGrid(bool canAnimate)
+		public async Task GenerateGrid(bool canAnimate)
 		{
 			CellGenerator generator = new CellGenerator(_gameFactory ,_persistentProgressService, _randomService);
 
@@ -39,7 +40,7 @@ namespace CellGrid
 
 			for (int row = 0; row < _rowsNumber; row++)
 				for (int column = 0; column < _columnsNumber; column++)
-					generator.CreateCell(column, row, _cellSize, _gridTransform);
+					await generator.CreateCell(column, row, _cellSize, _gridTransform);
 
 			RecenterGrid();
 
@@ -48,7 +49,7 @@ namespace CellGrid
 				GameObject objectToBounce = new GameObject();
 				_gridTransform.SetParent(objectToBounce.transform);
 
-				_bouncer.DoBounceEffect(objectToBounce.transform, 1.5f, 1f);
+				await _bouncer.DoBounceEffect(objectToBounce.transform, 1.5f, 1f);
 			}
 		}
 

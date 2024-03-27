@@ -84,10 +84,10 @@ namespace Infrastructure.States.LevelDifficultly
 			_persistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
-		private void GenerateGrid()
+		private async void GenerateGrid()
 		{
 			GridGenerator generator = new GridGenerator(_gameFactory, _persistentProgressService, _randomService, _bouncer);
-			generator.GenerateGrid(false);
+			await generator.GenerateGrid(false);
 		}
 
 		private void GenerateSearchIntent()

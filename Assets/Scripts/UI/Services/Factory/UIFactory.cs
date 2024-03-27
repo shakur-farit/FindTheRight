@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -12,14 +13,30 @@ namespace UI.Services.Factory
 		public UIFactory(Assets assets) =>
 			_assets = assets;
 
-		public void CreateUIRoot() =>
-			UIRoot = _assets.Instantiate(AssetsPath.UIRootPath).transform;
+		public async Task WarmUp()
+		{
+			await _assets.Instantiate<GameObject>(AssetsAddress.UIRootPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.GameCompleteWindowPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.LoadingWindowPath);
+		}
 
-		public void CreateGameCompleteWindow(Transform parentTransform) =>
-			_assets.Instantiate(AssetsPath.GameCompleteWindowPath, parentTransform);
+		public async Task CreateUIRoot()
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.UIRootPath);
+			UIRoot = _assets.Instantiate(prefab).transform;
+		}
 
-		public void CreateLoadingWindow(Transform parentTransform) => 
-			_assets.Instantiate(AssetsPath.LoadingWindowPath, parentTransform);
+		public async void CreateGameCompleteWindow(Transform parentTransform)
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.GameCompleteWindowPath);
+			_assets.Instantiate(prefab, parentTransform);
+		}
+
+		public async void CreateLoadingWindow(Transform parentTransform)
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.LoadingWindowPath);
+			_assets.Instantiate(prefab, parentTransform);
+		}
 
 		public void DestroyUIRoot() => 
 			Object.Destroy(UIRoot.gameObject);

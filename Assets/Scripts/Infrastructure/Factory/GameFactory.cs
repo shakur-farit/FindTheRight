@@ -1,4 +1,4 @@
-using CellGrid;
+using System.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -16,17 +16,37 @@ namespace Infrastructure.Factory
 		public GameFactory(Assets assets) => 
 			_assets = assets;
 
-		public void CreateGrid() => 
-			Grid = _assets.Instantiate(AssetsPath.GridPath);
+		public async Task WarmUp()
+		{
+			await _assets.Instantiate<GameObject>(AssetsAddress.GridPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.CellPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.ContentPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.HudPath);
+		}
 
-		public GameObject CreateCell(Transform parentTransform) => 
-			Cell = _assets.Instantiate(AssetsPath.CellPath, parentTransform);
+		public async Task CreateGrid()
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.GridPath);
+			Grid = _assets.Instantiate(prefab);
+		}
 
-		public GameObject CreateContent(Transform parentTransform) => 
-			Content = _assets.Instantiate(AssetsPath.ContentPath, parentTransform);
+		public async Task<GameObject> CreateCell(Transform parentTransform)
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.CellPath);
+			return Cell = _assets.Instantiate(prefab, parentTransform);
+		}
 
-		public void CreateHud() => 
-			Hud = _assets.Instantiate(AssetsPath.Hud);
+		public async Task<GameObject> CreateContent(Transform parentTransform)
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.ContentPath);
+			return Content = _assets.Instantiate(prefab, parentTransform);
+		}
+
+		public async Task CreateHud()
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.HudPath);
+			Hud = _assets.Instantiate(prefab);
+		}
 
 		public void DestroyGrid() => 
 			Object.Destroy(Grid);

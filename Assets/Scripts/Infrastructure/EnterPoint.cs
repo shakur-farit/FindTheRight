@@ -1,3 +1,5 @@
+using FX;
+using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
@@ -19,31 +21,35 @@ namespace Infrastructure
 		private StaticDataService _staticDataService;
 		private GameFactory _gameFactory;
 		private UIFactory _uiFactory;
+		private FXFactory _fxFactory;
 		private PersistentProgressService _persistentProgressService;
 		private RandomService _randomService;
 		private WindowService _windowService;
 		private ILoadService _loadService;
 		private IBouncer _bouncer;
+		private Assets _assets;
 
 		[Inject]
 		public void Constructor(StaticDataService staticDataService, GameFactory gameFactory, UIFactory uiFactory,
-			PersistentProgressService persistentProgressService, ILoadService loadService, RandomService randomService,
-			WindowService windowService, IBouncer bouncer)
+			FXFactory fxFactory, PersistentProgressService persistentProgressService, ILoadService loadService, 
+			RandomService randomService, WindowService windowService, IBouncer bouncer, Assets assets)
 		{
 			_staticDataService = staticDataService;
 			_gameFactory = gameFactory;
 			_uiFactory = uiFactory;
+			_fxFactory = fxFactory;
 			_persistentProgressService = persistentProgressService;
 			_loadService = loadService;
 			_randomService = randomService;
 			_windowService = windowService;
 			_bouncer = bouncer;
+			_assets = assets;
 		}
 
 		private void Awake()
 		{
 			_game = new Game(_staticDataService, _gameFactory, _uiFactory,
-				_persistentProgressService, _loadService, _randomService, _windowService, _bouncer);
+				_persistentProgressService, _loadService, _randomService, _windowService, _bouncer, _assets, _fxFactory);
 
 			_game.GameStateMachine.Enter<LoadStaticDataState>();
 		}

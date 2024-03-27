@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CellContent;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
 
@@ -22,11 +22,11 @@ namespace CellGrid
 			_randomService = randomService;
 		}
 
-		public void CreateCell(int column, int row, float cellSize, Transform parentTransform)
+		public async Task CreateCell(int column, int row, float cellSize, Transform parentTransform)
 		{
 			List<ContentStaticData> content = _persistentProgressService.Progress.ContentData.CurrentContent;
 
-			GameObject cellPrefab = _gameFactory.CreateCell(parentTransform);
+			GameObject cellPrefab = await _gameFactory.CreateCell(parentTransform);
 
 			SetupCellPosition(column, row, cellSize, cellPrefab);
 
@@ -41,10 +41,10 @@ namespace CellGrid
 			cell.transform.position = new Vector2(cellXPosition, cellYPosition);
 		}
 
-		private void CreateContent(GameObject cell, List<ContentStaticData> content)
+		private async void CreateContent(GameObject cell, List<ContentStaticData> content)
 		{
 			ContentGenerator generator = new ContentGenerator(_persistentProgressService, _randomService, _gameFactory);
-			generator.GenerateContent(cell.transform, content);
+			await generator.GenerateContent(cell.transform, content);
 		}
 	}
 }

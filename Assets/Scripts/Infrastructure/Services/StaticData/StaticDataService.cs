@@ -13,17 +13,11 @@ namespace Infrastructure.Services.StaticData
 
 		public LevelStaticData[] ForLevels { get; private set; }
 		public ContentStaticData[] ForContent { get; private set; }
-		//public Content[] ForLettersContent { get; private set; }
-		//public Content[] ForNumbersContent { get; private set; }
 
 		public void Load()
 		{
 			ForLevels = Resources.LoadAll<LevelStaticData>(LevelsStaticDataPath);
 			ForContent = Resources.LoadAll<ContentStaticData>(ContentStaticDataPath);
-
-			//ForLettersContent = Resources.LoadAll<Content>(LettersContentStaticDataPath);
-			//ForNumbersContent = Resources.LoadAll<Content>(NumbersContentStaticDataPath);
-
 		}
 	}
 }

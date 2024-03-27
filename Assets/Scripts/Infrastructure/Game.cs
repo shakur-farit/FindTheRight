@@ -1,3 +1,5 @@
+using FX;
+using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
@@ -16,10 +18,10 @@ namespace Infrastructure
 
 		public Game(StaticDataService staticDataService, GameFactory gameFactory, UIFactory uiFactory,
 			PersistentProgressService persistentProgressService, ILoadService loadService,
-			RandomService randomService, WindowService windowService, IBouncer bouncer)
+			RandomService randomService, WindowService windowService, IBouncer bouncer, Assets assets, FXFactory fxFactory)
 		{
 			GameStateMachine = new GameStateMachine(staticDataService, gameFactory, uiFactory, persistentProgressService,
-				loadService, randomService, windowService, bouncer);
+				loadService, randomService, windowService, bouncer, assets, fxFactory);
 		}
 	}
 }

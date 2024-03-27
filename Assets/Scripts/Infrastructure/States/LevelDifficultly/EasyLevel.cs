@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CellContent;
 using CellGrid;
 using Infrastructure.Factory;
@@ -43,7 +44,7 @@ namespace Infrastructure.States.LevelDifficultly
 
 			SetupLevel();
 			SetupGridData();
-			SetupContent();
+			SetupContent(); 
 			GenerateGrid();
 			GenerateSearchIntent();
 		}
@@ -84,10 +85,10 @@ namespace Infrastructure.States.LevelDifficultly
 			_persistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
-		private void GenerateGrid()
+		private async void GenerateGrid()
 		{
 			GridGenerator generator = new GridGenerator(_gameFactory, _persistentProgressService, _randomService, _bouncer);
-			generator.GenerateGrid(true);
+			await generator.GenerateGrid(true);
 		}
 
 		private void GenerateSearchIntent()

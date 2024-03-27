@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FX;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -21,20 +22,20 @@ namespace Infrastructure.Services.SceneManagement
 			_windowsService = windowsService;
 		}
 
-		public void RestartScene()
+		public async void RestartScene()
 		{
 			OpenLoadScene();
 
 			CleanScene();
 			CleanLists();
 
-			CreateGameObjects();
+			await CreateGameObjects();
 		}
 
-		private void CreateGameObjects()
+		private async Task CreateGameObjects()
 		{
-			CreateGrid();
-			CreateHud();
+			await CreateGrid();
+			await CreateHud();
 		}
 
 		private void OpenLoadScene() => 
@@ -52,10 +53,10 @@ namespace Infrastructure.Services.SceneManagement
 			_persistentProgressService.Progress.ContentData.UsedInGame.Clear();
 			_persistentProgressService.Progress.ContentData.UsedInLevel.Clear();
 		}
-		private void CreateGrid() =>
-			_gameFactory.CreateGrid();
+		private async Task CreateGrid() =>
+			await _gameFactory.CreateGrid();
 
-		private void CreateHud() =>
-			_gameFactory.CreateHud();
+		private async Task CreateHud() =>
+			await _gameFactory.CreateHud();
 	}
 }

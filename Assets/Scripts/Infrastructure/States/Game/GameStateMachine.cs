@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using FX;
+using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
@@ -18,13 +20,13 @@ namespace Infrastructure.States.Game
 
 		public GameStateMachine(StaticDataService staticDataService, GameFactory gameFactory, UIFactory uiFactory,
 			PersistentProgressService persistentProgressService, ILoadService loadService, RandomService randomService,
-			WindowService windowService, IBouncer bouncer)
+			WindowService windowService, IBouncer bouncer, Assets assets, FXFactory fxFactory)
 		{
 			_statesDictionary = new Dictionary<Type, IState>()
 			{
 				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService,persistentProgressService),
 				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService, loadService, staticDataService),
-				[typeof(LoadSceneState)] = new LoadSceneState(this, gameFactory, uiFactory),
+				[typeof(LoadSceneState)] = new LoadSceneState(this, gameFactory, uiFactory, assets, fxFactory),
 				[typeof(GameLoopingState)] = new GameLoopingState(this, persistentProgressService, staticDataService, 
 					gameFactory, randomService, bouncer),
 				[typeof(GameCompleteState)] = new GameCompleteState(this, windowService)

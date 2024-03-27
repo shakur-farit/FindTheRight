@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
@@ -20,14 +21,14 @@ namespace CellContent
 			_gameFactory = gameFactory;
 		}
 
-		public void GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
+		public async Task GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
 		{
 			List<ContentStaticData> usedContentInGame = _persistentProgressService.Progress.ContentData.UsedInGame;
 			List<ContentStaticData> usedContentOnLevel = _persistentProgressService.Progress.ContentData.UsedInLevel;
 			
 			ContentStaticData contentData = GetUnusedContentPrefab(currentContentList, usedContentInGame);
 
-			CreateContent(contentData, transform, usedContentInGame, usedContentOnLevel);
+			await CreateContent(contentData, transform, usedContentInGame, usedContentOnLevel);
 		}
 
 		private ContentStaticData GetUnusedContentPrefab(List<ContentStaticData> currentContentList, List<ContentStaticData> usedContentList)
@@ -39,10 +40,11 @@ namespace CellContent
 			return contentPrefab;
 		}
 
-		private void CreateContent(ContentStaticData contentData, Transform transform, 
+		private async Task CreateContent(ContentStaticData contentData, Transform transform, 
 			List<ContentStaticData> usedContentList, List<ContentStaticData> usedContentOnLevel)
 		{
-			Content contentPrefab = _gameFactory.CreateContent(transform).GetComponent<Content>();
+			GameObject prefab = await _gameFactory.CreateContent(transform);
+			Content contentPrefab = prefab.GetComponent<Content>();
 
 			contentPrefab.type = contentData.Type;
 			contentPrefab.ContentId = contentData.ContentId;

@@ -10,6 +10,8 @@ using SearchIntent;
 using StaticData;
 using StaticEvents;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Infrastructure.States.LevelDifficultly
 {
@@ -56,7 +58,6 @@ namespace Infrastructure.States.LevelDifficultly
 		private void EnterGameCompleteState()
 		{
 			_gameStateMachine.Enter<GameCompleteState>();
-
 			Exit();
 		}
 
@@ -86,10 +87,10 @@ namespace Infrastructure.States.LevelDifficultly
 			_persistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
-		private void GenerateGrid()
+		private async void GenerateGrid()
 		{
 			GridGenerator generator = new GridGenerator(_gameFactory, _persistentProgressService, _randomService, _bouncer);
-			generator.GenerateGrid(false);
+			await generator.GenerateGrid(false);
 		}
 
 		private void GenerateSearchIntent()

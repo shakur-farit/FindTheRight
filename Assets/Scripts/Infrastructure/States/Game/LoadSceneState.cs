@@ -1,5 +1,9 @@
+using System.Threading.Tasks;
+using FX;
+using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using UI.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -8,35 +12,54 @@ namespace Infrastructure.States.Game
 		private readonly GameFactory _gameFactory;
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly UIFactory _uiFactory;
+		private readonly FXFactory _fxFactory;
+		private readonly Assets _assets;
 
-		public LoadSceneState(GameStateMachine gameStateMachine, GameFactory gameFactory, UIFactory uiFactory)
+		public LoadSceneState(GameStateMachine gameStateMachine, GameFactory gameFactory, UIFactory uiFactory, Assets assets, FXFactory fxFactory)
 		{
 			_gameStateMachine = gameStateMachine;
 			_gameFactory = gameFactory;
 			_uiFactory = uiFactory;
+			_assets = assets;
+			_fxFactory = fxFactory;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
-			LoadSceneGameObjects();
+			InitializeAssets();
+			await WarmUpFactories();
+			await LoadSceneGameObjects();
 			EnterGameLoopingState();
 		}
 
-		private void LoadSceneGameObjects()
+		private void InitializeAssets()
 		{
-			CreateGrid();
-			CreateHud();
-			CreateUIRoot();
+			_assets.Initialize();
+			_assets.CleanUp();
 		}
 
-		private void CreateGrid() => 
-			_gameFactory.CreateGrid();
+		private async Task WarmUpFactories()
+		{
+			await _gameFactory.WarmUp();
+			await _uiFactory.WarmUp();
+			await _fxFactory.WarmUp();
+		}
 
-		private void CreateHud() => 
-			_gameFactory.CreateHud();
+		private async Task LoadSceneGameObjects()
+		{
+			await CreateGrid();
+			await CreateHud();
+			await CreateUIRoot();
+		}
 
-		private void CreateUIRoot() => 
-			_uiFactory.CreateUIRoot();
+		private async Task CreateGrid() => 
+			await _gameFactory.CreateGrid();
+
+		private async Task CreateHud() => 
+			await _gameFactory.CreateHud();
+
+		private async Task CreateUIRoot() => 
+			await _uiFactory.CreateUIRoot();
 
 		private void EnterGameLoopingState() => 
 			_gameStateMachine.Enter<GameLoopingState>();

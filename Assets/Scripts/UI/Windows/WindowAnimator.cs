@@ -23,8 +23,13 @@ namespace UI.Windows
 		{
 			_canvasGroup.alpha = _alphaStartValue;
 
-			DoFadeOut(_canvasGroup,_endFadeOutValue,_duration);
-			DoFadeIn(_canvasGroup, _endFadeInValue, _duration);
+			DoFade();
+		}
+
+		private void DoFade()
+		{
+			 DoFadeOut(_canvasGroup,_endFadeOutValue,_duration);
+			 DoFadeIn(_canvasGroup, _endFadeInValue, _duration);
 		}
 
 		private void OnDestroy() => 

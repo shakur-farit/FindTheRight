@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -9,11 +10,17 @@ namespace FX
 
 		public GameObject StarFx { get; private set; }
 
+		public async Task WarmUp() => 
+			await _assets.Instantiate<GameObject>(AssetsAddress.StarFx);
+
 		public FXFactory(Assets assets) => 
 			_assets = assets;
 
-		public void CreateStarFx() =>
-			StarFx = _assets.Instantiate(AssetsPath.StarFx);
+		public async Task CreateStarFx()
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.StarFx);
+			StarFx = _assets.Instantiate(prefab);
+		}
 
 		public void DestroyStarFx() => 
 			Object.Destroy(StarFx);
