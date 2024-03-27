@@ -10,5 +10,6 @@ namespace Infrastructure.AssetsManagement
 		public const string GameCompleteWindowPath = "GameCompleteWindow";
 		public const string LoadingWindowPath = "LoadingWindow";
 		public const string StarFx = "StarsPartical";
+		public const string DetectorPath = "ClickDetector";
 	}
 }

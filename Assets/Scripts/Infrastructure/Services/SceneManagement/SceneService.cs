@@ -24,7 +24,7 @@ namespace Infrastructure.Services.SceneManagement
 
 		public async void RestartScene()
 		{
-			await CleanScene();
+			CleanScene();
 			OpenLoadScene();
 			CleanLists();
 
@@ -35,15 +35,17 @@ namespace Infrastructure.Services.SceneManagement
 		{
 			await CreateGrid();
 			await CreateHud();
+			CreateClickDetector();
 		}
 
 		private void OpenLoadScene() => 
 			_windowsService.Open(WindowId.Load);
 
-		private async Task CleanScene()
+		private void CleanScene()
 		{
 			_gameFactory.DestroyGrid();
 			_gameFactory.DestroyHud();
+			_gameFactory.DestroyClickDetector();
 			_fxFactory.DestroyStarFx();
 		}
 
@@ -52,10 +54,14 @@ namespace Infrastructure.Services.SceneManagement
 			_persistentProgressService.Progress.ContentData.UsedInGame.Clear();
 			_persistentProgressService.Progress.ContentData.UsedInLevel.Clear();
 		}
+
 		private async Task CreateGrid() =>
 			await _gameFactory.CreateGrid();
 
 		private async Task CreateHud() =>
 			await _gameFactory.CreateHud();
+
+		private async void CreateClickDetector() => 
+			await _gameFactory.CreateClickDetector();
 	}
 }

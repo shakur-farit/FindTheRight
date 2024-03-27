@@ -50,6 +50,7 @@ namespace Infrastructure.States.Game
 			await CreateGrid();
 			await CreateUIRoot();
 			await CreateHud();
+			CreateClickDetector();
 		}
 
 		private async Task CreateGrid() => 
@@ -63,5 +64,8 @@ namespace Infrastructure.States.Game
 
 		private void EnterGameLoopingState() => 
 			_gameStateMachine.Enter<GameLoopingState>();
+
+		private async void CreateClickDetector() => 
+			await _gameFactory.CreateClickDetector();
 	}
 }

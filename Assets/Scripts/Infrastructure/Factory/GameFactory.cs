@@ -12,6 +12,7 @@ namespace Infrastructure.Factory
 		public GameObject Cell { get; private set; }
 		public GameObject Content { get; private set; }
 		public GameObject Hud { get; private set; }
+		public GameObject ClickDetector { get; private set; }
 
 		public GameFactory(Assets assets) => 
 			_assets = assets;
@@ -22,12 +23,14 @@ namespace Infrastructure.Factory
 			await _assets.Instantiate<GameObject>(AssetsAddress.CellPath);
 			await _assets.Instantiate<GameObject>(AssetsAddress.ContentPath);
 			await _assets.Instantiate<GameObject>(AssetsAddress.HudPath);
+			await _assets.Instantiate<GameObject>(AssetsAddress.DetectorPath);
 		}
 
 		public async Task CreateGrid()
 		{
 			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.GridPath);
 			Grid = _assets.Instantiate(prefab);
+			Debug.Log("CreatG");
 		}
 
 		public async Task<GameObject> CreateCell(Transform parentTransform)
@@ -46,6 +49,13 @@ namespace Infrastructure.Factory
 		{
 			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.HudPath);
 			Hud = _assets.Instantiate(prefab);
+			Debug.Log("CreatH");
+		}
+
+		public async Task CreateClickDetector()
+		{
+			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.DetectorPath);
+			ClickDetector = _assets.Instantiate(prefab);
 		}
 
 		public void DestroyGrid() => 
@@ -53,5 +63,8 @@ namespace Infrastructure.Factory
 
 		public void DestroyHud() =>
 			Object.Destroy(Hud);
+
+		public void DestroyClickDetector() => 
+			Object.Destroy(ClickDetector);
 	}
 }
