@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CellContent;
 using CellGrid;
 using Infrastructure.Factory;
@@ -10,7 +9,6 @@ using Infrastructure.Services.StaticData;
 using SearchIntent;
 using StaticData;
 using StaticEvents;
-using UnityEngine;
 
 namespace Infrastructure.States.LevelDifficultly
 {

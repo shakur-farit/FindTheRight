@@ -30,7 +30,6 @@ namespace Infrastructure.Factory
 		{
 			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.GridPath);
 			Grid = _assets.Instantiate(prefab);
-			Debug.Log("CreatG");
 		}
 
 		public async Task<GameObject> CreateCell(Transform parentTransform)
@@ -49,7 +48,6 @@ namespace Infrastructure.Factory
 		{
 			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.HudPath);
 			Hud = _assets.Instantiate(prefab);
-			Debug.Log("CreatH");
 		}
 
 		public async Task CreateClickDetector()

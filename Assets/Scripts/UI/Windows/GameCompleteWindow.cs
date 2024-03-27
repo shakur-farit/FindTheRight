@@ -1,6 +1,4 @@
-using System;
 using Infrastructure.Services.SceneManagement;
-using StaticEvents;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

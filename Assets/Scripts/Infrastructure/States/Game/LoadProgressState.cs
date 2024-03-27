@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using CellContent;
 using Data;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.StaticData;
 using StaticData;
 
@@ -12,30 +10,24 @@ namespace Infrastructure.States.Game
 	{
 		private readonly PersistentProgressService _progressService;
 		private readonly GameStateMachine _gameStateMachine;
-		private readonly ILoadService _loadService;
 		private readonly StaticDataService _staticDataService;
 
-		public LoadProgressState(GameStateMachine gameStateMachine, PersistentProgressService progressService, 
-			ILoadService loadService, StaticDataService staticDataService)
+		public LoadProgressState(GameStateMachine gameStateMachine, PersistentProgressService progressService, StaticDataService staticDataService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_progressService = progressService;
-			_loadService = loadService;
 			_staticDataService = staticDataService;
 		}
 
 		public void Enter()
 		{
-			LoadProgressOrInitNew();
+			_progressService.Progress = InitNewProgress();
 			SortContentData();
 			EnterLoadSceneState();
 		}
 
 		private void EnterLoadSceneState() => 
 			_gameStateMachine.Enter<LoadSceneState>();
-
-		private void LoadProgressOrInitNew() =>
-			_progressService.Progress = _loadService.LoadProgress() ?? InitNewProgress();
 
 		private Progress InitNewProgress() =>
 		new Progress();

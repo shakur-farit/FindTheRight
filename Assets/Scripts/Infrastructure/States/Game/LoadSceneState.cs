@@ -3,7 +3,6 @@ using FX;
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using UI.Services.Factory;
-using UnityEngine;
 
 namespace Infrastructure.States.Game
 {

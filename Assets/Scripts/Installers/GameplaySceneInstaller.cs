@@ -5,7 +5,6 @@ using Infrastructure.Services.Animation;
 using Infrastructure.Services.ContentCompare;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.SaveLoad;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using UI.Services.Factory;
@@ -24,7 +23,6 @@ namespace Installers
 			RegisterFXFactory();
 			RegisterAssets();
 			RegisterPersistentProgressService();
-			RegisterSaveLoadService();
 			RegisterRandomService();
 			RegisterSceneService();
 			RegisterWindowService();
@@ -48,9 +46,6 @@ namespace Installers
 
 		private void RegisterPersistentProgressService() => 
 			Container.Bind<PersistentProgressService>().AsSingle();
-
-		private void RegisterSaveLoadService() => 
-			Container.BindInterfacesAndSelfTo<SaveLoadService>().AsSingle();
 
 		private void RegisterRandomService() => 
 			Container.Bind<RandomService>().AsSingle();
