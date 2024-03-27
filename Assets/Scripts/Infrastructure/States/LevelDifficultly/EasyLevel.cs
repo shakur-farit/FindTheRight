@@ -59,7 +59,7 @@ namespace Infrastructure.States.LevelDifficultly
 
 		private void SetupLevel()
 		{
-			foreach (LevelStaticData level in _staticData.ForLevels)
+			foreach (LevelStaticData level in _staticData.ForLevels.LevelstList)
 			{
 				if (level.LevelId == LevelEasy)
 				{

@@ -26,7 +26,7 @@ namespace Infrastructure.AssetsManagement
 		public GameObject Instantiate(GameObject prefab, Transform parentTransform) => 
 			_diContainer.InstantiatePrefab(prefab, parentTransform);
 
-		public async Task<T> Instantiate<T>(string addressReference) where T : class
+		public async Task<T> Load<T>(string addressReference) where T : class
 		{
 			if (_completedCache.TryGetValue(addressReference, out AsyncOperationHandle completedHandle))
 				return completedHandle.Result as T;

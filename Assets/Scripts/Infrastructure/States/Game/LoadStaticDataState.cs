@@ -16,9 +16,9 @@ namespace Infrastructure.States.Game
 			_persistentProgressService = persistentProgressService;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
-			_staticDataService.Load();
+			await _staticDataService.Load();
 
 			LoadProgressState();
 		}

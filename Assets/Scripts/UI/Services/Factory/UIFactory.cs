@@ -15,26 +15,26 @@ namespace UI.Services.Factory
 
 		public async Task WarmUp()
 		{
-			await _assets.Instantiate<GameObject>(AssetsAddress.UIRootPath);
-			await _assets.Instantiate<GameObject>(AssetsAddress.GameCompleteWindowPath);
-			await _assets.Instantiate<GameObject>(AssetsAddress.LoadingWindowPath);
+			await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
+			await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
+			await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
 		}
 
 		public async Task CreateUIRoot()
 		{
-			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.UIRootPath);
+			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
 			UIRoot = _assets.Instantiate(prefab).transform;
 		}
 
 		public async void CreateGameCompleteWindow(Transform parentTransform)
 		{
-			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.GameCompleteWindowPath);
+			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
 			_assets.Instantiate(prefab, parentTransform);
 		}
 
 		public async void CreateLoadingWindow(Transform parentTransform)
 		{
-			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.LoadingWindowPath);
+			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
 			_assets.Instantiate(prefab, parentTransform);
 		}
 

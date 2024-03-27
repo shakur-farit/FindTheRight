@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Infrastructure.AssetsManagement;
 using StaticData;
 using UnityEngine;
 
@@ -5,16 +7,31 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{
-		private const string LevelsStaticDataPath = "StaticData/Levels";
-		private const string ContentStaticDataPath = "StaticData/Content";
+		private readonly Assets _assets;
 
-		public LevelStaticData[] ForLevels { get; private set; }
-		public ContentStaticData[] ForContent { get; private set; }
+		public StaticDataService(Assets assets) => 
+			_assets = assets;
 
-		public void Load()
+		private const string LevelsListPath = "Levels Static Data List";
+		private const string ContentListPath = "Content Static Data List";
+
+		public LevelStaticDataList ForLevels { get; private set; }
+		public ContentStaticDataList ForContent { get; private set; }
+
+		public async Task Load()
 		{
-			ForLevels = Resources.LoadAll<LevelStaticData>(LevelsStaticDataPath);
-			ForContent = Resources.LoadAll<ContentStaticData>(ContentStaticDataPath);
+			await WarmUp();
+
+			ForLevels =  await _assets.Load<LevelStaticDataList>(LevelsListPath);
+			ForContent = await _assets.Load<ContentStaticDataList>(ContentListPath);
+
+			Debug.Log(ForLevels);
+		}
+
+		private async Task WarmUp()
+		{
+			await _assets.Load<LevelStaticDataList>(LevelsListPath);
+			await _assets.Load<ContentStaticDataList>(ContentListPath);
 		}
 	}
 }

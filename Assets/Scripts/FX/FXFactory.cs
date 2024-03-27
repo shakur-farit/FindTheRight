@@ -11,14 +11,14 @@ namespace FX
 		public GameObject StarFx { get; private set; }
 
 		public async Task WarmUp() => 
-			await _assets.Instantiate<GameObject>(AssetsAddress.StarFx);
+			await _assets.Load<GameObject>(AssetsAddress.StarFx);
 
 		public FXFactory(Assets assets) => 
 			_assets = assets;
 
 		public async Task CreateStarFx()
 		{
-			GameObject prefab = await _assets.Instantiate<GameObject>(AssetsAddress.StarFx);
+			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.StarFx);
 			StarFx = _assets.Instantiate(prefab);
 		}
 

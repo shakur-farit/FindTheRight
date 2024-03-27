@@ -70,6 +70,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Levels
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3585e016320acc24e8be76e94644c109, type: 2}

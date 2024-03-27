@@ -34,7 +34,7 @@ namespace Infrastructure.States.Game
 
 		private void SortContentData()
 		{
-			foreach (ContentStaticData content in _staticDataService.ForContent)
+			foreach (ContentStaticData content in _staticDataService.ForContent.ContentList)
 			{
 				if (content.Type == ContentType.Letters)
 					_progressService.Progress.ContentData.Letters.Add(content);

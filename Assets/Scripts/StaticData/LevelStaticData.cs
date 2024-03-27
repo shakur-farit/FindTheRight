@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Grid Static Data", menuName = "ScriptableObjects/Static Data/Grid")]
+	[CreateAssetMenu(fileName = "Grid Static Data", menuName = "ScriptableObjects/Static Data/Level")]
 	public class LevelStaticData : ScriptableObject
 	{
 		public string LevelId;
