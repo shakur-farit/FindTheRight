@@ -11,13 +11,13 @@ namespace Infrastructure.Services.Animation
 			Vector3 originalScale = transform.localScale;
 			Vector3 scaleTo = originalScale * scalingValue;
 
-			   await transform.DOScale(scaleTo, duration)
-				.SetEase(Ease.InOutSine)
-				.OnComplete(() =>
-				{
-					transform.DOScale(originalScale, duration)
-						.SetEase(Ease.OutBack);
-				}).AsyncWaitForCompletion();
+			await transform.DOScale(scaleTo, duration)
+		 .SetEase(Ease.InOutSine)
+		 .AsyncWaitForCompletion();
+			
+			await transform.DOScale(originalScale, duration)
+			.SetEase(Ease.OutBack)
+			.AsyncWaitForCompletion();
 		}
 
 		public async Task DoShakeEffect(Transform transform, float duration, float strength, int vibrato, float randomness) =>
