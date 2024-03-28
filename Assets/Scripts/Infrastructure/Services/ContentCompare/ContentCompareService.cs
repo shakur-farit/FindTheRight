@@ -41,7 +41,6 @@ namespace Infrastructure.Services.ContentCompare
 			{
 				animator.DoShakeEffect();
 			}
-	
 		}
 
 		private async Task BounceContent(Content content, float scalingValue, float duration) => 

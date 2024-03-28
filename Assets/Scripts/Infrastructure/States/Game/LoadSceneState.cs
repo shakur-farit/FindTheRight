@@ -6,7 +6,7 @@ using UI.Services.Factory;
 
 namespace Infrastructure.States.Game
 {
-	internal class LoadSceneState : IState
+	public class LoadSceneState : IState
 	{
 		private readonly GameFactory _gameFactory;
 		private readonly GameStateMachine _gameStateMachine;

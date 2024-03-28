@@ -95,7 +95,6 @@ namespace Infrastructure.States.LevelDifficultly
 			generator.GenerateSearchIntent();
 		}
 
-
 		private void CleanGird()
 		{
 			GridCleaner cleaner = new GridCleaner(_gameFactory, _persistentProgressService);

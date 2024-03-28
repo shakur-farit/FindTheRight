@@ -4,9 +4,4 @@ namespace Infrastructure.States
 	{
 		void Enter();
 	}
-
-	public interface IExitable : IState
-	{
-		void Exit();
-	}
 }

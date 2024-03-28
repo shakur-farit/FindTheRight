@@ -16,7 +16,6 @@ namespace Infrastructure.States.Game
 	{
 		private readonly Dictionary<Type, IState> _statesDictionary;
 
-
 		public GameStateMachine(StaticDataService staticDataService, GameFactory gameFactory, UIFactory uiFactory,
 			PersistentProgressService persistentProgressService, RandomService randomService,
 			WindowService windowService, IBouncer bouncer, Assets assets, FXFactory fxFactory)

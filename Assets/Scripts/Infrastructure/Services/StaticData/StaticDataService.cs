@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using StaticData;
-using UnityEngine;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -24,8 +23,6 @@ namespace Infrastructure.Services.StaticData
 
 			ForLevels =  await _assets.Load<LevelStaticDataList>(LevelsListPath);
 			ForContent = await _assets.Load<ContentStaticDataList>(ContentListPath);
-
-			Debug.Log(ForLevels);
 		}
 
 		private async Task WarmUp()

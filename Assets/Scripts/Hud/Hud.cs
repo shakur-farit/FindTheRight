@@ -8,7 +8,6 @@ namespace Hud
 {
 	public class Hud : MonoBehaviour
 	{
-		[SerializeField] private TextMeshProUGUI _lableText;
 		[SerializeField] private TextMeshProUGUI _searchIntentText;
 		private PersistentProgressService _persistentProgressService;
 
@@ -22,10 +21,7 @@ namespace Hud
 		private void OnDestroy() => 
 			StaticEventsHandler.OnSearchIntentChanged -= UpdateSearchIntentText;
 
-		private void UpdateSearchIntentText()
-		{
-			_lableText.text = "Find";
-			_searchIntentText.text = _persistentProgressService.Progress.SearchIntentData.SearchIntent;
-		}
+		private void UpdateSearchIntentText() => 
+			_searchIntentText.text = "Find " + _persistentProgressService.Progress.SearchIntentData.SearchIntent;
 	}
 }

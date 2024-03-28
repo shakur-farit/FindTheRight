@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.States.LevelDifficultly
 {
-	internal class MediumLevel : IExitable
+	public class MediumLevel : IExitable
 	{
 		private const string LevelMedium = "medium";
 

@@ -7,7 +7,7 @@ namespace CellContent
 	{
 		public Transform Transform;
 		
-		public ContentType type { get; set; }
+		public ContentType Type { get; set; }
 		public string ContentId { get; set; }
 		public Sprite Sprite { get; set; }
 
@@ -22,6 +22,6 @@ namespace CellContent
 		}
 
 		private void NormalizeContentSprite() => 
-			HelperUtility.NumberSpriteNormalize(type, Transform, ContentId);
+			HelperUtility.NumberSpriteNormalize(Type, Transform, ContentId);
 	}
 }

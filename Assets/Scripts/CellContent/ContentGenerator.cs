@@ -35,7 +35,15 @@ namespace CellContent
 		{
 			ContentStaticData contentPrefab = GetRandomContent(currentContentList);
 			while (usedContentList.Contains(contentPrefab))
+			{
+				if (usedContentList.Count >= currentContentList.Count)
+				{
+					Debug.LogError($"Not enough {currentContentList[0].Type} Type content. Add more data");
+					return null;
+				}
+				
 				contentPrefab = GetRandomContent(currentContentList);
+			}
 
 			return contentPrefab;
 		}
@@ -46,7 +54,7 @@ namespace CellContent
 			GameObject prefab = await _gameFactory.CreateContent(transform);
 			Content contentPrefab = prefab.GetComponent<Content>();
 
-			contentPrefab.type = contentData.Type;
+			contentPrefab.Type = contentData.Type;
 			contentPrefab.ContentId = contentData.ContentId;
 			contentPrefab.Sprite = contentData.Sprite;
 
