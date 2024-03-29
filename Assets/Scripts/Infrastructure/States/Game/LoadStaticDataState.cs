@@ -1,5 +1,6 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -18,6 +19,7 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			Debug.Log("Enter in Static");
 			await _staticDataService.Load();
 
 			LoadProgressState();

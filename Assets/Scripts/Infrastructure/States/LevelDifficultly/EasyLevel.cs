@@ -9,6 +9,7 @@ using Infrastructure.Services.StaticData;
 using SearchIntent;
 using StaticData;
 using StaticEvents;
+using UnityEngine;
 
 namespace Infrastructure.States.LevelDifficultly
 {
@@ -42,7 +43,7 @@ namespace Infrastructure.States.LevelDifficultly
 
 			SetupLevel();
 			SetupGridData();
-			SetupContent(); 
+			SetupContent();
 			GenerateGrid();
 			GenerateSearchIntent();
 		}

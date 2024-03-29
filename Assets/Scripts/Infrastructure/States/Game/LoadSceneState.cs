@@ -3,6 +3,7 @@ using FX;
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using UI.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -25,6 +26,7 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			Debug.Log("Enter in Scene");
 			InitializeAssets();
 			await WarmUpFactories();
 			await LoadSceneGameObjects();

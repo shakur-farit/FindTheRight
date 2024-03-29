@@ -28,7 +28,11 @@ namespace Installers
 			RegisterWindowService();
 			RegisterContentCompareService();
 			RegisterAnimationService();
+			RegisterSceneCleaner();
 		}
+
+		private void RegisterSceneCleaner() => 
+			Container.Bind<SceneCleaner>().AsSingle();
 
 		private void RegisterStaticDataService() => 
 			Container.Bind<StaticDataService>().AsSingle();

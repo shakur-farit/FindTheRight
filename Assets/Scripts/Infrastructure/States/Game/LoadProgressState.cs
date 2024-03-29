@@ -3,6 +3,7 @@ using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -21,6 +22,7 @@ namespace Infrastructure.States.Game
 
 		public void Enter()
 		{
+			Debug.Log("Enter in Progress");
 			_progressService.Progress = InitNewProgress();
 			SortContentData();
 			SetupClickDetectorData();

@@ -1,6 +1,7 @@
 using Infrastructure.Services.PersistentProgress;
 using StaticEvents;
 using UI.Services.Window;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -25,6 +26,10 @@ namespace Infrastructure.States.Game
 			_windowService.Open(WindowId.GameComplete);
 
 			ReturnClicker();
+
+			Debug.Log("Enter in Conplete");
+
+
 		}
 
 		private void ReturnClicker() => 
@@ -32,6 +37,9 @@ namespace Infrastructure.States.Game
 
 		private void RestartGame()
 		{
+			Debug.Log("Restatr");
+
+
 			_gameStateMachine.Enter<LoadStaticDataState>();
 
 			StaticEventsHandler.OnRestartedGame -= RestartGame;
