@@ -4,6 +4,7 @@ namespace StaticEvents
 {
 	public static class StaticEventsHandler
 	{
+		public static event Action OnRestartedGame;
 		public static event Action OnLevelComplete;
 		public static event Action OnSearchIntentChanged;
 		public static event Action OnStartedGamePlay;
@@ -16,5 +17,8 @@ namespace StaticEvents
 
 		public static void CallStartedGamePlayEvent() => 
 			OnStartedGamePlay?.Invoke();
+
+		public static void CallRestartGameEvent() => 
+			OnRestartedGame?.Invoke();
 	}
 }

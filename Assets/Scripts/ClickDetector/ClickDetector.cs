@@ -1,5 +1,6 @@
 using CellContent;
 using Infrastructure.Services.ContentCompare;
+using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
@@ -8,19 +9,27 @@ namespace ClickDetector
 	public class ClickDetector : MonoBehaviour
 	{
 		private Camera _camera;
+		private bool _canClick;
 
 		private ContentCompareService _contentCompareService;
+		private PersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(ContentCompareService contentCompareService) => 
+		public void Constructor(ContentCompareService contentCompareService,
+			PersistentProgressService persistentProgressService)
+		{
 			_contentCompareService = contentCompareService;
+			_persistentProgressService = persistentProgressService;
+		}
 
 		void Update() =>
 			TryClickContent();
 
 		private void TryClickContent()
 		{
-			if (Input.GetMouseButtonDown(0))
+			_canClick = _persistentProgressService.Progress.ClickDetectorData.CanClick;
+
+			if (_canClick && Input.GetMouseButtonDown(0))
 			{
 				_camera = Camera.main;
 

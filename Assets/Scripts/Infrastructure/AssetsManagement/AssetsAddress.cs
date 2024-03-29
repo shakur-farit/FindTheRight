@@ -2,6 +2,7 @@ namespace Infrastructure.AssetsManagement
 {
 	public class AssetsAddress
 	{
+		public const string GridParentPath = "GridContainer";
 		public const string GridPath = "Grid";
 		public const string CellPath = "Cell";
 		public const string ContentPath = "Content";

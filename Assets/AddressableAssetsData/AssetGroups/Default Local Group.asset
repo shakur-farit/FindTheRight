@@ -75,14 +75,20 @@ MonoBehaviour:
     m_Address: Levels Static Data List
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 11400000, guid: ba1e1a1603f87c44f8989aae9616ebbd, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: ba1e1a1603f87c44f8989aae9616ebbd, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 16e5d36f1905c4a48b3e58578acf1ab0
     m_Address: Content Static Data List
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 11400000, guid: 16e5d36f1905c4a48b3e58578acf1ab0, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 16e5d36f1905c4a48b3e58578acf1ab0, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 1790b01fcfeb00340a20c7de5c0331db
+    m_Address: GridContainer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1115294770783012829, guid: 1790b01fcfeb00340a20c7de5c0331db, type: 3}
+    m_TargetAsset: {fileID: 1115294770783012829, guid: 1790b01fcfeb00340a20c7de5c0331db, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e408391096458aa40ad82262c54a3cdc, type: 2}
   m_SchemaSet:

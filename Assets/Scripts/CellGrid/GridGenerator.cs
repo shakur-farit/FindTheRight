@@ -46,10 +46,13 @@ namespace CellGrid
 
 			if (canAnimate)
 			{
-				GameObject objectToBounce = new GameObject();
-				_gridTransform.SetParent(objectToBounce.transform);
+				float scalingValue = 1.5f;
+				float duration = 1f;
 
-				await _bouncer.DoBounceEffect(objectToBounce.transform, 1.5f, 1f);
+				Transform gridParent = _gameFactory.GridParent;
+				_gridTransform.SetParent(gridParent);
+
+				await _bouncer.DoBounceEffect(gridParent, scalingValue, duration);
 			}
 		}
 

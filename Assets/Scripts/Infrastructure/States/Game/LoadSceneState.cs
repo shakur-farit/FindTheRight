@@ -47,10 +47,14 @@ namespace Infrastructure.States.Game
 		private async Task LoadSceneGameObjects()
 		{
 			await CreateGrid();
+			await CreateGridParent();
 			await CreateUIRoot();
 			await CreateHud();
 			CreateClickDetector();
 		}
+
+		private async Task CreateGridParent() =>
+			await _gameFactory.CreateGridParent();
 
 		private async Task CreateGrid() => 
 			await _gameFactory.CreateGrid();

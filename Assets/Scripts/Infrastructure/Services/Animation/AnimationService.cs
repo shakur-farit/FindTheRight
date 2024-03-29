@@ -18,12 +18,22 @@ namespace Infrastructure.Services.Animation
 			await transform.DOScale(originalScale, duration)
 			.SetEase(Ease.OutBack)
 			.AsyncWaitForCompletion();
+
+			DOTween.Kill(transform);
 		}
 
-		public async Task DoShakeEffect(Transform transform, float duration, float strength, int vibrato, float randomness) =>
+		public async Task DoShakeEffect(Transform transform, float duration, float strength, int vibrato, float randomness)
+		{
 			await transform.DOShakePosition(duration, strength, vibrato, randomness).AsyncWaitForCompletion();
 
-		public async Task DoFade(CanvasGroup canvasGroup, float endValue, float duration) => 
+			DOTween.Kill(transform);
+		}
+
+		public async Task DoFade(CanvasGroup canvasGroup, float endValue, float duration)
+		{
 			await canvasGroup.DOFade(endValue, duration).AsyncWaitForCompletion();
+
+			DOTween.Kill(canvasGroup);
+		}
 	}
 }

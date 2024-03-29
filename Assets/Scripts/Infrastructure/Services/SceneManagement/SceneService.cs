@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using FX;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
+using StaticEvents;
+using UI.Services.Factory;
 using UI.Services.Window;
 
 namespace Infrastructure.Services.SceneManagement
@@ -12,23 +14,26 @@ namespace Infrastructure.Services.SceneManagement
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly FXFactory _fxFactory;
 		private readonly WindowService _windowsService;
+		private readonly UIFactory _uiFactory;
 
 		public SceneService(GameFactory gameFactory, PersistentProgressService persistentProgressService, 
-			FXFactory fxFactory, WindowService windowsService)
+			FXFactory fxFactory, WindowService windowsService, UIFactory uiFactory)
 		{
 			_gameFactory = gameFactory;
 			_persistentProgressService = persistentProgressService;
 			_fxFactory = fxFactory;
 			_windowsService = windowsService;
+			_uiFactory = uiFactory;
 		}
 
-		public async void RestartScene()
+		public void RestartScene()
 		{
 			CleanScene();
 			OpenLoadScene();
 			CleanLists();
 
-			await CreateGameObjects();
+			
+			//await CreateGameObjects();
 		}
 
 		private async Task CreateGameObjects()
@@ -36,6 +41,8 @@ namespace Infrastructure.Services.SceneManagement
 			await CreateGrid();
 			await CreateHud();
 			CreateClickDetector();
+
+			StaticEventsHandler.CallRestartGameEvent();
 		}
 
 		private void OpenLoadScene() => 
@@ -43,9 +50,10 @@ namespace Infrastructure.Services.SceneManagement
 
 		private void CleanScene()
 		{
-			_gameFactory.DestroyGrid();
+			_gameFactory.DestroyGridParent();
 			_gameFactory.DestroyHud();
 			_gameFactory.DestroyClickDetector();
+			_uiFactory.DestroyUIRoot();
 			_fxFactory.DestroyStarFx();
 		}
 

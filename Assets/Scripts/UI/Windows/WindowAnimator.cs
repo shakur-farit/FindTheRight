@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
 using UnityEngine;
@@ -18,16 +19,16 @@ namespace UI.Windows
 		public void Constructor(IFadeInOut fadeInOut) =>
 			_fadeInOut = fadeInOut;
 
-		private void Start()
+		private async void Start()
 		{
 			_canvasGroup.alpha = _alphaStartValue;
 
-			DoFadeIn(_canvasGroup, _endFadeValue, _duration);
+			await DoFadeIn(_canvasGroup, _endFadeValue, _duration);
 		}
 
 		private void OnDestroy() => 
 			DOTween.Kill(transform);
-		private void DoFadeIn(CanvasGroup canvas, float endValue, float duration) =>
-			_fadeInOut.DoFade(canvas, endValue, duration);
+		private async Task DoFadeIn(CanvasGroup canvas, float endValue, float duration) =>
+			await _fadeInOut.DoFade(canvas, endValue, duration);
 	}
 }

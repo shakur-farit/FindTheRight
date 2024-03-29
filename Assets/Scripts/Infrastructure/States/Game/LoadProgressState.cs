@@ -23,6 +23,7 @@ namespace Infrastructure.States.Game
 		{
 			_progressService.Progress = InitNewProgress();
 			SortContentData();
+			SetupClickDetectorData();
 			EnterLoadSceneState();
 		}
 
@@ -43,5 +44,8 @@ namespace Infrastructure.States.Game
 					_progressService.Progress.ContentData.Numbers.Add(content);
 			}
 		}
+
+		private void SetupClickDetectorData() => 
+			_progressService.Progress.ClickDetectorData.CanClick = true;
 	}
 }

@@ -1,3 +1,4 @@
+using Infrastructure.Services.PersistentProgress;
 using StaticEvents;
 using UI.Services.Window;
 
@@ -7,25 +8,33 @@ namespace Infrastructure.States.Game
 	{
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly WindowService _windowService;
+		private readonly PersistentProgressService _persistentProgressService;
 
-		public GameCompleteState(GameStateMachine gameStateMachine, WindowService windowService)
+		public GameCompleteState(GameStateMachine gameStateMachine, WindowService windowService, 
+			PersistentProgressService persistentProgressService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_windowService = windowService;
+			_persistentProgressService = persistentProgressService;
 		}
 
 		public void Enter()
 		{
-			StaticEventsHandler.OnStartedGamePlay += EnterGameLoopingSceneState;
+			StaticEventsHandler.OnRestartedGame += RestartGame;
 
 			_windowService.Open(WindowId.GameComplete);
+
+			ReturnClicker();
 		}
 
-		private void EnterGameLoopingSceneState()
-		{
-			_gameStateMachine.Enter<GameLoopingState>();
+		private void ReturnClicker() => 
+			_persistentProgressService.Progress.ClickDetectorData.CanClick = false;
 
-			StaticEventsHandler.OnStartedGamePlay -= EnterGameLoopingSceneState;
+		private void RestartGame()
+		{
+			_gameStateMachine.Enter<LoadStaticDataState>();
+
+			StaticEventsHandler.OnRestartedGame -= RestartGame;
 		}
 	}
 }

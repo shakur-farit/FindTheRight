@@ -9,5 +9,6 @@ namespace Data
 		public ContentData ContentData = new ContentData();
 		public SearchIntentData SearchIntentData = new SearchIntentData();
 		public LevelData LevelData = new LevelData();
+		public ClickDetectorData ClickDetectorData = new ClickDetectorData();
 	}
 }
