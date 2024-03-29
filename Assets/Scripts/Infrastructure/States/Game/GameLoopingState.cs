@@ -36,7 +36,7 @@ namespace Infrastructure.States.Game
 			_levelStateMachine = new LevelStateMachine(_persistentProgressService, _stateDataService, _gameFactory,
 				_gameStateMachine, _randomService, _bouncer);
 
-			_levelStateMachine.Enter<EasyLevel>();
+			_levelStateMachine.Enter<EasyLevelState>();
 		}
 	}
 }

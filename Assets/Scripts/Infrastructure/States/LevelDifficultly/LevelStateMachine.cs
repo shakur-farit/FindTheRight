@@ -20,9 +20,9 @@ namespace Infrastructure.States.LevelDifficultly
 		{
 			_statesDictionary = new Dictionary<Type, IExitable>()
 			{
-				[typeof(EasyLevel)] = new EasyLevel(this, persistentProgressService, staticData, gameFactory, randomService, bouncer),
-				[typeof(MediumLevel)] = new MediumLevel(this, persistentProgressService, staticData, gameFactory, randomService, bouncer),
-				[typeof(HardLevel)] = new HardLevel(persistentProgressService, staticData, gameFactory, gameStateMachine, randomService, bouncer),
+				[typeof(EasyLevelState)] = new EasyLevelState(staticData, persistentProgressService, randomService, gameFactory, bouncer, this),
+				[typeof(MediumLevelState)] = new MediumLevelState(staticData, persistentProgressService, randomService, gameFactory, bouncer, this),
+				[typeof(HardLevelState)] = new HardLevelState(staticData, persistentProgressService, randomService, gameFactory, bouncer, gameStateMachine),
 			};
 		}
 
