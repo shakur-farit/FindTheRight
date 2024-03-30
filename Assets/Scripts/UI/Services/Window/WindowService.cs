@@ -24,5 +24,20 @@ namespace UI.Services.Window
 					break;
 			}
 		}
+
+		public  void Close(WindowId windowId)
+		{
+			switch (windowId)
+			{
+				case WindowId.None:
+					break;
+				case WindowId.GameComplete:
+					 _uiFactory.DestroyGameCompleteWindow();
+					break;
+				case WindowId.Load:
+					 _uiFactory.DestroyLoadSceneWindow();
+					break;
+			}
+		}
 	}
 }

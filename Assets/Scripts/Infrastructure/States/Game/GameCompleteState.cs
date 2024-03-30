@@ -23,21 +23,17 @@ namespace Infrastructure.States.Game
 		{
 			StaticEventsHandler.OnRestartedGame += RestartGame;
 
+			Debug.Log("OpenWindow");
 			await _windowService.Open(WindowId.GameComplete);
 
-			ReturnClicker();
-
-			Debug.Log("Enter in Conplete");
+			ReturnClicks();
 		}
 
-		private void ReturnClicker() => 
+		private void ReturnClicks() => 
 			_persistentProgressService.Progress.ClickDetectorData.CanClick = false;
 
 		private void RestartGame()
 		{
-			Debug.Log("Restatr");
-
-
 			_gameStateMachine.Enter<LoadStaticDataState>();
 
 			StaticEventsHandler.OnRestartedGame -= RestartGame;

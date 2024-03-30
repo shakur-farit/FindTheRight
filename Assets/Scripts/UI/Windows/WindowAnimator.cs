@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace UI.Windows
@@ -9,9 +10,10 @@ namespace UI.Windows
 	public class WindowAnimator : MonoBehaviour
 	{
 		[SerializeField] private CanvasGroup _canvasGroup;
-		[SerializeField] private  float _alphaStartValue = 0f; 
-		[SerializeField] private  float _endFadeValue = 1f;
-		[SerializeField] private  float _duration = 0.5f;
+		[SerializeField] private float _alphaStartValue = 0f; 
+		[SerializeField] private float _endFadeOutValue = 1f;
+		[SerializeField] private float _endFadeInValue = 1f;
+		[SerializeField] private float _duration = 0.5f;
 
 		private IFadeInOut _fadeInOut;
 
@@ -23,13 +25,16 @@ namespace UI.Windows
 		{
 			_canvasGroup.alpha = _alphaStartValue;
 
-			await DoFadeIn(_canvasGroup, _endFadeValue, _duration);
+			await DoFadeOut();
 		}
 
 		private void OnDestroy() => 
-			DOTween.Kill(transform);
+			DOTween.Kill(_canvasGroup);
 
-		private async Task DoFadeIn(CanvasGroup canvas, float endValue, float duration) =>
-			await _fadeInOut.DoFade(canvas, endValue, duration);
+		public async Task DoFadeIn() =>
+			await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
+
+		private async Task DoFadeOut() => 
+			await _fadeInOut.DoFade(_canvasGroup,_endFadeOutValue, _duration);
 	}
 }

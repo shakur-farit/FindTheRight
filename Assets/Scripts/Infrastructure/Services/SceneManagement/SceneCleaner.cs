@@ -22,11 +22,22 @@ namespace Infrastructure.Services.SceneManagement
 
 		public void CleanScene()
 		{
+			DestroyGameObjects();
+			DestroyUIObjects();
+			DestroyFXObjects();
+		}
+
+		public void DestroyFXObjects() => 
+			_fxFactory.DestroyStarFx();
+
+		public void DestroyUIObjects() => 
+			_uiFactory.DestroyUIRoot();
+
+		public void DestroyGameObjects()
+		{
 			_gameFactory.DestroyGridParent();
 			_gameFactory.DestroyHud();
 			_gameFactory.DestroyClickDetector();
-			_uiFactory.DestroyUIRoot();
-			_fxFactory.DestroyStarFx();
 		}
 
 		public void CleanLists()

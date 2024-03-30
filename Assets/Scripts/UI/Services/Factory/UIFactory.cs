@@ -9,6 +9,8 @@ namespace UI.Services.Factory
 		private readonly Assets _assets;
 
 		public Transform UIRoot { get; private set; }
+		public GameObject GameCompleteWindow { get; private set; }
+		public GameObject LoadSceneWindow { get; private set; }
 
 		public UIFactory(Assets assets) =>
 			_assets = assets;
@@ -29,16 +31,22 @@ namespace UI.Services.Factory
 		public async Task CreateGameCompleteWindow(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
-			_assets.Instantiate(prefab, parentTransform);
+			GameCompleteWindow = _assets.Instantiate(prefab, parentTransform);
 		}
 
 		public async Task CreateLoadingWindow(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
-			_assets.Instantiate(prefab, parentTransform);
+			LoadSceneWindow = _assets.Instantiate(prefab, parentTransform);
 		}
 
 		public void DestroyUIRoot() => 
 			Object.Destroy(UIRoot.gameObject);
+
+		public void DestroyGameCompleteWindow() => 
+			Object.Destroy(GameCompleteWindow);
+
+		public void DestroyLoadSceneWindow() => 
+			Object.Destroy(LoadSceneWindow);
 	}
 }

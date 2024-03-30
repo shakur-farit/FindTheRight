@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2587027141643201799}
   - component: {fileID: 1688295524930947088}
+  - component: {fileID: 2049619936588264849}
   m_Layer: 5
   m_Name: GameCompleteWindow
   m_TagString: Untagged
@@ -51,6 +52,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RestartButton: {fileID: 8998827883354323475}
+--- !u!114 &2049619936588264849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082304341194378253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81641aae16799545b2d9e8936731e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 8165869021632789009}
+  _alphaStartValue: 0
+  _endFadeOutValue: 0.8
+  _endFadeInValue: 0
+  _duration: 1
 --- !u!1 &3331986101995259674
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,9 +81,8 @@ GameObject:
   - component: {fileID: 7281720702644619850}
   - component: {fileID: 4182987574651377881}
   - component: {fileID: 8165869021632789009}
-  - component: {fileID: 6123734513180978515}
   m_Layer: 5
-  m_Name: Uncklicker
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,22 +157,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &6123734513180978515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3331986101995259674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81641aae16799545b2d9e8936731e1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 8165869021632789009}
-  _alphaStartValue: 0
-  _endFadeValue: 0.8
-  _duration: 1.5
 --- !u!1 &7451716307235726499
 GameObject:
   m_ObjectHideFlags: 0
