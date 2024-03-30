@@ -28,6 +28,7 @@ namespace UI.Windows
 
 		private void OnDestroy() => 
 			DOTween.Kill(transform);
+
 		private async Task DoFadeIn(CanvasGroup canvas, float endValue, float duration) =>
 			await _fadeInOut.DoFade(canvas, endValue, duration);
 	}

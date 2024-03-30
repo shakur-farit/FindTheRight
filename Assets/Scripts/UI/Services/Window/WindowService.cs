@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UI.Services.Factory;
 
 namespace UI.Services.Window
@@ -9,18 +10,17 @@ namespace UI.Services.Window
 		public WindowService(UIFactory uiFactory) =>
 			_uiFactory = uiFactory;
 
-		public void Open(WindowId windowId)
+		public async Task Open(WindowId windowId)
 		{
-
 			switch (windowId)
 			{
 				case WindowId.None:
 					break;
 				case WindowId.GameComplete:
-					_uiFactory.CreateGameCompleteWindow(_uiFactory.UIRoot);
+					await _uiFactory.CreateGameCompleteWindow(_uiFactory.UIRoot);
 					break;
 				case WindowId.Load:
-					_uiFactory.CreateLoadingWindow(_uiFactory.UIRoot);
+					await _uiFactory.CreateLoadingWindow(_uiFactory.UIRoot);
 					break;
 			}
 		}

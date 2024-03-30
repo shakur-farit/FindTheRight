@@ -19,17 +19,15 @@ namespace Infrastructure.States.Game
 			_persistentProgressService = persistentProgressService;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
 			StaticEventsHandler.OnRestartedGame += RestartGame;
 
-			_windowService.Open(WindowId.GameComplete);
+			await _windowService.Open(WindowId.GameComplete);
 
 			ReturnClicker();
 
 			Debug.Log("Enter in Conplete");
-
-
 		}
 
 		private void ReturnClicker() => 

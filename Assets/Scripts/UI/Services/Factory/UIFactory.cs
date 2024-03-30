@@ -26,13 +26,13 @@ namespace UI.Services.Factory
 			UIRoot = _assets.Instantiate(prefab).transform;
 		}
 
-		public async void CreateGameCompleteWindow(Transform parentTransform)
+		public async Task CreateGameCompleteWindow(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
 			_assets.Instantiate(prefab, parentTransform);
 		}
 
-		public async void CreateLoadingWindow(Transform parentTransform)
+		public async Task CreateLoadingWindow(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
 			_assets.Instantiate(prefab, parentTransform);

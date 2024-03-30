@@ -23,7 +23,7 @@ namespace Infrastructure.States.LevelDifficultly
 		protected readonly RandomService RandomService;
 		protected readonly GameFactory GameFactory;
 		protected readonly IBouncer Bouncer;
-
+		
 		protected LevelDifficulty(StaticDataService staticData, PersistentProgressService persistentProgressService,
 			RandomService randomService, GameFactory gameFactory, IBouncer bouncer)
 		{

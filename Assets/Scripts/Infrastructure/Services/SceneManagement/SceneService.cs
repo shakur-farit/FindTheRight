@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using StaticEvents;
 using UI.Services.Window;
 
@@ -14,16 +15,17 @@ namespace Infrastructure.Services.SceneManagement
 			_sceneCleaner = sceneCleaner;
 		}
 
-		public void RestartScene()
+		public async void RestartScene()
 		{
+			await OpenLoadScene();
 			CleanScene();
-			OpenLoadScene();
 			CleanLists();
+
 			StaticEventsHandler.CallRestartGameEvent();
 		}
 
-		private void OpenLoadScene() => 
-			_windowsService.Open(WindowId.Load);
+		private async Task OpenLoadScene() => 
+			await _windowsService.Open(WindowId.Load);
 
 		private void CleanScene() => 
 			_sceneCleaner.CleanScene();

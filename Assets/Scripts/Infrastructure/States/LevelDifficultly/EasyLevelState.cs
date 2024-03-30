@@ -28,7 +28,6 @@ namespace Infrastructure.States.LevelDifficultly
 			CleanGird();
 		}
 
-
 		protected override void EnterNextState() => 
 			_levelStateMachine.Enter<MediumLevelState>();
 

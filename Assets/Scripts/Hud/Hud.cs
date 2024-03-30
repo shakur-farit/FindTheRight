@@ -9,6 +9,7 @@ namespace Hud
 	public class Hud : MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI _searchIntentText;
+
 		private PersistentProgressService _persistentProgressService;
 
 		[Inject]
@@ -22,6 +23,6 @@ namespace Hud
 			StaticEventsHandler.OnSearchIntentChanged -= UpdateSearchIntentText;
 
 		private void UpdateSearchIntentText() => 
-			_searchIntentText.text = "Find " + _persistentProgressService.Progress.SearchIntentData.SearchIntent;
+			_searchIntentText.text = _persistentProgressService.Progress.SearchIntentData.SearchIntent;
 	}
 }
