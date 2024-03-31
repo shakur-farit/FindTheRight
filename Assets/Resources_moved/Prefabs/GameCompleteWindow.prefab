@@ -66,9 +66,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8165869021632789009}
   _alphaStartValue: 0
-  _endFadeOutValue: 0.8
-  _endFadeInValue: 0
-  _duration: 1
+  _endFadeInValue: 0.8
+  _endFadeOutValue: 0
+  _duration: 0.5
 --- !u!1 &3331986101995259674
 GameObject:
   m_ObjectHideFlags: 0

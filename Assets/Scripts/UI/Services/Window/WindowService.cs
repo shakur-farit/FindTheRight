@@ -25,7 +25,7 @@ namespace UI.Services.Window
 			}
 		}
 
-		public  void Close(WindowId windowId)
+		public void Close(WindowId windowId)
 		{
 			switch (windowId)
 			{

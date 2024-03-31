@@ -4,6 +4,7 @@ using FX;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using StaticEvents;
+using UnityEngine;
 
 namespace Infrastructure.Services.ContentCompare
 {
@@ -32,7 +33,6 @@ namespace Infrastructure.Services.ContentCompare
 			if (content.ContentId == searchIntent)
 			{
 				await CreateStarEffect(content);
-
 				await BounceContent(content,ScalingValue,Duration);
 
 				StaticEventsHandler.CallLevelCompleteEvent();

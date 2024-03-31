@@ -32,7 +32,6 @@ namespace Infrastructure.States.Game
 
 		public void Enter()
 		{
-			Debug.Log("Enter in GameKooping");
 			_levelStateMachine = new LevelStateMachine(_persistentProgressService, _stateDataService, _gameFactory,
 				_gameStateMachine, _randomService, _bouncer);
 

@@ -19,7 +19,6 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
-			Debug.Log("Enter in Static");
 			await _staticDataService.Load();
 
 			LoadProgressState();

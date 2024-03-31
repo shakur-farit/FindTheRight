@@ -19,13 +19,7 @@ namespace UI.Windows
 			RestartButton.onClick.AddListener(Restart);
 
 
-		private void Restart()
-		{
+		private void Restart() => 
 			_restartable.RestartScene();
-			CloseWindow();
-		}
-
-		private void CloseWindow() =>
-			Destroy(gameObject);
 	}
 }

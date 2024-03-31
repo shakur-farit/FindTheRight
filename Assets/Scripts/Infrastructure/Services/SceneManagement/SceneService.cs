@@ -20,27 +20,29 @@ namespace Infrastructure.Services.SceneManagement
 			_uiFactory = uiFactory;
 		}
 
-		public async void RestartScene()
+		public void RestartScene()
 		{
-			Debug.Log("Press on res");
-
-			await CloserGameCompleteWindow();
-			await OpenLoadScene();
+			CloserGameCompleteWindow();
+			OpenLoadScene();
 			//CleanScene();
 			_sceneCleaner.DestroyGameObjects();
 			_sceneCleaner.DestroyFXObjects();
 			CleanLists();
 
 			StaticEventsHandler.CallRestartGameEvent();
+
+			_windowsService.Close(WindowId.Load);
+
+			_sceneCleaner.DestroyUIObjects();
 		}
 
-		private async Task CloserGameCompleteWindow()
+		private async void CloserGameCompleteWindow()
 		{
-			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeIn();
+			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
 			_windowsService.Close(WindowId.GameComplete);
 		}
 
-		private async Task OpenLoadScene() => 
+		private async void OpenLoadScene() => 
 			await _windowsService.Open(WindowId.Load);
 
 		private void CleanScene() => 

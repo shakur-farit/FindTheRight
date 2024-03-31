@@ -22,7 +22,6 @@ namespace Infrastructure.States.Game
 
 		public void Enter()
 		{
-			Debug.Log("Enter in Progress");
 			_progressService.Progress = InitNewProgress();
 			SortContentData();
 			SetupClickDetectorData();

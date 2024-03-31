@@ -23,7 +23,6 @@ namespace Infrastructure.States.Game
 		{
 			StaticEventsHandler.OnRestartedGame += RestartGame;
 
-			Debug.Log("OpenWindow");
 			await _windowService.Open(WindowId.GameComplete);
 
 			ReturnClicks();
