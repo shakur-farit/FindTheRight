@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
@@ -11,7 +12,7 @@ namespace UI.Windows
 		[SerializeField] private CanvasGroup _canvasGroup;
 		[SerializeField] private float _alphaStartValue = 0f;
 		[SerializeField] private float _endFadeInValue = 1f;
-		[SerializeField] private float _endFadeOutValue = 1f;
+		[SerializeField] private float _endFadeOutValue = 0f;
 		[SerializeField] private float _duration = 0.5f;
 
 		private IFadeInOut _fadeInOut;
@@ -20,21 +21,25 @@ namespace UI.Windows
 		public void Constructor(IFadeInOut fadeInOut) =>
 			_fadeInOut = fadeInOut;
 
-		private 
-			void Start()
-		{
+		private void Awake() => 
 			_canvasGroup.alpha = _alphaStartValue;
 
+		private void Start() => 
 			DoFadeIn();
-		}
 
 		private void OnDestroy() => 
 			DOTween.Kill(_canvasGroup);
 
-		public async Task DoFadeOut() => 
+		public async Task DoFadeOut()
+		{
 			await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
+			Debug.Log("Close - " + gameObject.name );
+		}
 
-		private async void DoFadeIn() => 
+		private async void DoFadeIn()
+		{
 			await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
+			Debug.Log("Open - " + gameObject.name);
+		}
 	}
 }

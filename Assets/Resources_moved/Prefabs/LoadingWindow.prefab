@@ -66,7 +66,7 @@ MonoBehaviour:
   _alphaStartValue: 0
   _endFadeInValue: 1
   _endFadeOutValue: 0
-  _duration: 1
+  _duration: 3
 --- !u!1 &2829345441064080832
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,5 +229,5 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
