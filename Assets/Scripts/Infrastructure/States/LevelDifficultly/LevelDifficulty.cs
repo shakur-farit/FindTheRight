@@ -54,7 +54,7 @@ namespace Infrastructure.States.LevelDifficultly
 		{
 			foreach (LevelStaticData level in StaticData.ForLevels.LevelstList)
 			{
-				if (level.LevelId == levelId)
+				if (level.LevelId.ToUpper() == levelId.ToUpper())
 				{
 					PersistentProgressService.Progress.LevelData.Level = level;
 					DifficultyLevel = level;

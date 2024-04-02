@@ -3,7 +3,6 @@ using StaticEvents;
 using UI.Services.Factory;
 using UI.Services.Window;
 using UI.Windows;
-using UnityEngine;
 
 namespace Infrastructure.Services.SceneManagement
 {
@@ -22,7 +21,7 @@ namespace Infrastructure.Services.SceneManagement
 
 		public async void RestartScene()
 		{
-			await CloserGameCompleteWindow();
+			CloserGameCompleteWindow();
 
 			await OpenLoadScene();
 
@@ -31,27 +30,30 @@ namespace Infrastructure.Services.SceneManagement
 
 			CleanLists();
 
-			CloseLoadSceneWindow();
+			StaticEventsHandler.CallRestartGameEvent();
 
-			//DestroyUIObjects();
-				
-			//StaticEventsHandler.CallRestartGameEvent();
+			await CloseLoadSceneWindow();
+
+			DestroyUIObjects();
 		}
 
 		private void DestroyUIObjects() => 
 			_sceneCleaner.DestroyUIObjects();
 
-		private async Task CloserGameCompleteWindow()
+		private async void CloserGameCompleteWindow()
 		{
 			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
 			_windowsService.Close(WindowId.GameComplete);
 		}
 
-		private async Task OpenLoadScene() => 
+		private async Task OpenLoadScene()
+		{
 			await _windowsService.Open(WindowId.Load);
+			await _uiFactory.LoadSceneWindow.GetComponent<WindowAnimator>().DoFadeIn();
+		}
 
-		private async  void CloseLoadSceneWindow()
-		{ 
+		private async Task CloseLoadSceneWindow()
+		{
 			await _uiFactory.LoadSceneWindow.GetComponent<WindowAnimator>().DoFadeOut();
 		 _windowsService.Close(WindowId.Load);
 		}

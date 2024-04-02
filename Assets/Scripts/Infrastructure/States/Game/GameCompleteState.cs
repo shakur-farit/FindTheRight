@@ -1,7 +1,8 @@
 using Infrastructure.Services.PersistentProgress;
 using StaticEvents;
+using UI.Services.Factory;
 using UI.Services.Window;
-using UnityEngine;
+using UI.Windows;
 
 namespace Infrastructure.States.Game
 {
@@ -10,13 +11,15 @@ namespace Infrastructure.States.Game
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly WindowService _windowService;
 		private readonly PersistentProgressService _persistentProgressService;
+		private readonly UIFactory _uiFactory;
 
 		public GameCompleteState(GameStateMachine gameStateMachine, WindowService windowService, 
-			PersistentProgressService persistentProgressService)
+			PersistentProgressService persistentProgressService, UIFactory uiFactory)
 		{
 			_gameStateMachine = gameStateMachine;
 			_windowService = windowService;
 			_persistentProgressService = persistentProgressService;
+			_uiFactory = uiFactory;
 		}
 
 		public async void Enter()
@@ -24,6 +27,7 @@ namespace Infrastructure.States.Game
 			StaticEventsHandler.OnRestartedGame += RestartGame;
 
 			await _windowService.Open(WindowId.GameComplete);
+			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeIn();
 
 			ReturnClicks();
 		}

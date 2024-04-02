@@ -7,13 +7,13 @@ namespace Utility
 	{
 		public static void NumberSpriteNormalize(ContentType type, Transform transform, string id)
 		{
-			if (type == ContentType.Numbers)
-			{
-				transform.localScale = new Vector2(0.2f, 0.2f);
+			if (type != ContentType.Numbers) 
+				return;
 
-				if (id == "7" || id == "8")
-					transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
-			}
+			transform.localScale = new Vector2(0.2f, 0.2f);
+
+			if (id == "7" || id == "8")
+				transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
 		}
 	}
 }

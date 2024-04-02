@@ -66,9 +66,6 @@ namespace Infrastructure.Factory
 		public void DestroyGridParent() =>
 			Object.Destroy(GridParent.gameObject);
 
-		public void DestroyGrid() =>
-			Object.Destroy(Grid);
-
 		public void DestroyHud() =>
 			Object.Destroy(Hud);
 

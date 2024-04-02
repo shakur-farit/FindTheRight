@@ -4,7 +4,6 @@ using FX;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using StaticEvents;
-using UnityEngine;
 
 namespace Infrastructure.Services.ContentCompare
 {

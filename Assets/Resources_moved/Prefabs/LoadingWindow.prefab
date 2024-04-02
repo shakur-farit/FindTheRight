@@ -66,7 +66,7 @@ MonoBehaviour:
   _alphaStartValue: 0
   _endFadeInValue: 1
   _endFadeOutValue: 0
-  _duration: 3
+  _duration: 0.5
 --- !u!1 &2829345441064080832
 GameObject:
   m_ObjectHideFlags: 0

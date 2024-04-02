@@ -3,7 +3,6 @@ using FX;
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using UI.Services.Factory;
-using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -47,8 +46,8 @@ namespace Infrastructure.States.Game
 
 		private async Task LoadSceneGameObjects()
 		{
-			await CreateGrid();
 			await CreateGridParent();
+			await CreateGrid();
 			await CreateUIRoot();
 			await CreateHud();
 			CreateClickDetector();

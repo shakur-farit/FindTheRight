@@ -27,7 +27,7 @@ namespace Infrastructure.States.Game
 				[typeof(LoadSceneState)] = new LoadSceneState(this, gameFactory, uiFactory, assets, fxFactory),
 				[typeof(GameLoopingState)] = new GameLoopingState(this, persistentProgressService, staticDataService, 
 					gameFactory, randomService, bouncer),
-				[typeof(GameCompleteState)] = new GameCompleteState(this, windowService, persistentProgressService)
+				[typeof(GameCompleteState)] = new GameCompleteState(this, windowService, persistentProgressService, uiFactory)
 			};
 		}
 

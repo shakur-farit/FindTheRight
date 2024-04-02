@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
@@ -24,22 +23,13 @@ namespace UI.Windows
 		private void Awake() => 
 			_canvasGroup.alpha = _alphaStartValue;
 
-		private void Start() => 
-			DoFadeIn();
-
 		private void OnDestroy() => 
 			DOTween.Kill(_canvasGroup);
 
-		public async Task DoFadeOut()
-		{
-			await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
-			Debug.Log("Close - " + gameObject.name );
-		}
-
-		private async void DoFadeIn()
-		{
+		public async Task DoFadeIn() => 
 			await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
-			Debug.Log("Open - " + gameObject.name);
-		}
+
+		public async Task DoFadeOut() => 
+			await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
 	}
 }
