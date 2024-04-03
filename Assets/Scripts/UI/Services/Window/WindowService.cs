@@ -19,9 +19,7 @@ namespace UI.Services.Window
 				case WindowId.GameComplete:
 					await _uiFactory.CreateGameCompleteWindow(_uiFactory.UIRoot);
 					break;
-				case WindowId.Load:
-					await _uiFactory.CreateLoadingWindow(_uiFactory.UIRoot);
-					break;
+
 			}
 		}
 
@@ -33,9 +31,6 @@ namespace UI.Services.Window
 					break;
 				case WindowId.GameComplete:
 					 _uiFactory.DestroyGameCompleteWindow();
-					break;
-				case WindowId.Load:
-					 _uiFactory.DestroyLoadSceneWindow();
 					break;
 			}
 		}

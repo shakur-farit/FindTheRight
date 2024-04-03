@@ -3,6 +3,7 @@ using FX;
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
 using UI.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -25,8 +26,8 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
-			InitializeAssets();
-			await WarmUpFactories();
+			InitializeAssets(); 
+			WarmUpFactories();
 			await LoadSceneGameObjects();
 			EnterGameLoopingState();
 		}
@@ -37,7 +38,7 @@ namespace Infrastructure.States.Game
 			_assets.CleanUp();
 		}
 
-		private async Task WarmUpFactories()
+		private async void WarmUpFactories()
 		{
 			await _gameFactory.WarmUp();
 			await _uiFactory.WarmUp();

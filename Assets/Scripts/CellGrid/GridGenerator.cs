@@ -74,14 +74,5 @@ namespace CellGrid
 
 		private void ResetGridPosition() => 
 			_gameFactory.Grid.transform.position = Vector2.zero;
-
-		private List<ContentStaticData> GetRandomContent()
-		{
-			ContentTypeRandomizer randomizer = new ContentTypeRandomizer(_persistentProgressService, _randomService);
-
-			List<ContentStaticData> currentContentList = randomizer.GetRandomContentList();
-
-			return currentContentList;
-		}
 	}
 }

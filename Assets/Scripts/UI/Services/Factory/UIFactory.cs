@@ -10,7 +10,6 @@ namespace UI.Services.Factory
 
 		public Transform UIRoot { get; private set; }
 		public GameObject GameCompleteWindow { get; private set; }
-		public GameObject LoadSceneWindow { get; private set; }
 
 		public UIFactory(Assets assets) =>
 			_assets = assets;
@@ -19,7 +18,6 @@ namespace UI.Services.Factory
 		{
 			await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
 			await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
-			await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
 		}
 
 		public async Task CreateUIRoot()
@@ -34,19 +32,10 @@ namespace UI.Services.Factory
 			GameCompleteWindow = _assets.Instantiate(prefab, parentTransform);
 		}
 
-		public async Task CreateLoadingWindow(Transform parentTransform)
-		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.LoadingWindowPath);
-			LoadSceneWindow = _assets.Instantiate(prefab, parentTransform);
-		}
-
 		public void DestroyUIRoot() => 
 			Object.Destroy(UIRoot.gameObject);
 
 		public void DestroyGameCompleteWindow() => 
 			Object.Destroy(GameCompleteWindow);
-
-		public void DestroyLoadSceneWindow() => 
-			Object.Destroy(LoadSceneWindow);
 	}
 }

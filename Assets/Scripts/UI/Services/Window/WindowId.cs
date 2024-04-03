@@ -4,6 +4,5 @@ namespace UI.Services.Window
 	{
 		None = 0,
 		GameComplete = 1,
-		Load = 2,
 	}
 }

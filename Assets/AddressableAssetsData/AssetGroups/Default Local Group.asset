@@ -35,12 +35,6 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
-  - m_GUID: e7ff641b295db0f49afd5914abffb93d
-    m_Address: LoadingWindow
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 18f6d1df3ae241c40851884b4ea58c36
     m_Address: Content
     m_ReadOnly: 0
@@ -87,8 +81,8 @@ MonoBehaviour:
     m_Address: GridContainer
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 1115294770783012829, guid: 1790b01fcfeb00340a20c7de5c0331db, type: 3}
-    m_TargetAsset: {fileID: 1115294770783012829, guid: 1790b01fcfeb00340a20c7de5c0331db, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e408391096458aa40ad82262c54a3cdc, type: 2}
   m_SchemaSet:

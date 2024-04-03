@@ -21,10 +21,6 @@ namespace Infrastructure.Services.SceneManagement
 
 		public async void RestartScene()
 		{
-			CloserGameCompleteWindow();
-
-			await OpenLoadScene();
-
 			_sceneCleaner.DestroyGameObjects();
 			_sceneCleaner.DestroyFXObjects();
 
@@ -32,30 +28,18 @@ namespace Infrastructure.Services.SceneManagement
 
 			StaticEventsHandler.CallRestartGameEvent();
 
-			await CloseLoadSceneWindow();
-
+			await CloserGameCompleteWindow();
+			
 			DestroyUIObjects();
 		}
 
 		private void DestroyUIObjects() => 
 			_sceneCleaner.DestroyUIObjects();
 
-		private async void CloserGameCompleteWindow()
+		private async Task CloserGameCompleteWindow()
 		{
 			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
 			_windowsService.Close(WindowId.GameComplete);
-		}
-
-		private async Task OpenLoadScene()
-		{
-			await _windowsService.Open(WindowId.Load);
-			await _uiFactory.LoadSceneWindow.GetComponent<WindowAnimator>().DoFadeIn();
-		}
-
-		private async Task CloseLoadSceneWindow()
-		{
-			await _uiFactory.LoadSceneWindow.GetComponent<WindowAnimator>().DoFadeOut();
-		 _windowsService.Close(WindowId.Load);
 		}
 
 		private void CleanLists() => 

@@ -9,6 +9,7 @@ namespace UI.Windows
 	{
 		public Button RestartButton;
 
+		private bool _canButtonRotate;
 		private IRestartable _restartable;
 
 		[Inject]
@@ -18,8 +19,22 @@ namespace UI.Windows
 		private void Awake() => 
 			RestartButton.onClick.AddListener(Restart);
 
+		private void Update()
+		{
+			if(_canButtonRotate)
+				RotateButton();
+		}
 
-		private void Restart() => 
+		private void Restart()
+		{
 			_restartable.RestartScene();
+			TurnOnButtonRotate();
+		}
+
+		private void TurnOnButtonRotate() => 
+			_canButtonRotate = true;
+
+		private void RotateButton() => 
+			RestartButton.transform.Rotate(0,0,-140 * Time.deltaTime);
 	}
 }
