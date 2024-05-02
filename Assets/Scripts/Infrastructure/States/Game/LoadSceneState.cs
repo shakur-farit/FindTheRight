@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using FX;
 using Infrastructure.AssetsManagement;
 using Infrastructure.Factory;
+using StaticEvents;
 using UI.Services.Factory;
-using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -26,6 +26,7 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			StaticEventsHandler.CallOnDebug("Load Scene State");
 			InitializeAssets(); 
 			WarmUpFactories();
 			await LoadSceneGameObjects();
@@ -45,8 +46,10 @@ namespace Infrastructure.States.Game
 			await _fxFactory.WarmUp();
 		}
 
-		private async Task LoadSceneGameObjects()
+		private async UniTask LoadSceneGameObjects()
 		{
+			StaticEventsHandler.CallOnDebug("Load Game Objects");
+
 			await CreateGridParent();
 			await CreateGrid();
 			await CreateUIRoot();
@@ -54,16 +57,20 @@ namespace Infrastructure.States.Game
 			CreateClickDetector();
 		}
 
-		private async Task CreateGridParent() =>
+		private async UniTask CreateGridParent()
+		{
 			await _gameFactory.CreateGridParent();
+			StaticEventsHandler.CallOnDebug("Create Grid");
 
-		private async Task CreateGrid() => 
+		}
+
+		private async UniTask CreateGrid() => 
 			await _gameFactory.CreateGrid();
 
-		private async Task CreateHud() => 
+		private async UniTask CreateHud() => 
 			await _gameFactory.CreateHud();
 
-		private async Task CreateUIRoot() => 
+		private async UniTask CreateUIRoot() => 
 			await _uiFactory.CreateUIRoot();
 
 		private void EnterGameLoopingState() => 

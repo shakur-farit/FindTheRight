@@ -6,6 +6,7 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.Game;
+using StaticEvents;
 using UI.Services.Factory;
 using UI.Services.Window;
 using UnityEngine;
@@ -45,8 +46,12 @@ namespace Infrastructure
 
 		private void Awake()
 		{
+			StaticEventsHandler.CallOnDebug("Enter Point");
+
 			_game = new Game(_staticDataService, _gameFactory, _uiFactory,
 				_persistentProgressService, _randomService, _windowService, _bouncer, _assets, _fxFactory);
+
+			StaticEventsHandler.CallOnDebug("Enter Machine");
 
 			_game.GameStateMachine.Enter<LoadStaticDataState>();
 		}

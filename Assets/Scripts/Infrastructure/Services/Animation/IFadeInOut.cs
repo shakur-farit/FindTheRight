@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Infrastructure.Services.Animation
 {
 	public interface IFadeInOut
 	{
-		Task DoFade(CanvasGroup canvasGroup, float endValue, float duration);
+		UniTask DoFade(CanvasGroup canvasGroup, float endValue, float duration);
 	}
 }

@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Infrastructure.Factory
 		public GameFactory(Assets assets) => 
 			_assets = assets;
 
-		public async Task WarmUp()
+		public async UniTask WarmUp()
 		{
 			await _assets.Load<GameObject>(AssetsAddress.GridParentPath);
 			await _assets.Load<GameObject>(AssetsAddress.GridPath);
@@ -27,37 +27,37 @@ namespace Infrastructure.Factory
 			await _assets.Load<GameObject>(AssetsAddress.HudPath);
 			await _assets.Load<GameObject>(AssetsAddress.DetectorPath);
 		}
-		public async Task CreateGridParent()
+		public async UniTask CreateGridParent()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GridParentPath);
 			GridParent = _assets.Instantiate(prefab).transform;
 		}
 
-		public async Task CreateGrid()
+		public async UniTask CreateGrid()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GridPath);
 			Grid = _assets.Instantiate(prefab);
 		}
 
-		public async Task<GameObject> CreateCell(Transform parentTransform)
+		public async UniTask<GameObject> CreateCell(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.CellPath);
 			return Cell = _assets.Instantiate(prefab, parentTransform);
 		}
 
-		public async Task<GameObject> CreateContent(Transform parentTransform)
+		public async UniTask<GameObject> CreateContent(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.ContentPath);
 			return Content = _assets.Instantiate(prefab, parentTransform);
 		}
 
-		public async Task CreateHud()
+		public async UniTask CreateHud()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.HudPath);
 			Hud = _assets.Instantiate(prefab);
 		}
 
-		public async Task CreateClickDetector()
+		public async UniTask CreateClickDetector()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.DetectorPath);
 			ClickDetector = _assets.Instantiate(prefab);

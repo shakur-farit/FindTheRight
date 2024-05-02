@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -14,19 +14,19 @@ namespace UI.Services.Factory
 		public UIFactory(Assets assets) =>
 			_assets = assets;
 
-		public async Task WarmUp()
+		public async UniTask WarmUp()
 		{
 			await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
 			await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
 		}
 
-		public async Task CreateUIRoot()
+		public async UniTask CreateUIRoot()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
 			UIRoot = _assets.Instantiate(prefab).transform;
 		}
 
-		public async Task CreateGameCompleteWindow(Transform parentTransform)
+		public async UniTask CreateGameCompleteWindow(Transform parentTransform)
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
 			GameCompleteWindow = _assets.Instantiate(prefab, parentTransform);

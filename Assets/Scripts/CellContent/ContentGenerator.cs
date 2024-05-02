@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
@@ -21,7 +21,7 @@ namespace CellContent
 			_gameFactory = gameFactory;
 		}
 
-		public async Task GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
+		public async UniTask GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
 		{
 			List<ContentStaticData> usedContentInGame = _persistentProgressService.Progress.ContentData.UsedInGame;
 			List<ContentStaticData> usedContentOnLevel = _persistentProgressService.Progress.ContentData.UsedInLevel;
@@ -48,7 +48,7 @@ namespace CellContent
 			return contentPrefab;
 		}
 
-		private async Task CreateContent(ContentStaticData contentData, Transform transform, 
+		private async UniTask CreateContent(ContentStaticData contentData, Transform transform, 
 			List<ContentStaticData> usedContentList, List<ContentStaticData> usedContentOnLevel)
 		{
 			GameObject prefab = await _gameFactory.CreateContent(transform);

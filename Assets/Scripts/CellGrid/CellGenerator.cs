@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CellContent;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
@@ -22,7 +22,7 @@ namespace CellGrid
 			_randomService = randomService;
 		}
 
-		public async Task CreateCell(int column, int row, float cellSize, Transform parentTransform)
+		public async UniTask CreateCell(int column, int row, float cellSize, Transform parentTransform)
 		{
 			List<ContentStaticData> content = _persistentProgressService.Progress.ContentData.CurrentContent;
 

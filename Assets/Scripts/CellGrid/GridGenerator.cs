@@ -1,11 +1,8 @@
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CellContent;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Animation;
-using StaticData;
 using UnityEngine;
 
 namespace CellGrid
@@ -31,7 +28,7 @@ namespace CellGrid
 			_bouncer = bouncer;
 		}
 
-		public async Task GenerateGrid(bool canAnimate)
+		public async UniTask GenerateGrid(bool canAnimate)
 		{
 			CellGenerator generator = new CellGenerator(_gameFactory ,_persistentProgressService, _randomService);
 

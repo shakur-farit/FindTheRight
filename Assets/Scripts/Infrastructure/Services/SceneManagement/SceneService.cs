@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using StaticEvents;
 using UI.Services.Factory;
 using UI.Services.Window;
@@ -36,7 +36,7 @@ namespace Infrastructure.Services.SceneManagement
 		private void DestroyUIObjects() => 
 			_sceneCleaner.DestroyUIObjects();
 
-		private async Task CloserGameCompleteWindow()
+		private async UniTask CloserGameCompleteWindow()
 		{
 			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
 			_windowsService.Close(WindowId.GameComplete);

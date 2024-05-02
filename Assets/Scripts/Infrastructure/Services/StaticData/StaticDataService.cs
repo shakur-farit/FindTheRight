@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using StaticData;
 
@@ -17,7 +17,7 @@ namespace Infrastructure.Services.StaticData
 		public LevelStaticDataList ForLevels { get; private set; }
 		public ContentStaticDataList ForContent { get; private set; }
 
-		public async Task Load()
+		public async UniTask Load()
 		{
 			await WarmUp();
 
@@ -25,7 +25,7 @@ namespace Infrastructure.Services.StaticData
 			ForContent = await _assets.Load<ContentStaticDataList>(ContentListPath);
 		}
 
-		private async Task WarmUp()
+		private async UniTask WarmUp()
 		{
 			await _assets.Load<LevelStaticDataList>(LevelsListPath);
 			await _assets.Load<ContentStaticDataList>(ContentListPath);

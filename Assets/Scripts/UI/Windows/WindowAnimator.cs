@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
 using UnityEngine;
@@ -26,10 +26,10 @@ namespace UI.Windows
 		private void OnDestroy() => 
 			DOTween.Kill(_canvasGroup);
 
-		public async Task DoFadeIn() => 
+		public async UniTask DoFadeIn() => 
 			await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
 
-		public async Task DoFadeOut() => 
+		public async UniTask DoFadeOut() => 
 			await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
 	}
 }

@@ -1,5 +1,5 @@
-using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using StaticEvents;
 
 namespace Infrastructure.States.Game
 {
@@ -7,13 +7,11 @@ namespace Infrastructure.States.Game
 	{
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly StaticDataService _staticDataService;
-		private readonly PersistentProgressService _persistentProgressService;
 
-		public LoadStaticDataState(GameStateMachine gameStateMachine, StaticDataService staticDataService, PersistentProgressService persistentProgressService)
+		public LoadStaticDataState(GameStateMachine gameStateMachine, StaticDataService staticDataService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_staticDataService = staticDataService;
-			_persistentProgressService = persistentProgressService;
 		}
 
 		public async void Enter()
@@ -21,6 +19,8 @@ namespace Infrastructure.States.Game
 			await _staticDataService.Load();
 
 			LoadProgressState();
+
+			StaticEventsHandler.CallOnDebug("Load Static Data");
 		}
 
 		private void LoadProgressState() =>

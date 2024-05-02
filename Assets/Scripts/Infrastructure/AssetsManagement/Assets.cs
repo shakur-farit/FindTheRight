@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,33 +12,37 @@ namespace Infrastructure.AssetsManagement
 		private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new Dictionary<string, AsyncOperationHandle>();
 		private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new Dictionary<string, List<AsyncOperationHandle>>();
 
-		private readonly DiContainer _diContainer;
+		private readonly IInstantiator _instantiator;
 
-		public Assets(DiContainer diContainer) => 
-			_diContainer = diContainer;
+		public Assets(IInstantiator instantiator) => 
+			_instantiator = instantiator;
 
 		public void Initialize() => 
-			Addressables.InitializeAsync();
+			Addressables.InitializeAsync().ToUniTask();
 
 		public GameObject Instantiate(GameObject prefab) => 
-			_diContainer.InstantiatePrefab(prefab);
+			_instantiator.InstantiatePrefab(prefab);
 
 		public GameObject Instantiate(GameObject prefab, Transform parentTransform) => 
-			_diContainer.InstantiatePrefab(prefab, parentTransform);
+			_instantiator.InstantiatePrefab(prefab, parentTransform);
 
-		public async Task<T> Load<T>(string addressReference) where T : class
+		public async UniTask<T> Load<T>(string addressReference) where T : class
 		{
 			if (_completedCache.TryGetValue(addressReference, out AsyncOperationHandle completedHandle))
 				return completedHandle.Result as T;
 
-			AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(addressReference);
+			var completionSource = new UniTaskCompletionSource<T>();
 
-			handle.Completed += h => 
+			AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(addressReference);
+			handle.Completed += h =>
+			{
 				_completedCache[addressReference] = h;
+				completionSource.TrySetResult(h.Result);
+			};
 
 			AddHandle(addressReference, handle);
 
-			return await handle.Task;
+			return await completionSource.Task;
 		}
 
 		public void CleanUp()

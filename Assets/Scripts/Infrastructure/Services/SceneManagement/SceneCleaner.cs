@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using FX;
 using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;

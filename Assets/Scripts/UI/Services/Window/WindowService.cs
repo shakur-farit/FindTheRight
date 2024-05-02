@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UI.Services.Factory;
 
 namespace UI.Services.Window
@@ -10,7 +10,7 @@ namespace UI.Services.Window
 		public WindowService(UIFactory uiFactory) =>
 			_uiFactory = uiFactory;
 
-		public async Task Open(WindowId windowId)
+		public async UniTask Open(WindowId windowId)
 		{
 			switch (windowId)
 			{

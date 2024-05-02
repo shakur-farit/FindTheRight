@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using CellContent;
+using Cysharp.Threading.Tasks;
 using FX;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
@@ -42,10 +42,10 @@ namespace Infrastructure.Services.ContentCompare
 			}
 		}
 
-		private async Task BounceContent(Content content, float scalingValue, float duration) => 
+		private async UniTask BounceContent(Content content, float scalingValue, float duration) => 
 			await _animationService.DoBounceEffect(content.Transform, scalingValue, duration);
 
-		private async Task CreateStarEffect(Content content)
+		private async UniTask CreateStarEffect(Content content)
 		{
 			await _fxFactory.CreateStarFx();
 			_fxFactory.StarFx.transform.position = content.transform.position;

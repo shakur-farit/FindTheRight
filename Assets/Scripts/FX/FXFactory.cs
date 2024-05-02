@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using UnityEngine;
 
@@ -10,13 +10,13 @@ namespace FX
 
 		public GameObject StarFx { get; private set; }
 
-		public async Task WarmUp() => 
+		public async UniTask WarmUp() => 
 			await _assets.Load<GameObject>(AssetsAddress.StarFx);
 
 		public FXFactory(Assets assets) => 
 			_assets = assets;
 
-		public async Task CreateStarFx()
+		public async UniTask CreateStarFx()
 		{
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.StarFx);
 			StarFx = _assets.Instantiate(prefab);
