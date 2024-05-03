@@ -26,6 +26,8 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			StaticEventsHandler.CallDebug("Scene");
+
 			InitializeAssets(); 
 			WarmUpFactories();
 			await LoadSceneGameObjects();

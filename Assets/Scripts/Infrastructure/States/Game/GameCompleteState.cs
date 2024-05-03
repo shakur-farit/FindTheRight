@@ -24,6 +24,8 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			StaticEventsHandler.CallDebug("GameComp");
+
 			StaticEventsHandler.OnRestartedGame += RestartGame;
 
 			await _windowService.Open(WindowId.GameComplete);

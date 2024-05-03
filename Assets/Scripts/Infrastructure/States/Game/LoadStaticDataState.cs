@@ -16,6 +16,8 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
+			StaticEventsHandler.CallDebug("StaticData");
+
 			await _staticDataService.Load();
 
 			LoadProgressState();

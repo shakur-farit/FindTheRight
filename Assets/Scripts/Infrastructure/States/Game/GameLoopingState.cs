@@ -4,6 +4,7 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.LevelDifficultly;
+using StaticEvents;
 
 namespace Infrastructure.States.Game
 {
@@ -31,6 +32,8 @@ namespace Infrastructure.States.Game
 
 		public void Enter()
 		{
+			StaticEventsHandler.CallDebug("GameLoop");
+
 			_levelStateMachine = new LevelStateMachine(_persistentProgressService, _stateDataService, _gameFactory,
 				_gameStateMachine, _randomService, _bouncer);
 

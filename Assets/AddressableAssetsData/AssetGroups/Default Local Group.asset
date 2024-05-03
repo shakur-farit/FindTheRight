@@ -69,8 +69,8 @@ MonoBehaviour:
     m_Address: Levels Static Data List
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 11400000, guid: ba1e1a1603f87c44f8989aae9616ebbd, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: ba1e1a1603f87c44f8989aae9616ebbd, type: 2}
   - m_GUID: 16e5d36f1905c4a48b3e58578acf1ab0
     m_Address: Content Static Data List
     m_ReadOnly: 0
