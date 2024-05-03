@@ -26,7 +26,6 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
-			StaticEventsHandler.CallOnDebug("Load Scene State");
 			InitializeAssets(); 
 			WarmUpFactories();
 			await LoadSceneGameObjects();
@@ -48,8 +47,6 @@ namespace Infrastructure.States.Game
 
 		private async UniTask LoadSceneGameObjects()
 		{
-			StaticEventsHandler.CallOnDebug("Load Game Objects");
-
 			await CreateGridParent();
 			await CreateGrid();
 			await CreateUIRoot();
@@ -57,12 +54,8 @@ namespace Infrastructure.States.Game
 			CreateClickDetector();
 		}
 
-		private async UniTask CreateGridParent()
-		{
+		private async UniTask CreateGridParent() => 
 			await _gameFactory.CreateGridParent();
-			StaticEventsHandler.CallOnDebug("Create Grid");
-
-		}
 
 		private async UniTask CreateGrid() => 
 			await _gameFactory.CreateGrid();

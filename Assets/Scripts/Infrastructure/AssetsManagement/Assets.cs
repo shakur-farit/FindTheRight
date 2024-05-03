@@ -18,7 +18,7 @@ namespace Infrastructure.AssetsManagement
 			_instantiator = instantiator;
 
 		public void Initialize() => 
-			Addressables.InitializeAsync().ToUniTask();
+			Addressables.InitializeAsync();
 
 		public GameObject Instantiate(GameObject prefab) => 
 			_instantiator.InstantiatePrefab(prefab);
