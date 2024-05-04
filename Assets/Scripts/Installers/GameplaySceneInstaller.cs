@@ -18,15 +18,9 @@ namespace Installers
 	{
 		public override void InstallBindings()
 		{
-			RegisterStaticDataService();
 			RegisterFactories();
-			RegisterAssets();
-			RegisterPersistentProgressService();
-			RegisterRandomService();
-			RegisterWindowService();
-			RegisterContentCompareService();
-			RegisterAnimationService();
 			RegisterStateMachines();
+			RegisterServices();
 		}
 
 		private void RegisterStateMachines()
@@ -41,6 +35,18 @@ namespace Installers
 			RegisterUIFactory();
 			RegisterFXFactory();
 			RegisterStatesFactory();
+		}
+
+		private void RegisterServices()
+		{
+			RegisterStaticDataService();
+			RegisterAssets();
+			RegisterPersistentProgressService();
+			RegisterRandomService();
+			RegisterWindowService();
+			RegisterContentCompareService();
+			RegisterAnimationService();
+			RegisterGameObjectsCreateService();
 		}
 
 		private void RegisterStaticDataService() => 
@@ -59,7 +65,7 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<StatesFactory>().AsSingle();
 
 		private void RegisterAssets() => 
-			Container.Bind<Assets>().AsSingle();
+			Container.Bind<AssetsProvider>().AsSingle();
 
 		private void RegisterPersistentProgressService() => 
 			Container.Bind<PersistentProgressService>().AsSingle();
@@ -75,5 +81,8 @@ namespace Installers
 
 		private void RegisterAnimationService() =>
 			Container.BindInterfacesAndSelfTo<AnimationService>().AsSingle();
+
+		private void RegisterGameObjectsCreateService() => 
+			Container.Bind<IGameObjectsCreateService>().To<GameObjectsCreateService>().AsSingle();
 	}
 }

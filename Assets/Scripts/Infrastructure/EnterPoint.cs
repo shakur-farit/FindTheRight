@@ -30,10 +30,10 @@ namespace Infrastructure
 
 		private void RegisterStates()
 		{
+			_gameStateMachine.RegisterState(_statesFactory.Create<WarmUpState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadStaticDataState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<GameLoopingState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<GameCompleteState>());
 
 			_levelStateMachine.RegisterState(_statesFactory.Create<EasyLevelState>());

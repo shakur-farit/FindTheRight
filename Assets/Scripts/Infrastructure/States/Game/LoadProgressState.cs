@@ -31,9 +31,6 @@ namespace Infrastructure.States.Game
 			EnterLoadSceneState();
 		}
 
-		private void EnterLoadSceneState() => 
-			_gameStateMachine.Enter<LoadSceneState>();
-
 		private void InitNewProgress() =>
 			_progressService.Progress = new Progress();
 
@@ -51,5 +48,8 @@ namespace Infrastructure.States.Game
 
 		private void SetupClickDetectorData() => 
 			_progressService.Progress.ClickDetectorData.CanClick = true;
+
+		private void EnterLoadSceneState() => 
+			_gameStateMachine.Enter<LoadSceneState>();
 	}
 }

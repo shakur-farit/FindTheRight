@@ -6,10 +6,10 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{
-		private readonly Assets _assets;
+		private readonly AssetsProvider _assetsProvider;
 
-		public StaticDataService(Assets assets) => 
-			_assets = assets;
+		public StaticDataService(AssetsProvider assetsProvider) => 
+			_assetsProvider = assetsProvider;
 
 		private const string LevelsListPath = "Levels Static Data List";
 		private const string ContentListPath = "Content Static Data List";
@@ -21,14 +21,14 @@ namespace Infrastructure.Services.StaticData
 		{
 			await WarmUp();
 
-			ForLevels =  await _assets.Load<LevelStaticDataList>(LevelsListPath);
-			ForContent = await _assets.Load<ContentStaticDataList>(ContentListPath);
+			ForLevels =  await _assetsProvider.Load<LevelStaticDataList>(LevelsListPath);
+			ForContent = await _assetsProvider.Load<ContentStaticDataList>(ContentListPath);
 		}
 
 		private async UniTask WarmUp()
 		{
-			await _assets.Load<LevelStaticDataList>(LevelsListPath);
-			await _assets.Load<ContentStaticDataList>(ContentListPath);
+			await _assetsProvider.Load<LevelStaticDataList>(LevelsListPath);
+			await _assetsProvider.Load<ContentStaticDataList>(ContentListPath);
 		}
 	}
 }

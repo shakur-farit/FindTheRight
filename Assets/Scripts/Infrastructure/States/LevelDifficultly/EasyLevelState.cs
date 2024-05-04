@@ -16,10 +16,8 @@ namespace Infrastructure.States.LevelDifficultly
 
 		public EasyLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService, RandomService randomService, 
 			GameFactory gameFactory, IBouncer bouncer, LevelStateMachine levelStateMachine) 
-			: base(staticData, persistentProgressService, randomService, gameFactory, bouncer)
-		{
+			: base(staticData, persistentProgressService, randomService, gameFactory, bouncer) =>
 			_levelStateMachine = levelStateMachine;
-		}
 
 		public void Exit()
 		{

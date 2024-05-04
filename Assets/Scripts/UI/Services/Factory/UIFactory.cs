@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using StaticEvents;
@@ -7,32 +8,34 @@ namespace UI.Services.Factory
 {
 	public class UIFactory
 	{
-		private readonly Assets _assets;
+		private readonly AssetsProvider _assetsProvider;
+		private AssetsReference _reference;
+		private readonly IGameObjectsCreateService _gameObjectsCreateService;
 
 		public Transform UIRoot { get; private set; }
 		public GameObject GameCompleteWindow { get; private set; }
 
-		public UIFactory(Assets assets) =>
-			_assets = assets;
-
-		public async UniTask WarmUp()
+		public UIFactory(AssetsProvider assetsProvider, IGameObjectsCreateService gameObjectsCreateService)
 		{
-			await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
-			await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
+			_assetsProvider = assetsProvider;
+			_gameObjectsCreateService = gameObjectsCreateService;
+
+			LoadAssetsReference();
 		}
 
 		public async UniTask CreateUIRoot()
 		{
 			StaticEventsHandler.CallDebugUI("GetInstant");
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
-			UIRoot = _assets.Instantiate(prefab).transform;
+			
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.UIRootAddress);
+			UIRoot = _gameObjectsCreateService.Instantiate(prefab).transform;
 			StaticEventsHandler.CallDebugUI($"Instant {UIRoot.GetInstanceID()}");
 		}
 
 		public async UniTask CreateGameCompleteWindow(Transform parentTransform)
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GameCompleteWindowPath);
-			GameCompleteWindow = _assets.Instantiate(prefab, parentTransform);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.GridParentAddress);
+			GameCompleteWindow = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}
 
 		public void DestroyUIRoot()
@@ -43,5 +46,8 @@ namespace UI.Services.Factory
 
 		public void DestroyGameCompleteWindow() => 
 			Object.Destroy(GameCompleteWindow);
+
+		private async void LoadAssetsReference() => 
+			_reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
 	}
 }

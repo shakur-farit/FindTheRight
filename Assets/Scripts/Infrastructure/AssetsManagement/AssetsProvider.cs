@@ -1,30 +1,17 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Zenject;
 
 namespace Infrastructure.AssetsManagement
 {
-	public class Assets
+	public class AssetsProvider
 	{
 		private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new Dictionary<string, AsyncOperationHandle>();
 		private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new Dictionary<string, List<AsyncOperationHandle>>();
 
-		private readonly IInstantiator _instantiator;
-
-		public Assets(IInstantiator instantiator) => 
-			_instantiator = instantiator;
-
-		public void Initialize() => 
+		public void Initialize() =>
 			Addressables.InitializeAsync();
-
-		public GameObject Instantiate(GameObject prefab) => 
-			_instantiator.InstantiatePrefab(prefab);
-
-		public GameObject Instantiate(GameObject prefab, Transform parentTransform) => 
-			_instantiator.InstantiatePrefab(prefab, parentTransform);
 
 		public async UniTask<T> Load<T>(string addressReference) where T : class
 		{

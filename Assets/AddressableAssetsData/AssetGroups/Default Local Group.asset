@@ -33,8 +33,8 @@ MonoBehaviour:
     m_Address: GameCompleteWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 1082304341194378253, guid: 666b3027edf4e3b4a957e754b50cf6b3, type: 3}
+    m_TargetAsset: {fileID: 1082304341194378253, guid: 666b3027edf4e3b4a957e754b50cf6b3, type: 3}
   - m_GUID: 18f6d1df3ae241c40851884b4ea58c36
     m_Address: Content
     m_ReadOnly: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: ea8f25e07e742af4189311113ff03dbe
-    m_Address: StarsPartical
+    m_Address: FXStar
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
@@ -51,8 +51,8 @@ MonoBehaviour:
     m_Address: Grid
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 4523257034028445175, guid: 9caea1e4a2385cd40be0b7d7e7c2d015, type: 3}
+    m_TargetAsset: {fileID: 4523257034028445175, guid: 9caea1e4a2385cd40be0b7d7e7c2d015, type: 3}
   - m_GUID: eeaa4b7c3385cbe4e9acea3a1e1fd240
     m_Address: Cell
     m_ReadOnly: 0
@@ -63,8 +63,8 @@ MonoBehaviour:
     m_Address: ClickDetector
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 404694954777879752, guid: 621446dda91868d42b23b6dc57c123cb, type: 3}
+    m_TargetAsset: {fileID: 404694954777879752, guid: 621446dda91868d42b23b6dc57c123cb, type: 3}
   - m_GUID: ba1e1a1603f87c44f8989aae9616ebbd
     m_Address: Levels Static Data List
     m_ReadOnly: 0
@@ -78,11 +78,17 @@ MonoBehaviour:
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 1790b01fcfeb00340a20c7de5c0331db
-    m_Address: GridContainer
+    m_Address: GridParent
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 11b0ab9d8bfc2cf41bede46d7ec57218
+    m_Address: Assets Reference
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 11400000, guid: 11b0ab9d8bfc2cf41bede46d7ec57218, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: 11b0ab9d8bfc2cf41bede46d7ec57218, type: 2}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e408391096458aa40ad82262c54a3cdc, type: 2}
   m_SchemaSet:

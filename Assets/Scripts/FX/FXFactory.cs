@@ -6,20 +6,22 @@ namespace FX
 {
 	public class FXFactory
 	{
-		private readonly Assets _assets;
+		private readonly AssetsProvider _assetsProvider;
+		private readonly IGameObjectsCreateService _gameObjectsCreateService;
 
 		public GameObject StarFx { get; private set; }
 
-		public async UniTask WarmUp() => 
-			await _assets.Load<GameObject>(AssetsAddress.StarFx);
-
-		public FXFactory(Assets assets) => 
-			_assets = assets;
+		public FXFactory(AssetsProvider assetsProvider, IGameObjectsCreateService gameObjectsCreateService)
+		{
+			_assetsProvider = assetsProvider;
+			_gameObjectsCreateService = gameObjectsCreateService;
+		}
 
 		public async UniTask CreateStarFx()
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.StarFx);
-			StarFx = _assets.Instantiate(prefab);
+			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.FXStarAddress);
+			StarFx = _gameObjectsCreateService.Instantiate(prefab);
 		}
 
 		public void DestroyStarFx() => 

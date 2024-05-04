@@ -6,7 +6,9 @@ namespace Infrastructure.Factory
 {
 	public class GameFactory
 	{
-		private readonly Assets _assets;
+		private readonly AssetsProvider _assetsProvider;
+		private AssetsReference _reference;
+		private readonly IGameObjectsCreateService _gameObjectsCreateService;
 
 		public Transform GridParent { get; private set; }
 		public GameObject Grid { get; private set; }
@@ -15,52 +17,48 @@ namespace Infrastructure.Factory
 		public GameObject Hud { get; private set; }
 		public GameObject ClickDetector { get; private set; }
 
-		public GameFactory(Assets assets) => 
-			_assets = assets;
-
-		public async UniTask WarmUp()
+		public GameFactory(AssetsProvider assetsProvider, IGameObjectsCreateService gameObjectsCreateService)
 		{
-			await _assets.Load<GameObject>(AssetsAddress.GridParentPath);
-			await _assets.Load<GameObject>(AssetsAddress.GridPath);
-			await _assets.Load<GameObject>(AssetsAddress.CellPath);
-			await _assets.Load<GameObject>(AssetsAddress.ContentPath);
-			await _assets.Load<GameObject>(AssetsAddress.HudPath);
-			await _assets.Load<GameObject>(AssetsAddress.DetectorPath);
+			_assetsProvider = assetsProvider;
+			_gameObjectsCreateService = gameObjectsCreateService;
+
+			LoadAssetsReference();
 		}
+
 		public async UniTask CreateGridParent()
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GridParentPath);
-			GridParent = _assets.Instantiate(prefab).transform;
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.GridParentAddress);
+			GridParent = _gameObjectsCreateService.Instantiate(prefab).transform;
 		}
 
 		public async UniTask CreateGrid()
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.GridPath);
-			Grid = _assets.Instantiate(prefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.GridAddress);
+			Grid = _gameObjectsCreateService.Instantiate(prefab);
 		}
 
 		public async UniTask<GameObject> CreateCell(Transform parentTransform)
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.CellPath);
-			return Cell = _assets.Instantiate(prefab, parentTransform);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.CellAddress);
+			return Cell = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}
 
 		public async UniTask<GameObject> CreateContent(Transform parentTransform)
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.ContentPath);
-			return Content = _assets.Instantiate(prefab, parentTransform);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.ContentAddress);
+			return Content = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}
 
 		public async UniTask CreateHud()
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.HudPath);
-			Hud = _assets.Instantiate(prefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.HudAddress);
+			Hud = _gameObjectsCreateService.Instantiate(prefab);
 		}
 
 		public async UniTask CreateClickDetector()
 		{
-			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.DetectorPath);
-			ClickDetector = _assets.Instantiate(prefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.ClickDetectorAddress);
+			ClickDetector = _gameObjectsCreateService.Instantiate(prefab);
 		}
 
 		public void DestroyGridParent() =>
@@ -71,5 +69,8 @@ namespace Infrastructure.Factory
 
 		public void DestroyClickDetector() => 
 			Object.Destroy(ClickDetector);
+
+		private async void LoadAssetsReference() => 
+			_reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
 	}
 }
