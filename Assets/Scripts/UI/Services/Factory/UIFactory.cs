@@ -23,9 +23,10 @@ namespace UI.Services.Factory
 
 		public async UniTask CreateUIRoot()
 		{
+			StaticEventsHandler.CallDebugUI("GetInstant");
 			GameObject prefab = await _assets.Load<GameObject>(AssetsAddress.UIRootPath);
 			UIRoot = _assets.Instantiate(prefab).transform;
-			StaticEventsHandler.CallDebugUI($"Instant {UIRoot.GetInstanceID().ToString()}");
+			StaticEventsHandler.CallDebugUI($"Instant {UIRoot.GetInstanceID()}");
 		}
 
 		public async UniTask CreateGameCompleteWindow(Transform parentTransform)
@@ -36,8 +37,8 @@ namespace UI.Services.Factory
 
 		public void DestroyUIRoot()
 		{
-			StaticEventsHandler.CallDebugUI($"Destroy {UIRoot.GetInstanceID().ToString()}");
 			Object.Destroy(UIRoot.gameObject);
+			StaticEventsHandler.CallDebugUI($"Destroy {UIRoot.GetInstanceID()}");
 		}
 
 		public void DestroyGameCompleteWindow() => 

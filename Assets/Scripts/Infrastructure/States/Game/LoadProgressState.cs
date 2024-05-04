@@ -25,7 +25,7 @@ namespace Infrastructure.States.Game
 			StaticEventsHandler.CallDebug("Progress");
 
 
-			_progressService.Progress = InitNewProgress();
+			InitNewProgress();
 			SortContentData();
 			SetupClickDetectorData();
 			EnterLoadSceneState();
@@ -34,8 +34,8 @@ namespace Infrastructure.States.Game
 		private void EnterLoadSceneState() => 
 			_gameStateMachine.Enter<LoadSceneState>();
 
-		private Progress InitNewProgress() =>
-		new Progress();
+		private void InitNewProgress() =>
+			_progressService.Progress = new Progress();
 
 		private void SortContentData()
 		{

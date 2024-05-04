@@ -1,4 +1,4 @@
-using Infrastructure.Services.SceneManagement;
+using StaticEvents;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,11 +10,6 @@ namespace UI.Windows
 		public Button RestartButton;
 
 		private bool _canButtonRotate;
-		private IRestartable _restartable;
-
-		[Inject]
-		public void Constructor(IRestartable restartable) => 
-			_restartable = restartable;
 
 		private void Awake() => 
 			RestartButton.onClick.AddListener(Restart);
@@ -27,7 +22,8 @@ namespace UI.Windows
 
 		private void Restart()
 		{
-			_restartable.RestartScene();
+			StaticEventsHandler.CallRestartGameEvent();
+
 			TurnOnButtonRotate();
 		}
 

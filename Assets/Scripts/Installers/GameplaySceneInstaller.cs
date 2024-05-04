@@ -5,8 +5,9 @@ using Infrastructure.Services.Animation;
 using Infrastructure.Services.ContentCompare;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
+using Infrastructure.States.Game;
+using Infrastructure.States.LevelDifficultly;
 using UI.Services.Factory;
 using UI.Services.Window;
 using Zenject;
@@ -18,21 +19,29 @@ namespace Installers
 		public override void InstallBindings()
 		{
 			RegisterStaticDataService();
-			RegisterGameFactory();
-			RegisterUIFactory();
-			RegisterFXFactory();
+			RegisterFactories();
 			RegisterAssets();
 			RegisterPersistentProgressService();
 			RegisterRandomService();
-			RegisterSceneService();
 			RegisterWindowService();
 			RegisterContentCompareService();
 			RegisterAnimationService();
-			RegisterSceneCleaner();
+			RegisterStateMachines();
 		}
 
-		private void RegisterSceneCleaner() => 
-			Container.Bind<SceneCleaner>().AsSingle();
+		private void RegisterStateMachines()
+		{
+			Container.Bind<GameStateMachine>().AsSingle();
+			Container.Bind<LevelStateMachine>().AsSingle();
+		}
+
+		private void RegisterFactories()
+		{
+			RegisterGameFactory();
+			RegisterUIFactory();
+			RegisterFXFactory();
+			RegisterStatesFactory();
+		}
 
 		private void RegisterStaticDataService() => 
 			Container.Bind<StaticDataService>().AsSingle();
@@ -42,8 +51,12 @@ namespace Installers
 
 		private void RegisterUIFactory() => 
 			Container.Bind<UIFactory>().AsSingle();
+
 		private void RegisterFXFactory() =>
 			Container.Bind<FXFactory>().AsSingle();
+
+		private void RegisterStatesFactory() => 
+			Container.BindInterfacesAndSelfTo<StatesFactory>().AsSingle();
 
 		private void RegisterAssets() => 
 			Container.Bind<Assets>().AsSingle();
@@ -53,9 +66,6 @@ namespace Installers
 
 		private void RegisterRandomService() => 
 			Container.Bind<RandomService>().AsSingle();
-
-		private void RegisterSceneService() => 
-			Container.BindInterfacesAndSelfTo<SceneService>().AsSingle();
 
 		private void RegisterWindowService() => 
 			Container.Bind<WindowService>().AsSingle();
