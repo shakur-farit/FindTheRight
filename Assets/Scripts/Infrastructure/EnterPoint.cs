@@ -41,8 +41,10 @@ namespace Infrastructure
 			_levelStateMachine.RegisterState(_statesFactory.Create<HardLevelState>());
 		}
 
-		private void EnterInLoadStaticDataState() => 
+		private void EnterInLoadStaticDataState()
+		{
 			_gameStateMachine.Enter<LoadStaticDataState>();
+		}
 	}
 }
 

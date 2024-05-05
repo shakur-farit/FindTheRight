@@ -3,6 +3,7 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
 using StaticEvents;
+using UnityEngine;
 
 namespace SearchIntent
 {
@@ -25,6 +26,7 @@ namespace SearchIntent
 			_contentList = _persistentProgressService.Progress.ContentData.UsedInLevel;
 
 			int randomIndex = _randomService.Next(0, _contentList.Count);
+			Debug.Log(_contentList.Count);
 
 			string searchIntent = _contentList[randomIndex].ContentId.ToUpper();
 

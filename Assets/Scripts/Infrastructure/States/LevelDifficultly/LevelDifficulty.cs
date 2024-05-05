@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CellContent;
 using CellGrid;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
@@ -34,7 +35,7 @@ namespace Infrastructure.States.LevelDifficultly
 			Bouncer = bouncer;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
 			StaticEventsHandler.OnLevelComplete += EnterNextState;
 
@@ -42,7 +43,7 @@ namespace Infrastructure.States.LevelDifficultly
 			SetupLevel(LevelId);
 			SetupGridData();
 			SetupContent();
-			GenerateGrid(CanAnimateGrid);
+			await GenerateGrid(CanAnimateGrid);
 			GenerateSearchIntent();
 		}
 
@@ -76,7 +77,7 @@ namespace Infrastructure.States.LevelDifficultly
 			PersistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
-		private async void GenerateGrid(bool canAnimate)
+		private async UniTask GenerateGrid(bool canAnimate)
 		{
 			GridGenerator generator = new GridGenerator(GameFactory, PersistentProgressService, RandomService, Bouncer);
 			await generator.GenerateGrid(canAnimate);

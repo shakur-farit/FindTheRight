@@ -6,6 +6,7 @@ using StaticEvents;
 using UI.Services.Factory;
 using UI.Services.Window;
 using UI.Windows;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -36,6 +37,7 @@ namespace Infrastructure.States.Game
 			StaticEventsHandler.OnRestartedGame += RestartScene;
 
 			await _windowService.Open(WindowId.GameComplete);
+			Debug.Log(_uiFactory.GameCompleteWindow);
 			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeIn();
 
 			ReturnClicks();

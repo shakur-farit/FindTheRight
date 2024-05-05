@@ -34,7 +34,7 @@ namespace UI.Services.Factory
 
 		public async UniTask CreateGameCompleteWindow(Transform parentTransform)
 		{
-			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.GridParentAddress);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.GameCompleteWindowAddress);
 			GameCompleteWindow = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}
 

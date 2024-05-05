@@ -3,6 +3,7 @@ using Infrastructure.Factory;
 using Infrastructure.States.LevelDifficultly;
 using StaticEvents;
 using UI.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -29,6 +30,7 @@ namespace Infrastructure.States.Game
 
 		private async UniTask LoadSceneGameObjects()
 		{
+
 			await CreateGridParent();
 			await CreateGrid();
 			await CreateUIRoot();
