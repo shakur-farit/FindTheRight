@@ -89,10 +89,8 @@ namespace Infrastructure.States.LevelDifficultly
 			PersistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
-		private async UniTask GenerateGrid(bool canAnimate)
-		{
+		private async UniTask GenerateGrid(bool canAnimate) => 
 			await _gridGenerator.GenerateGrid(canAnimate);
-		}
 
 		private void GenerateSearchIntent() => 
 			_searchIntentGenerator.GenerateSearchIntent();

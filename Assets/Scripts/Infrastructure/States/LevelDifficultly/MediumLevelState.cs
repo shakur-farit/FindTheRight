@@ -14,18 +14,15 @@ namespace Infrastructure.States.LevelDifficultly
 		private const string MediumDifficulty = "medium";
 
 		private readonly LevelStateMachine _levelStateMachine;
-		private readonly IGridCleaner _gridCleaner;
 
 		public MediumLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService,
 			RandomService randomService, IGridFactory gridFactory, IBouncer bouncer, LevelStateMachine levelStateMachine,
 			ILevelCompleteEvent levelCompleteEvent,
-			ISearchIntentGenerator searchIntentGenerator, IGridGenerator gridGenerator, IGridCleaner gridCleaner)
+			ISearchIntentGenerator searchIntentGenerator, IGridGenerator gridGenerator)
 			: base(staticData, persistentProgressService, randomService, gridFactory, bouncer,
-				levelCompleteEvent, searchIntentGenerator, gridGenerator)
-		{
+				levelCompleteEvent, searchIntentGenerator, gridGenerator) =>
+			
 			_levelStateMachine = levelStateMachine;
-			_gridCleaner = gridCleaner;
-		}
 
 		public void Exit()
 		{
@@ -43,7 +40,13 @@ namespace Infrastructure.States.LevelDifficultly
 			CanAnimateGrid = false;
 		}
 
-		private void CleanGird() => 
-			_gridCleaner.Clean();
+		private void CleanGird()
+		{
+			GridFactory.DestroyGrid();
+			CleanUsedOnLevelContentList();
+		}
+
+		private void CleanUsedOnLevelContentList() =>
+			PersistentProgressService.Progress.ContentData.UsedInLevel.Clear();
 	}
 }

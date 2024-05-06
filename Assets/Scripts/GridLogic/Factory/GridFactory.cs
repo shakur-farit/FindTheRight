@@ -34,6 +34,9 @@ namespace GridLogic.Factory
 			Grid = _gameObjectsCreateService.Instantiate(prefab);
 		}
 
+		public void DestroyGrid() => 
+			Object.Destroy(Grid);
+
 		public void DestroyGridParent() =>
 			Object.Destroy(GridParent.gameObject);
 

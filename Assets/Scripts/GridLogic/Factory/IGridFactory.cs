@@ -10,5 +10,6 @@ namespace GridLogic.Factory
 		UniTask CreateGridParent();
 		UniTask CreateGrid();
 		void DestroyGridParent();
+		void DestroyGrid();
 	}
 }

@@ -4,6 +4,7 @@ using GridLogic.Factory;
 using Hud.Factory;
 using Infrastructure.States.LevelDifficultly;
 using UI.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -33,9 +34,7 @@ namespace Infrastructure.States.Game
 
 		private async UniTask LoadSceneGameObjects()
 		{
-
 			await CreateGridParent();
-			await CreateGrid();
 			await CreateUIRoot();
 			await CreateHud();
 			CreateClickDetector();
@@ -43,9 +42,6 @@ namespace Infrastructure.States.Game
 
 		private async UniTask CreateGridParent() => 
 			await _gridFactory.CreateGridParent();
-
-		private async UniTask CreateGrid() => 
-			await _gridFactory.CreateGrid();
 
 		private async UniTask CreateHud() => 
 			await _hudFactory.CreateHud();

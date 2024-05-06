@@ -3,6 +3,7 @@ using Events;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
+using UnityEngine;
 
 namespace SearchIntent
 {

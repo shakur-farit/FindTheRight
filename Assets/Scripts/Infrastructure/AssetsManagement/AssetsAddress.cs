@@ -1,3 +1,4 @@
+
 namespace Infrastructure.AssetsManagement
 {
 	public class AssetsAddress

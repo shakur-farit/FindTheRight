@@ -26,7 +26,7 @@ namespace CellLogic
 			List<ContentStaticData> content = _persistentProgressService.Progress.ContentData.CurrentContent;
 
 			GameObject cellPrefab = await _cellFactory.CreateCell(parentTransform);
-
+			Debug.Log(cellPrefab);
 			SetupCellPosition(column, row, cellSize, cellPrefab);
 
 			CreateContent(cellPrefab, content);
@@ -34,6 +34,7 @@ namespace CellLogic
 
 		private void SetupCellPosition(int column, int row, float cellSize, GameObject cell)
 		{
+			Debug.Log("Here");
 			float cellXPosition = column * cellSize;
 			float cellYPosition = row * cellSize;
 

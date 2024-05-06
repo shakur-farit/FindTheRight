@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using GridLogic.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.Randomizer;
 using UnityEngine;
 
 namespace GridLogic
@@ -16,24 +15,23 @@ namespace GridLogic
 
 		private Transform _gridTransform;
 
-		private readonly IGridFactory _gameFactory;
+		private readonly IGridFactory _gridFactory;
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly RandomService _randomService;
 		private readonly IBouncer _bouncer;
 		private readonly ICellGenerator _cellGenerator;
 
-		public GridGenerator(IGridFactory gameFactory, PersistentProgressService persistentProgressService, RandomService randomService, 
+		public GridGenerator(IGridFactory gridFactory, PersistentProgressService persistentProgressService,
 			IBouncer bouncer, ICellGenerator cellGenerator)
 		{
-			_gameFactory = gameFactory;
+			_gridFactory = gridFactory;
 			_persistentProgressService = persistentProgressService;
-			_randomService = randomService;
 			_bouncer = bouncer;
 			_cellGenerator = cellGenerator;
 		}
 
 		public async UniTask GenerateGrid(bool canAnimate)
 		{
+			await CreateGrid();
 			ResetGridPosition();
 			SetupGridData();
 
@@ -43,24 +41,20 @@ namespace GridLogic
 
 			RecenterGrid();
 
-			if (canAnimate)
-			{
-				float scalingValue = 1.5f;
-				float duration = 1f;
+			Transform gridParent = SetParent();
 
-				Transform gridParent = _gameFactory.GridParent;
-				_gridTransform.SetParent(gridParent);
-
-				await _bouncer.DoBounceEffect(gridParent, scalingValue, duration);
-			}
+			await TryAnimateGrid(canAnimate, gridParent);
 		}
+
+		private async UniTask CreateGrid() => 
+			await _gridFactory.CreateGrid();
 
 		private void SetupGridData()
 		{
 			_rowsNumber = _persistentProgressService.Progress.GridData.RowsNumber;
 			_columnsNumber = _persistentProgressService.Progress.GridData.ColumnNumber;
 			_cellSize = _persistentProgressService.Progress.GridData.CellSize;
-			_gridTransform = _gameFactory.Grid.transform;
+			_gridTransform = _gridFactory.Grid.transform;
 		}
 
 		private void RecenterGrid()
@@ -68,10 +62,28 @@ namespace GridLogic
 			float gridWidth = _columnsNumber * _cellSize;
 			float gridHeight = _rowsNumber * _cellSize;
 
-			_gridTransform.position = new Vector2(-gridWidth / 2 + _cellSize / 2, -gridHeight / 2f + _cellSize / 2);
+			_gridTransform.position = new Vector2(-gridWidth / 2f + _cellSize / 2f, -gridHeight / 2f + _cellSize / 2f);
 		}
 
 		private void ResetGridPosition() => 
-			_gameFactory.Grid.transform.position = Vector2.zero;
+			_gridFactory.Grid.transform.position = Vector2.zero;
+
+		private Transform SetParent()
+		{
+			Transform gridParent = _gridFactory.GridParent;
+			_gridTransform.SetParent(gridParent);
+			return gridParent;
+		}
+
+		private async UniTask TryAnimateGrid(bool canAnimate, Transform gridParent)
+		{
+			if (canAnimate)
+			{
+				float scalingValue = 1.5f;
+				float duration = 1f;
+
+				await _bouncer.DoBounceEffect(gridParent, scalingValue, duration);
+			}
+		}
 	}
 }
