@@ -3,7 +3,6 @@ using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
-using StaticEvents;
 
 namespace Infrastructure.States.Game
 {
@@ -22,9 +21,6 @@ namespace Infrastructure.States.Game
 
 		public void Enter()
 		{
-			StaticEventsHandler.CallDebug("Progress");
-
-
 			InitNewProgress();
 			SortContentData();
 			SetupClickDetectorData();

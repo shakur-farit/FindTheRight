@@ -1,10 +1,12 @@
-using Infrastructure.Factory;
+using Events;
+using GridLogic;
+using GridLogic.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.Game;
-using StaticEvents;
+using SearchIntent;
 
 namespace Infrastructure.States.LevelDifficultly
 {
@@ -14,14 +16,17 @@ namespace Infrastructure.States.LevelDifficultly
 
 		private readonly GameStateMachine _gameStateMachine;
 
-		public HardLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService, RandomService randomService,
-			GameFactory gameFactory, IBouncer bouncer, GameStateMachine gameStateMachine) 
-			: base(staticData, persistentProgressService, randomService, gameFactory, bouncer) =>
+		public HardLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService,
+			RandomService randomService, IGridFactory gridFactory, IBouncer bouncer, GameStateMachine gameStateMachine,
+			ILevelCompleteEvent levelCompleteEvent,
+			ISearchIntentGenerator searchIntentGenerator, IGridGenerator gridGenerator)
+			: base(staticData, persistentProgressService, randomService, gridFactory, bouncer,
+				levelCompleteEvent, searchIntentGenerator, gridGenerator) =>
 			_gameStateMachine = gameStateMachine;
 
 
 		public void Exit() =>
-			StaticEventsHandler.OnLevelComplete -= EnterNextState;
+			LevelCompleteEvent.LevelCompleted -= EnterNextState;
 
 		protected override void EnterNextState()
 		{

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure.AssetsManagement
+namespace Infrastructure.Services.GameObjectsCreate
 {
 	public class GameObjectsCreateService : IGameObjectsCreateService
 	{

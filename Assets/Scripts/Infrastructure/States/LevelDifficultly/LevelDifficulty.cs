@@ -1,15 +1,14 @@
 using System.Collections.Generic;
-using CellContent;
-using CellGrid;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
+using Events;
+using GridLogic;
+using GridLogic.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using SearchIntent;
 using StaticData;
-using StaticEvents;
 
 namespace Infrastructure.States.LevelDifficultly
 {
@@ -22,22 +21,30 @@ namespace Infrastructure.States.LevelDifficultly
 		protected readonly StaticDataService StaticData;
 		protected readonly PersistentProgressService PersistentProgressService;
 		protected readonly RandomService RandomService;
-		protected readonly GameFactory GameFactory;
+		protected readonly IGridFactory GridFactory;
 		protected readonly IBouncer Bouncer;
-		
+		protected readonly ILevelCompleteEvent LevelCompleteEvent;
+
+		private readonly ISearchIntentGenerator _searchIntentGenerator;
+		private readonly IGridGenerator _gridGenerator;
+
 		protected LevelDifficulty(StaticDataService staticData, PersistentProgressService persistentProgressService,
-			RandomService randomService, GameFactory gameFactory, IBouncer bouncer)
+			RandomService randomService, IGridFactory gridFactory, IBouncer bouncer, 
+			ILevelCompleteEvent levelCompleteEvent, ISearchIntentGenerator searchIntentGenerator, IGridGenerator gridGenerator)
 		{
 			StaticData = staticData;
 			PersistentProgressService = persistentProgressService;
 			RandomService = randomService;
-			GameFactory = gameFactory;
+			GridFactory = gridFactory;
 			Bouncer = bouncer;
+			LevelCompleteEvent = levelCompleteEvent;
+			_searchIntentGenerator = searchIntentGenerator;
+			_gridGenerator = gridGenerator;
 		}
 
 		public async void Enter()
 		{
-			StaticEventsHandler.OnLevelComplete += EnterNextState;
+			LevelCompleteEvent.LevelCompleted += EnterNextState;
 
 			SetupLevelData();
 			SetupLevel(LevelId);
@@ -72,21 +79,22 @@ namespace Infrastructure.States.LevelDifficultly
 
 		private void SetupContent()
 		{
-			ContentTypeRandomizer randomizer = new ContentTypeRandomizer(PersistentProgressService, RandomService);
-			List<ContentStaticData> currentContent = randomizer.GetRandomContentList();
+			List<List<ContentStaticData>> contentList = new List<List<ContentStaticData>>
+			{
+				PersistentProgressService.Progress.ContentData.Letters,
+				PersistentProgressService.Progress.ContentData.Numbers
+			};
+
+			List<ContentStaticData> currentContent = RandomService.GetRandomContentList(contentList);
 			PersistentProgressService.Progress.ContentData.CurrentContent = currentContent;
 		}
 
 		private async UniTask GenerateGrid(bool canAnimate)
 		{
-			GridGenerator generator = new GridGenerator(GameFactory, PersistentProgressService, RandomService, Bouncer);
-			await generator.GenerateGrid(canAnimate);
+			await _gridGenerator.GenerateGrid(canAnimate);
 		}
 
-		private void GenerateSearchIntent()
-		{
-			SearchIntentGenerator generator = new SearchIntentGenerator(RandomService, PersistentProgressService);
-			generator.GenerateSearchIntent();
-		}
+		private void GenerateSearchIntent() => 
+			_searchIntentGenerator.GenerateSearchIntent();
 	}
 }

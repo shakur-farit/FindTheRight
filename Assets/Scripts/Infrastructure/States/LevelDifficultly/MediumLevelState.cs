@@ -1,27 +1,35 @@
-using CellGrid;
-using Infrastructure.Factory;
+using Events;
+using GridLogic;
+using GridLogic.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
-using StaticEvents;
+using SearchIntent;
 
 namespace Infrastructure.States.LevelDifficultly
 {
-	public class MediumLevelState : LevelDifficulty,IExitable
+	public class MediumLevelState : LevelDifficulty, IExitable
 	{
 		private const string MediumDifficulty = "medium";
 
 		private readonly LevelStateMachine _levelStateMachine;
+		private readonly IGridCleaner _gridCleaner;
 
-		public MediumLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService, RandomService randomService,
-			GameFactory gameFactory, IBouncer bouncer, LevelStateMachine levelStateMachine) 
-			: base(staticData, persistentProgressService, randomService, gameFactory, bouncer) =>
+		public MediumLevelState(StaticDataService staticData, PersistentProgressService persistentProgressService,
+			RandomService randomService, IGridFactory gridFactory, IBouncer bouncer, LevelStateMachine levelStateMachine,
+			ILevelCompleteEvent levelCompleteEvent,
+			ISearchIntentGenerator searchIntentGenerator, IGridGenerator gridGenerator, IGridCleaner gridCleaner)
+			: base(staticData, persistentProgressService, randomService, gridFactory, bouncer,
+				levelCompleteEvent, searchIntentGenerator, gridGenerator)
+		{
 			_levelStateMachine = levelStateMachine;
+			_gridCleaner = gridCleaner;
+		}
 
 		public void Exit()
 		{
-			StaticEventsHandler.OnLevelComplete -= EnterNextState;
+			LevelCompleteEvent.LevelCompleted -= EnterNextState;
 
 			CleanGird();
 		}
@@ -35,10 +43,7 @@ namespace Infrastructure.States.LevelDifficultly
 			CanAnimateGrid = false;
 		}
 
-		private void CleanGird()
-		{
-			GridCleaner cleaner = new GridCleaner(GameFactory, PersistentProgressService);
-			cleaner.Clean();
-		}
+		private void CleanGird() => 
+			_gridCleaner.Clean();
 	}
 }

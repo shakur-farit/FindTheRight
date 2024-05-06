@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using CellContent.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
@@ -8,17 +8,17 @@ using UnityEngine;
 
 namespace CellContent
 {
-	public class ContentGenerator
+	public class ContentGenerator : IContentGenerator
 	{
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly RandomService _randomService;
-		private readonly GameFactory _gameFactory;
+		private readonly IContentFactory _contentFactory;
 
-		public  ContentGenerator(PersistentProgressService persistentProgressService, RandomService randomService, GameFactory gameFactory)
+		public  ContentGenerator(PersistentProgressService persistentProgressService, RandomService randomService, IContentFactory contentFactory)
 		{
 			_persistentProgressService = persistentProgressService;
 			_randomService = randomService;
-			_gameFactory = gameFactory;
+			_contentFactory = contentFactory;
 		}
 
 		public async UniTask GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
@@ -51,7 +51,7 @@ namespace CellContent
 		private async UniTask CreateContent(ContentStaticData contentData, Transform transform, 
 			List<ContentStaticData> usedContentList, List<ContentStaticData> usedContentOnLevel)
 		{
-			GameObject prefab = await _gameFactory.CreateContent(transform);
+			GameObject prefab = await _contentFactory.CreateContent(transform);
 			Content contentPrefab = prefab.GetComponent<Content>();
 
 			contentPrefab.Type = contentData.Type;

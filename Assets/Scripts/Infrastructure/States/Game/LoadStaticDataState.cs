@@ -1,5 +1,4 @@
 using Infrastructure.Services.StaticData;
-using StaticEvents;
 
 namespace Infrastructure.States.Game
 {
@@ -16,8 +15,6 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
-			StaticEventsHandler.CallDebug("StaticData");
-
 			await _staticDataService.Load();
 
 			LoadProgressState();

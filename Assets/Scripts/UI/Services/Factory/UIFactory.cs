@@ -1,12 +1,11 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
-using StaticEvents;
+using Infrastructure.Services.GameObjectsCreate;
 using UnityEngine;
 
 namespace UI.Services.Factory
 {
-	public class UIFactory
+	public class UIFactory : IUIFactory
 	{
 		private readonly AssetsProvider _assetsProvider;
 		private AssetsReference _reference;
@@ -25,11 +24,8 @@ namespace UI.Services.Factory
 
 		public async UniTask CreateUIRoot()
 		{
-			StaticEventsHandler.CallDebugUI("GetInstant");
-			
 			GameObject prefab = await _assetsProvider.Load<GameObject>(_reference.UIRootAddress);
 			UIRoot = _gameObjectsCreateService.Instantiate(prefab).transform;
-			StaticEventsHandler.CallDebugUI($"Instant {UIRoot.GetInstanceID()}");
 		}
 
 		public async UniTask CreateGameCompleteWindow(Transform parentTransform)
@@ -38,11 +34,8 @@ namespace UI.Services.Factory
 			GameCompleteWindow = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}
 
-		public void DestroyUIRoot()
-		{
+		public void DestroyUIRoot() => 
 			Object.Destroy(UIRoot.gameObject);
-			StaticEventsHandler.CallDebugUI($"Destroy {UIRoot.GetInstanceID()}");
-		}
 
 		public void DestroyGameCompleteWindow() => 
 			Object.Destroy(GameCompleteWindow);

@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
+using Infrastructure.Services.GameObjectsCreate;
 using UnityEngine;
 
 namespace FX
 {
-	public class FXFactory
+	public class FXFactory : IFXFactory
 	{
 		private readonly AssetsProvider _assetsProvider;
 		private readonly IGameObjectsCreateService _gameObjectsCreateService;

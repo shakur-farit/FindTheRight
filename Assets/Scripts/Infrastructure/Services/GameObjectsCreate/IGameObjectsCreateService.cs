@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Infrastructure.AssetsManagement
+namespace Infrastructure.Services.GameObjectsCreate
 {
 	public interface IGameObjectsCreateService
 	{

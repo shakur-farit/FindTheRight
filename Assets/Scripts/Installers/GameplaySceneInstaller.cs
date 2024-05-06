@@ -1,13 +1,24 @@
+using CellContent;
+using CellContent.Factory;
+using CellLogic;
+using CellLogic.Factory;
+using ClickDetector.Factory;
+using Events;
 using FX;
+using GridLogic;
+using GridLogic.Factory;
+using Hud.Factory;
 using Infrastructure.AssetsManagement;
-using Infrastructure.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.ContentCompare;
+using Infrastructure.Services.GameObjectsCreate;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
+using Infrastructure.States.Factory;
 using Infrastructure.States.Game;
 using Infrastructure.States.LevelDifficultly;
+using SearchIntent;
 using UI.Services.Factory;
 using UI.Services.Window;
 using Zenject;
@@ -21,6 +32,7 @@ namespace Installers
 			RegisterFactories();
 			RegisterStateMachines();
 			RegisterServices();
+			RegisterGenerators();
 		}
 
 		private void RegisterStateMachines()
@@ -31,7 +43,11 @@ namespace Installers
 
 		private void RegisterFactories()
 		{
-			RegisterGameFactory();
+			RegisterGridFactory();
+			RegisterCellFactory();
+			RegisterContentFactory();
+			RegisterClickDetectorFactory();
+			RegisterHudFactory();
 			RegisterUIFactory();
 			RegisterFXFactory();
 			RegisterStatesFactory();
@@ -47,19 +63,41 @@ namespace Installers
 			RegisterContentCompareService();
 			RegisterAnimationService();
 			RegisterGameObjectsCreateService();
+			RegisterEventer();
+			RegisterGridCleaner();
+		}
+
+		private void RegisterGenerators()
+		{
+			RegisterGridGenerator();
+			RegisterSearchIntentGenerator();
+			RegisterCellGenerator();
+			RegisterContentGenerator();
 		}
 
 		private void RegisterStaticDataService() => 
 			Container.Bind<StaticDataService>().AsSingle();
 
-		private void RegisterGameFactory() => 
-			Container.Bind<GameFactory>().AsSingle();
+		private void RegisterGridFactory() => 
+			Container.Bind<IGridFactory>().To<GridFactory>().AsSingle();
+
+		private void RegisterCellFactory() => 
+			Container.Bind<ICellFactory>().To<CellFactory>().AsSingle();
+
+		private void RegisterContentFactory() => 
+			Container.Bind<IContentFactory>().To<ContentFactory>().AsSingle();
+
+		private void RegisterClickDetectorFactory() => 
+			Container.Bind<IClickDetectorFactory>().To<ClickDetectorFactory>().AsSingle();
+
+		private void RegisterHudFactory() => 
+			Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
 
 		private void RegisterUIFactory() => 
-			Container.Bind<UIFactory>().AsSingle();
+			Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
 
 		private void RegisterFXFactory() =>
-			Container.Bind<FXFactory>().AsSingle();
+			Container.Bind<IFXFactory>().To<FXFactory>().AsSingle();
 
 		private void RegisterStatesFactory() => 
 			Container.BindInterfacesAndSelfTo<StatesFactory>().AsSingle();
@@ -84,5 +122,23 @@ namespace Installers
 
 		private void RegisterGameObjectsCreateService() => 
 			Container.Bind<IGameObjectsCreateService>().To<GameObjectsCreateService>().AsSingle();
+
+		private void RegisterEventer() => 
+			Container.BindInterfacesAndSelfTo<Eventer>().AsSingle();
+
+		private void RegisterGridGenerator() => 
+			Container.Bind<IGridGenerator>().To<GridGenerator>().AsSingle();
+
+		private void RegisterSearchIntentGenerator() => 
+			Container.Bind<ISearchIntentGenerator>().To<SearchIntentGenerator>().AsSingle();
+
+		private void RegisterCellGenerator() => 
+			Container.Bind<ICellGenerator>().To<CellGenerator>().AsSingle();
+
+		private void RegisterContentGenerator() => 
+			Container.Bind<IContentGenerator>().To<ContentGenerator>().AsSingle();
+
+		private void RegisterGridCleaner() => 
+			Container.Bind<IGridCleaner>().To<GridCleaner>().AsSingle();
 	}
 }

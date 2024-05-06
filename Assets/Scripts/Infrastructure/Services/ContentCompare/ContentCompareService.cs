@@ -1,9 +1,9 @@
 using CellContent;
 using Cysharp.Threading.Tasks;
+using Events;
 using FX;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
-using StaticEvents;
 
 namespace Infrastructure.Services.ContentCompare
 {
@@ -13,14 +13,16 @@ namespace Infrastructure.Services.ContentCompare
 		private const float Duration = 0.5f;
 
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly FXFactory _fxFactory;
+		private readonly IFXFactory _fxFactory;
 		private readonly AnimationService _animationService;
+		private readonly ILevelCompleteEvent _levelCompleteEvent;
 
-		public ContentCompareService(PersistentProgressService persistentProgressService, FXFactory fxFactory, AnimationService animationService)
+		public ContentCompareService(PersistentProgressService persistentProgressService, IFXFactory fxFactory, AnimationService animationService, ILevelCompleteEvent levelCompleteEvent)
 		{
 			_persistentProgressService = persistentProgressService;
 			_fxFactory = fxFactory;
 			_animationService = animationService;
+			_levelCompleteEvent = levelCompleteEvent;
 		}
 
 		public async void Compare(Content content)
@@ -34,7 +36,7 @@ namespace Infrastructure.Services.ContentCompare
 				await CreateStarEffect(content);
 				await BounceContent(content,ScalingValue,Duration);
 
-				StaticEventsHandler.CallLevelCompleteEvent();
+				_levelCompleteEvent.CallLevelCompleteEvent();
 			}
 			else
 			{

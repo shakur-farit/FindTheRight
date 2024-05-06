@@ -5,9 +5,9 @@ namespace UI.Services.Window
 {
 	public class WindowService
 	{
-		private readonly UIFactory _uiFactory;
+		private readonly IUIFactory _uiFactory;
 
-		public WindowService(UIFactory uiFactory) =>
+		public WindowService(IUIFactory uiFactory) =>
 			_uiFactory = uiFactory;
 
 		public async UniTask Open(WindowId windowId)

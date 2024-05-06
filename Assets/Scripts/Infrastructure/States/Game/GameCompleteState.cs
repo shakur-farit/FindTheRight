@@ -1,12 +1,13 @@
+using ClickDetector.Factory;
 using Cysharp.Threading.Tasks;
+using Events;
 using FX;
-using Infrastructure.Factory;
+using GridLogic.Factory;
+using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
-using StaticEvents;
 using UI.Services.Factory;
 using UI.Services.Window;
 using UI.Windows;
-using UnityEngine;
 
 namespace Infrastructure.States.Game
 {
@@ -15,29 +16,34 @@ namespace Infrastructure.States.Game
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly WindowService _windowService;
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly UIFactory _uiFactory;
-		private readonly GameFactory _gameFactory;
-		private readonly FXFactory _fxFactory;
+		private readonly IUIFactory _uiFactory;
+		private readonly IGridFactory _gridFactory;
+		private readonly IFXFactory _fxFactory;
+		private readonly IGameRestartEvent _gameRestartEvent;
+		private readonly IHudFactory _hudFactory;
+		private readonly IClickDetectorFactory _clickerDetectorFactory;
 
 		public GameCompleteState(GameStateMachine gameStateMachine, WindowService windowService, 
-			PersistentProgressService persistentProgressService, UIFactory uiFactory, GameFactory gameFactory, FXFactory fxFactory)
+			PersistentProgressService persistentProgressService, IUIFactory uiFactory, IGridFactory gridFactory, IFXFactory fxFactory, 
+			IHudFactory hudFactory, IClickDetectorFactory clickerDetectorFactory, IGameRestartEvent gameRestartEvent)
 		{
 			_gameStateMachine = gameStateMachine;
 			_windowService = windowService;
 			_persistentProgressService = persistentProgressService;
 			_uiFactory = uiFactory;
-			_gameFactory = gameFactory;
+			_gridFactory = gridFactory;
 			_fxFactory = fxFactory;
+			_hudFactory = hudFactory;
+			_clickerDetectorFactory = clickerDetectorFactory;
+			_gameRestartEvent = gameRestartEvent;
 		}
 
 		public async void Enter()
 		{
-			StaticEventsHandler.CallDebug("GameComp");
-
-			StaticEventsHandler.OnRestartedGame += RestartScene;
+			_gameRestartEvent.RestartedGame += GameRestartScene;
 
 			await _windowService.Open(WindowId.GameComplete);
-			Debug.Log(_uiFactory.GameCompleteWindow);
+
 			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeIn();
 
 			ReturnClicks();
@@ -47,7 +53,7 @@ namespace Infrastructure.States.Game
 			_persistentProgressService.Progress.ClickDetectorData.CanClick = false;
 
 
-		public async void RestartScene()
+		public async void GameRestartScene()
 		{
 			DestroyGameObjects();
 			DestroyFXObjects();
@@ -58,7 +64,7 @@ namespace Infrastructure.States.Game
 
 			DestroyUIObjects();
 
-			StaticEventsHandler.OnRestartedGame -= RestartScene;
+			_gameRestartEvent.RestartedGame -= GameRestartScene;
 			
 			_gameStateMachine.Enter<LoadStaticDataState>();
 		}
@@ -76,9 +82,9 @@ namespace Infrastructure.States.Game
 		}
 		public void DestroyGameObjects()
 		{
-			_gameFactory.DestroyGridParent();
-			_gameFactory.DestroyHud();
-			_gameFactory.DestroyClickDetector();
+			_gridFactory.DestroyGridParent();
+			_hudFactory.DestroyHud();
+			_clickerDetectorFactory.DestroyClickDetector();
 		}
 
 		private void CleanLists()
