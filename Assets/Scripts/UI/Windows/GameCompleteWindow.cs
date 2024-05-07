@@ -27,7 +27,7 @@ namespace UI.Windows
 
 		private void Restart()
 		{
-			_gameRestartEvent.CallRestartedGameEvent();
+			_gameRestartEvent.CallGameRestartedEvent();
 
 			TurnOnButtonRotate();
 		}

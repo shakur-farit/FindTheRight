@@ -4,7 +4,7 @@ namespace Events
 {
 	public interface IGameRestartEvent
 	{
-		event Action RestartedGame;
-		void CallRestartedGameEvent();
+		event Action GameRestarted;
+		void CallGameRestartedEvent();
 	}
 }

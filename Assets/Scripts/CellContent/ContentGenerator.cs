@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CellContent.Factory;
 using Cysharp.Threading.Tasks;
 using Data;
+using Events;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
@@ -15,12 +16,15 @@ namespace CellContent
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly RandomService _randomService;
 		private readonly IContentFactory _contentFactory;
+		private readonly IContentSetupEvent _contentSetupEvent;
 
-		public  ContentGenerator(PersistentProgressService persistentProgressService, RandomService randomService, IContentFactory contentFactory)
+		public  ContentGenerator(PersistentProgressService persistentProgressService, RandomService randomService, 
+			IContentFactory contentFactory, IContentSetupEvent contentSetupEvent)
 		{
 			_persistentProgressService = persistentProgressService;
 			_randomService = randomService;
 			_contentFactory = contentFactory;
+			_contentSetupEvent = contentSetupEvent;
 		}
 
 		public async UniTask GenerateContent(Transform transform, List<ContentStaticData> currentContentList)
@@ -53,7 +57,9 @@ namespace CellContent
 		private async UniTask CreateContent(ContentStaticData contentStaticData, Transform transform, 
 			List<ContentStaticData> usedContentList, List<ContentStaticData> usedContentOnLevel)
 		{
-			await SetupContent(contentStaticData, transform);
+			await _contentFactory.CreateContent(transform);
+
+			SetupContentData(contentStaticData);
 
 			usedContentList.Add(contentStaticData);
 			usedContentOnLevel.Add(contentStaticData);
@@ -69,15 +75,15 @@ namespace CellContent
 			//usedContentOnLevel.Add(contentStaticData);
 		}
 
-		private async UniTask SetupContent(ContentStaticData contentStaticData, Transform transform)
+		private void SetupContentData(ContentStaticData contentStaticData)
 		{
 			ContentData contentData = _persistentProgressService.Progress.ContentData;
 
 			contentData.Type = contentStaticData.Type;
 			contentData.Id = contentStaticData.Id.ToUpper();
 			contentData.Sprite = contentStaticData.Sprite;
-			Debug.Log($"{contentStaticData.Type} / {contentStaticData.Id}");
-			await _contentFactory.CreateContent(transform);
+
+			_contentSetupEvent.CallContentSetup();
 		}
 
 		private ContentStaticData GetRandomContent(List<ContentStaticData> contentList)

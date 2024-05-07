@@ -28,7 +28,7 @@ namespace Infrastructure.Services.ContentCompare
 			if (content.Id == searchIntent)
 			{
 				await _fxCreator.CreateStarEffect(content.transform);
-				await _contentAnimator.BounceContent(content.transform);
+				await _contentAnimator.BounceContent(content.MainContentTransform);
 
 				_levelCompleteEvent.CallLevelCompleteEvent();
 			}

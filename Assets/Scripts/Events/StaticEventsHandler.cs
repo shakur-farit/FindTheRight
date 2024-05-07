@@ -2,11 +2,12 @@ using System;
 
 namespace Events
 {
-	public class Eventer : IGameRestartEvent, ILevelCompleteEvent, ISearchIntentChangeEvent
+	public class Eventer : IGameRestartEvent, ILevelCompleteEvent, ISearchIntentChangeEvent, IContentSetupEvent
 	{
-		public event Action RestartedGame;
+		public event Action GameRestarted;
 		public event Action LevelCompleted;
 		public event Action SearchIntentChanged;
+		public event Action ContentSetup;
 
 		public void CallLevelCompleteEvent() => 
 			LevelCompleted?.Invoke();
@@ -14,7 +15,10 @@ namespace Events
 		public void CallSearchIntentChangedEvent() => 
 			SearchIntentChanged?.Invoke();
 
-		public void CallRestartedGameEvent() => 
-			RestartedGame?.Invoke();
+		public void CallGameRestartedEvent() => 
+			GameRestarted?.Invoke();
+
+		public void CallContentSetup() => 
+			ContentSetup?.Invoke();
 	}
 }

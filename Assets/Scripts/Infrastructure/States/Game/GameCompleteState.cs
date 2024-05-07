@@ -40,7 +40,7 @@ namespace Infrastructure.States.Game
 
 		public async void Enter()
 		{
-			_gameRestartEvent.RestartedGame += GameRestartScene;
+			_gameRestartEvent.GameRestarted += GameRestartScene;
 
 			await _windowService.Open(WindowId.GameComplete);
 
@@ -64,7 +64,7 @@ namespace Infrastructure.States.Game
 
 			DestroyUIObjects();
 
-			_gameRestartEvent.RestartedGame -= GameRestartScene;
+			_gameRestartEvent.GameRestarted -= GameRestartScene;
 			
 			_gameStateMachine.Enter<LoadStaticDataState>();
 		}

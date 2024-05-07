@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 950379498824004707}
   - component: {fileID: 8466862619598048838}
   m_Layer: 0
-  m_Name: Square
+  m_Name: MainContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,4 +260,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64769611744a040819f8b321793003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ContentSprite>k__BackingField: {fileID: 8466862619598048838}
+  _mainContentSprite: {fileID: 8466862619598048838}

@@ -1,5 +1,5 @@
-using System;
 using Data;
+using Events;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Utility;
@@ -9,30 +9,55 @@ namespace CellContent
 {
 	public class Content : MonoBehaviour
 	{
-		private PersistentProgressService _persistentProgressService;
+		[SerializeField] private SpriteRenderer _mainContentSprite;
 
-		[field: SerializeField] public SpriteRenderer ContentSprite { get; set; }
-		public ContentType Type { get; set; }
-		public string Id { get; set; }
+		private ContentType _type;
+		private string _id;
+
+		private bool _isSet;
+
+		private PersistentProgressService _persistentProgressService;
+		private IContentSetupEvent _contentSetupEvent;
+
+		public Transform MainContentTransform => _mainContentSprite.transform;
+		public string Id => _id;
 
 		[Inject]
-		public void Constructor(PersistentProgressService persistentProgressService) => 
+		public void Constructor(PersistentProgressService persistentProgressService, IContentSetupEvent contentSetupEvent)
+		{
 			_persistentProgressService = persistentProgressService;
+			_contentSetupEvent = contentSetupEvent;
+		}
 
-		private void Start()
+		private void OnEnable() => 
+			_contentSetupEvent.ContentSetup += TrySetupData;
+
+		private void OnDisable() => 
+			_contentSetupEvent.ContentSetup -= TrySetupData;
+
+		private void TrySetupData()
+		{
+			if(_isSet)
+				return;
+
+			SetupData();
+		}
+
+
+		private void SetupData()
 		{
 			ContentData contentData = _persistentProgressService.Progress.ContentData;
 
-			Debug.Log($"{contentData.Type} / {contentData.Id}");
-
-			ContentSprite.sprite = contentData.Sprite;
-			Type = contentData.Type;
-			Id = contentData.Id;
+			_mainContentSprite.sprite = contentData.Sprite;
+			_type = contentData.Type;
+			_id = contentData.Id;
 
 			NormalizeContentSprite();
+
+			_isSet = true;
 		}
 
 		private void NormalizeContentSprite() => 
-			HelperUtility.NumberSpriteNormalize(Type, ContentSprite.transform, Id);
+			HelperUtility.NumberSpriteNormalize(_type, _mainContentSprite.transform, _id);
 	}
 }
