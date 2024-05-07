@@ -1,9 +1,10 @@
+using CellContent;
 using System.Collections;
 using UnityEngine;
 
 namespace FX
 {
-	public class FXDestroyer : MonoBehaviour
+	public partial class FXDestroyer : MonoBehaviour
 	{
 		private const int TimeToDestroy = 3;
 

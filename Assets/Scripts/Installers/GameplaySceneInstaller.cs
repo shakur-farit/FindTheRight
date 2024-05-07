@@ -25,7 +25,7 @@ using Zenject;
 
 namespace Installers
 {
-	public class GameplaySceneInstaller : MonoInstaller
+	public class GamePlaySceneInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
 		{
@@ -65,6 +65,8 @@ namespace Installers
 			RegisterGameObjectsCreateService();
 			RegisterEventer();
 			RegisterGridCleaner();
+			RegisterContentAnimator();
+			RegisterFXCreator();
 		}
 
 		private void RegisterGenerators()
@@ -140,5 +142,11 @@ namespace Installers
 
 		private void RegisterGridCleaner() => 
 			Container.Bind<IGridCleaner>().To<GridCleaner>().AsSingle();
+
+		private void RegisterContentAnimator() => 
+			Container.Bind<IContentAnimator>().To<ContentAnimator>().AsSingle();
+
+		private void RegisterFXCreator() => 
+			Container.Bind<IFXCreator>().To<FXCreator>().AsSingle();
 	}
 }

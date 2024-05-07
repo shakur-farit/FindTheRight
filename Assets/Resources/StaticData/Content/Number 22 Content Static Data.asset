@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Number 22 Content Static Data
   m_EditorClassIdentifier: 
   Type: 2
-  ContentId: 22
+  Id: 22
   Sprite: {fileID: 2291364072458199075, guid: 2a1049433662def4ba90f9dae3e8fed5, type: 3}

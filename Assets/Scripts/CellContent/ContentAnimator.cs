@@ -1,22 +1,24 @@
-using DG.Tweening;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Animation;
 using UnityEngine;
-using Zenject;
 
 namespace CellContent
 {
-	public class ContentAnimator : MonoBehaviour
+	public class ContentAnimator : IContentAnimator
 	{
-		private IShaker _shaker;
+		private readonly IShaker _shaker;
+		private readonly IBouncer _bouncer;
 
-		[Inject]
-		public void Constructor(IShaker shaker) => 
+		private const float ScalingValue = 1.3f;
+		private const float Duration = 0.5f;
+
+		public ContentAnimator(IShaker shaker, IBouncer bouncer)
+		{
 			_shaker = shaker;
+			_bouncer = bouncer;
+		}
 
-		private void OnDestroy() => 
-			DOTween.Kill(transform);
-
-		public void DoShakeEffect()
+		public void DoShakeEffect(Transform transform)
 		{
 			float duration = 0.4f;
 			float strength = 0.5f;
@@ -25,5 +27,8 @@ namespace CellContent
 
 			_shaker.DoShakeEffect(transform, duration, strength, vibrato, random);
 		}
+
+		public async UniTask BounceContent(Transform transform) =>
+			await _bouncer.DoBounceEffect(transform, ScalingValue, Duration);
 	}
 }

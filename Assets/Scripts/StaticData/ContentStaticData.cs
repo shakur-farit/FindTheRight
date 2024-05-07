@@ -7,7 +7,7 @@ namespace StaticData
 	public class ContentStaticData : ScriptableObject
 	{
 		public ContentType Type;
-		public string ContentId;
+		public string Id;
 		public Sprite Sprite;
 	}
 }

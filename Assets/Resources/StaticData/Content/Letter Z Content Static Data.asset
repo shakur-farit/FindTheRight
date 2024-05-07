@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Letter Z Content Static Data
   m_EditorClassIdentifier: 
   Type: 1
-  ContentId: z
+  Id: z
   Sprite: {fileID: 3539555106843919260, guid: fe04810fa6b5fc247bcebdf0d87fb37d, type: 3}

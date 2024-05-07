@@ -30,7 +30,7 @@ namespace SearchIntent
 
 			int randomIndex = _randomService.Next(0, _contentList.Count);
 
-			string searchIntent = _contentList[randomIndex].ContentId.ToUpper();
+			string searchIntent = _contentList[randomIndex].Id.ToUpper();
 
 			_persistentProgressService.Progress.SearchIntentData.SearchIntent = searchIntent;
 

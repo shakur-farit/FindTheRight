@@ -1,27 +1,38 @@
+using System;
+using Data;
+using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Utility;
+using Zenject;
 
 namespace CellContent
 {
 	public class Content : MonoBehaviour
 	{
-		public Transform Transform;
-		
+		private PersistentProgressService _persistentProgressService;
+
+		[field: SerializeField] public SpriteRenderer ContentSprite { get; set; }
 		public ContentType Type { get; set; }
-		public string ContentId { get; set; }
-		public Sprite Sprite { get; set; }
+		public string Id { get; set; }
+
+		[Inject]
+		public void Constructor(PersistentProgressService persistentProgressService) => 
+			_persistentProgressService = persistentProgressService;
 
 		private void Start()
 		{
-			SpriteRenderer contentSprite = Transform.GetComponent<SpriteRenderer>();
-			contentSprite.sprite = Sprite;
+			ContentData contentData = _persistentProgressService.Progress.ContentData;
 
-			ContentId = ContentId.ToUpper();
+			Debug.Log($"{contentData.Type} / {contentData.Id}");
+
+			ContentSprite.sprite = contentData.Sprite;
+			Type = contentData.Type;
+			Id = contentData.Id;
 
 			NormalizeContentSprite();
 		}
 
 		private void NormalizeContentSprite() => 
-			HelperUtility.NumberSpriteNormalize(Type, Transform, ContentId);
+			HelperUtility.NumberSpriteNormalize(Type, ContentSprite.transform, Id);
 	}
 }

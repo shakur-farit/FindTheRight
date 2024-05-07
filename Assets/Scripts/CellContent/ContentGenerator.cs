@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CellContent.Factory;
 using Cysharp.Threading.Tasks;
+using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
@@ -48,18 +50,34 @@ namespace CellContent
 			return contentPrefab;
 		}
 
-		private async UniTask CreateContent(ContentStaticData contentData, Transform transform, 
+		private async UniTask CreateContent(ContentStaticData contentStaticData, Transform transform, 
 			List<ContentStaticData> usedContentList, List<ContentStaticData> usedContentOnLevel)
 		{
-			GameObject prefab = await _contentFactory.CreateContent(transform);
-			Content contentPrefab = prefab.GetComponent<Content>();
+			await SetupContent(contentStaticData, transform);
 
-			contentPrefab.Type = contentData.Type;
-			contentPrefab.ContentId = contentData.ContentId;
-			contentPrefab.Sprite = contentData.Sprite;
+			usedContentList.Add(contentStaticData);
+			usedContentOnLevel.Add(contentStaticData);
 
-			usedContentList.Add(contentData);
-			usedContentOnLevel.Add(contentData);
+			//GameObject prefab = await _contentFactory.CreateContent(transform);
+			//Content contentPrefab = prefab.GetComponent<Content>();
+
+			//contentPrefab.Type = contentStaticData.Type;
+			//contentPrefab.Id = contentStaticData.Id.ToUpper();
+			//contentPrefab.ContentSprite.sprite = contentStaticData.Sprite;
+
+			//usedContentList.Add(contentStaticData);
+			//usedContentOnLevel.Add(contentStaticData);
+		}
+
+		private async UniTask SetupContent(ContentStaticData contentStaticData, Transform transform)
+		{
+			ContentData contentData = _persistentProgressService.Progress.ContentData;
+
+			contentData.Type = contentStaticData.Type;
+			contentData.Id = contentStaticData.Id.ToUpper();
+			contentData.Sprite = contentStaticData.Sprite;
+			Debug.Log($"{contentStaticData.Type} / {contentStaticData.Id}");
+			await _contentFactory.CreateContent(transform);
 		}
 
 		private ContentStaticData GetRandomContent(List<ContentStaticData> contentList)
