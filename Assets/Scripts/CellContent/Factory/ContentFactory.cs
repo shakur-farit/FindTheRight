@@ -20,7 +20,7 @@ namespace CellContent.Factory
 
 		public async UniTask<GameObject> CreateContent(Transform parentTransform)
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObjectsAssetsReference reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.ContentAddress);
 			return Content = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}

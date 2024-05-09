@@ -3,6 +3,6 @@ namespace Infrastructure.AssetsManagement
 {
 	public class AssetsAddress
 	{
-		public const string AssetsReferenceAddress = "Assets Reference";
+		public const string GameObjectsAssetsReferenceAddress = "Game Objects Assets Reference";
 	}
 }

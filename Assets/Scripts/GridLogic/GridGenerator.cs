@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using GridLogic.Factory;
 using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace GridLogic
@@ -19,14 +20,16 @@ namespace GridLogic
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly IBouncer _bouncer;
 		private readonly ICellGenerator _cellGenerator;
+		private readonly StaticDataService _staticDataService;
 
 		public GridGenerator(IGridFactory gridFactory, PersistentProgressService persistentProgressService,
-			IBouncer bouncer, ICellGenerator cellGenerator)
+			IBouncer bouncer, ICellGenerator cellGenerator, StaticDataService staticDataService)
 		{
 			_gridFactory = gridFactory;
 			_persistentProgressService = persistentProgressService;
 			_bouncer = bouncer;
 			_cellGenerator = cellGenerator;
+			_staticDataService = staticDataService;
 		}
 
 		public async UniTask GenerateGrid(bool canAnimate)
@@ -62,7 +65,8 @@ namespace GridLogic
 			float gridWidth = _columnsNumber * _cellSize;
 			float gridHeight = _rowsNumber * _cellSize;
 
-			_gridTransform.position = new Vector2(-gridWidth / 2f + _cellSize / 2f, -gridHeight / 2f + _cellSize / 2f);
+			Vector2 centeringFormula = new Vector2(-gridWidth / 2f + _cellSize / 2f, -gridHeight / 2f + _cellSize / 2f);
+			_gridTransform.position = centeringFormula;
 		}
 
 		private void ResetGridPosition() => 
@@ -79,8 +83,8 @@ namespace GridLogic
 		{
 			if (canAnimate)
 			{
-				float scalingValue = 1.5f;
-				float duration = 1f;
+				float scalingValue = _staticDataService.ForGridBounceAnimation.BounceScaling;
+				float duration = _staticDataService.ForGridBounceAnimation.BounceDuration;
 
 				await _bouncer.DoBounceEffect(gridParent, scalingValue, duration);
 			}

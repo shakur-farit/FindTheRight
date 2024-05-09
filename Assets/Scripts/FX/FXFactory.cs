@@ -20,7 +20,7 @@ namespace FX
 
 		public async UniTask CreateStarFx()
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObjectsAssetsReference reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.FXStarAddress);
 			StarFx = _gameObjectsCreateService.Instantiate(prefab);
 		}

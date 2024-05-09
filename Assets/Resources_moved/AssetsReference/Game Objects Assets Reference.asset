@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f6522daf9834d6448d84e2435b3da6b, type: 3}
-  m_Name: Assets Reference
+  m_Name: Game Objects Assets Reference
   m_EditorClassIdentifier: 
   ClickDetectorAddress: ClickDetector
   FXStarAddress: FXStar

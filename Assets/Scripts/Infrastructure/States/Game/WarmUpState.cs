@@ -29,7 +29,7 @@ namespace Infrastructure.States.Game
 		}
 
 		private async void AssetsReferenceWarmUp() => 
-			await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 
 		private void EnterInLoadStaticDataState() => 
 			_gameStateMachine.Enter<LoadStaticDataState>();

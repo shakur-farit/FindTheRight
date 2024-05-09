@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CellContent.Factory;
 using Cysharp.Threading.Tasks;
 using Data;
@@ -63,16 +62,6 @@ namespace CellContent
 
 			usedContentList.Add(contentStaticData);
 			usedContentOnLevel.Add(contentStaticData);
-
-			//GameObject prefab = await _contentFactory.CreateContent(transform);
-			//Content contentPrefab = prefab.GetComponent<Content>();
-
-			//contentPrefab.Type = contentStaticData.Type;
-			//contentPrefab.Id = contentStaticData.Id.ToUpper();
-			//contentPrefab.ContentSprite.sprite = contentStaticData.Sprite;
-
-			//usedContentList.Add(contentStaticData);
-			//usedContentOnLevel.Add(contentStaticData);
 		}
 
 		private void SetupContentData(ContentStaticData contentStaticData)

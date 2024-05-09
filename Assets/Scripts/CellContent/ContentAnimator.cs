@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Animation;
+using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 
 namespace CellContent
@@ -8,27 +10,35 @@ namespace CellContent
 	{
 		private readonly IShaker _shaker;
 		private readonly IBouncer _bouncer;
+		private readonly StaticDataService _staticDataService;
 
-		private const float ScalingValue = 1.3f;
-		private const float Duration = 0.5f;
-
-		public ContentAnimator(IShaker shaker, IBouncer bouncer)
+		public ContentAnimator(IShaker shaker, IBouncer bouncer, StaticDataService staticDataService)
 		{
 			_shaker = shaker;
 			_bouncer = bouncer;
+			_staticDataService = staticDataService;
 		}
 
 		public void DoShakeEffect(Transform transform)
 		{
-			float duration = 0.4f;
-			float strength = 0.5f;
-			int vibrato = 10;
-			float random = 20f;
+			ShakeAnimationStaticData animationData = _staticDataService.ForContentShakeAnimation;
 
-			_shaker.DoShakeEffect(transform, duration, strength, vibrato, random);
+			float shakeDurationValue = animationData.ShakeDuration;
+			float shakeStrengthValue = animationData.ShakeStrength;
+			int shakeVibratoValue = animationData.ShakeVibrato;
+			float shakeRandomnessValue = animationData.ShakeRandomness;
+
+			_shaker.DoShakeEffect(transform, shakeDurationValue, shakeStrengthValue, shakeVibratoValue, shakeRandomnessValue);
 		}
 
-		public async UniTask BounceContent(Transform transform) =>
-			await _bouncer.DoBounceEffect(transform, ScalingValue, Duration);
+		public async UniTask BounceContent(Transform transform)
+		{
+			BounceAnimationStaticData animationData = _staticDataService.ForContentBounceAnimation;
+
+			float bounceScalingValue = animationData.BounceScaling;
+			float bounceDurationValue = animationData.BounceDuration;
+
+			await _bouncer.DoBounceEffect(transform, bounceScalingValue, bounceDurationValue);
+		}
 	}
 }

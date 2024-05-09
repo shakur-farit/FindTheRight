@@ -20,7 +20,7 @@ namespace CellLogic.Factory
 
 		public async UniTask<GameObject> CreateCell(Transform parentTransform)
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObjectsAssetsReference reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.CellAddress);
 			return Cell = _gameObjectsCreateService.Instantiate(prefab, parentTransform);
 		}

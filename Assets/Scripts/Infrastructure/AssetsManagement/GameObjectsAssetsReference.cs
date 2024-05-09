@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Infrastructure.AssetsManagement
 {
 	[CreateAssetMenu(fileName = "Assets Reference", menuName = "ScriptableObjects/Assets Reference")]
-	public class AssetsReference : ScriptableObject
+	public class GameObjectsAssetsReference : ScriptableObject
 	{
 		public string ClickDetectorAddress;
 		public string FXStarAddress;

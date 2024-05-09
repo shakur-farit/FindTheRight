@@ -23,7 +23,7 @@ namespace ClickDetector.Factory
 
 		public async UniTask CreateClickDetector()
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObjectsAssetsReference reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.ClickDetectorAddress);
 			ClickDetector = _gameObjectsCreateService.Instantiate(prefab);
 		}

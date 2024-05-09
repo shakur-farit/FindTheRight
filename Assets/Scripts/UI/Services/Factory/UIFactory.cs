@@ -8,7 +8,7 @@ namespace UI.Services.Factory
 	public class UIFactory : IUIFactory
 	{
 		private readonly AssetsProvider _assetsProvider;
-		private AssetsReference _reference;
+		private GameObjectsAssetsReference _reference;
 		private readonly IGameObjectsCreateService _gameObjectsCreateService;
 
 		public Transform UIRoot { get; private set; }
@@ -41,6 +41,6 @@ namespace UI.Services.Factory
 			Object.Destroy(GameCompleteWindow);
 
 		private async void LoadAssetsReference() => 
-			_reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			_reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 	}
 }

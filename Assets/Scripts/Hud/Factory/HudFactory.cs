@@ -20,7 +20,7 @@ namespace Hud.Factory
 
 		public async UniTask CreateHud()
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			GameObjectsAssetsReference reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.HudAddress);
 			Hud = _gameObjectsCreateService.Instantiate(prefab);
 		}

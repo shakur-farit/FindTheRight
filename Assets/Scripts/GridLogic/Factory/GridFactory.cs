@@ -8,7 +8,7 @@ namespace GridLogic.Factory
 	public class GridFactory : IGridFactory
 	{
 		private readonly AssetsProvider _assetsProvider;
-		private AssetsReference _reference;
+		private GameObjectsAssetsReference _reference;
 		private readonly IGameObjectsCreateService _gameObjectsCreateService;
 
 		public Transform GridParent { get; private set; }
@@ -41,6 +41,6 @@ namespace GridLogic.Factory
 			Object.Destroy(GridParent.gameObject);
 
 		private async void LoadAssetsReference() => 
-			_reference = await _assetsProvider.Load<AssetsReference>(AssetsAddress.AssetsReferenceAddress);
+			_reference = await _assetsProvider.Load<GameObjectsAssetsReference>(AssetsAddress.GameObjectsAssetsReferenceAddress);
 	}
 }

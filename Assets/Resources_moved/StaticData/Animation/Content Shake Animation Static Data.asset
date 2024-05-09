@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4843588a02a6f874ab0d37ec5df9946a, type: 3}
+  m_Name: Content Shake Animation Static Data
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.4
+  ShakeStrength: 0.5
+  ShakeVibrato: 10
+  ShakeRandomness: 20
