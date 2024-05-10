@@ -18,15 +18,17 @@ namespace CellContent
 
 		private PersistentProgressService _persistentProgressService;
 		private IContentSetupEvent _contentSetupEvent;
+		private IHelperUtility _helper;
 
 		public Transform MainContentTransform => _mainContentSprite.transform;
 		public string Id => _id;
 
 		[Inject]
-		public void Constructor(PersistentProgressService persistentProgressService, IContentSetupEvent contentSetupEvent)
+		public void Constructor(PersistentProgressService persistentProgressService, IContentSetupEvent contentSetupEvent, IHelperUtility helper)
 		{
 			_persistentProgressService = persistentProgressService;
 			_contentSetupEvent = contentSetupEvent;
+			_helper = helper;
 		}
 
 		private void OnEnable() => 
@@ -58,6 +60,6 @@ namespace CellContent
 		}
 
 		private void NormalizeContentSprite() => 
-			HelperUtility.NumberSpriteNormalize(_type, _mainContentSprite.transform, _id);
+			_helper.NumberSpriteNormalize(_type, _mainContentSprite.transform, _id);
 	}
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e0a6ea351cc0d741b97ae104cb3e18e, type: 3}
+  m_Script: {fileID: 11500000, guid: a9299be473baace40aa74889fb83a784, type: 3}
   m_Name: Grid Bounce Animation Static Data
   m_EditorClassIdentifier: 
   BounceScaling: 1.5

@@ -27,7 +27,7 @@ namespace SearchIntent
 		public void GenerateSearchIntent()
 		{
 			_contentList = _persistentProgressService.Progress.ContentData.UsedInLevel;
-
+			
 			int randomIndex = _randomService.Next(0, _contentList.Count);
 
 			string searchIntent = _contentList[randomIndex].Id.ToUpper();

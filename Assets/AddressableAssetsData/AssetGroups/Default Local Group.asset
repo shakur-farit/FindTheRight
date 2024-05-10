@@ -77,8 +77,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 530679031c10e744fbcf92363af3eeba
+  - m_GUID: 187db1a324b4d6b44b21efd034d7d250
     m_Address: Grid Bounce Animation Static Data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: adcdf63ba42ffd04b88990a9382f86d0
+    m_Address: Content Bounce Animation Static Data
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -87,8 +92,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: adcdf63ba42ffd04b88990a9382f86d0
-    m_Address: Content Bounce Animation Static Data
+  - m_GUID: 0fff5ba1fa83d2148a9e9e6619c01711
+    m_Address: Restart Button Rotate Animation Static Data
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

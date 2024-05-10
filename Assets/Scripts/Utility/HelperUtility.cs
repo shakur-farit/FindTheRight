@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Utility
 {
-	public static class HelperUtility
+	public class HelperUtility : IHelperUtility
 	{
-		public static void NumberSpriteNormalize(ContentType type, Transform transform, string id)
+		public void NumberSpriteNormalize(ContentType type, Transform transform, string id)
 		{
 			if (type != ContentType.Numbers) 
 				return;

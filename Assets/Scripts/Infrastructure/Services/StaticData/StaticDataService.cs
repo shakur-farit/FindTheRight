@@ -14,6 +14,8 @@ namespace Infrastructure.Services.StaticData
 
 		private const string GridBounceAnimationPath = "Grid Bounce Animation Static Data";
 
+		private const string RestartButtonRotateAnimation = "Restart Button Rotate Animation Static Data";
+
 		private readonly AssetsProvider _assetsProvider;
 
 		public LevelStaticDataList ForLevels { get; private set; }
@@ -23,6 +25,8 @@ namespace Infrastructure.Services.StaticData
 		public ShakeAnimationStaticData ForContentShakeAnimation { get; private set; }
 
 		public BounceAnimationStaticData ForGridBounceAnimation { get; private set; }
+
+		public RotateAnimationStaticData ForRestartButtonRotateAnimation { get; private set; }
 
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
@@ -38,6 +42,8 @@ namespace Infrastructure.Services.StaticData
 			ForContentShakeAnimation = await _assetsProvider.Load<ShakeAnimationStaticData>(ContentShakeAnimationPath);
 
 			ForGridBounceAnimation = await _assetsProvider.Load<BounceAnimationStaticData>(GridBounceAnimationPath);
+
+			ForRestartButtonRotateAnimation = await _assetsProvider.Load<RotateAnimationStaticData>(RestartButtonRotateAnimation);
 		}
 
 		private async UniTask WarmUp()
@@ -49,6 +55,8 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<ShakeAnimationStaticData>(ContentShakeAnimationPath);
 
 			await _assetsProvider.Load<BounceAnimationStaticData>(GridBounceAnimationPath);
+
+			await _assetsProvider.Load<RotateAnimationStaticData>(RestartButtonRotateAnimation);
 		}
 	}
 }

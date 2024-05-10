@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CellLogic;
 using Cysharp.Threading.Tasks;
 using GridLogic.Factory;
@@ -18,18 +19,20 @@ namespace GridLogic
 
 		private readonly IGridFactory _gridFactory;
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly IBouncer _bouncer;
 		private readonly ICellGenerator _cellGenerator;
+		private readonly IGridAnimator _gridAnimator;
 		private readonly StaticDataService _staticDataService;
+		private readonly IBouncer _bouncer;
 
 		public GridGenerator(IGridFactory gridFactory, PersistentProgressService persistentProgressService,
-			IBouncer bouncer, ICellGenerator cellGenerator, StaticDataService staticDataService)
+			ICellGenerator cellGenerator, IGridAnimator gridAnimator, StaticDataService staticDataService, IBouncer bouncer)
 		{
 			_gridFactory = gridFactory;
 			_persistentProgressService = persistentProgressService;
-			_bouncer = bouncer;
 			_cellGenerator = cellGenerator;
+			_gridAnimator = gridAnimator;
 			_staticDataService = staticDataService;
+			_bouncer = bouncer;
 		}
 
 		public async UniTask GenerateGrid(bool canAnimate)
@@ -82,12 +85,7 @@ namespace GridLogic
 		private async UniTask TryAnimateGrid(bool canAnimate, Transform gridParent)
 		{
 			if (canAnimate)
-			{
-				float scalingValue = _staticDataService.ForGridBounceAnimation.BounceScaling;
-				float duration = _staticDataService.ForGridBounceAnimation.BounceDuration;
-
-				await _bouncer.DoBounceEffect(gridParent, scalingValue, duration);
-			}
+				await _gridAnimator.BounceGrid(gridParent);
 		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Infrastructure.Services.Animation
 {
-	public class AnimationService : IBouncer, IShaker, IFadeInOut
+	public class AnimationService : IBouncer, IShaker, IFadeInOut, IRotator
 	{
 		public async UniTask DoBounceEffect(Transform transform, float scalingValue, float duration)
 		{
@@ -34,6 +34,13 @@ namespace Infrastructure.Services.Animation
 			await canvasGroup.DOFade(endValue, duration).AsyncWaitForCompletion();
 
 			DOTween.Kill(canvasGroup);
+		}
+
+		public async UniTask DoRotate(Transform transform, Vector3 endValue, float duration)
+		{
+			await transform.DORotate(endValue, duration).AsyncWaitForCompletion();
+
+			DOTween.Kill(transform);
 		}
 	}
 }

@@ -21,6 +21,8 @@ using Infrastructure.States.LevelDifficultly;
 using SearchIntent;
 using UI.Services.Factory;
 using UI.Services.Window;
+using UI.Windows;
+using Utility;
 using Zenject;
 
 namespace Installers
@@ -66,7 +68,10 @@ namespace Installers
 			RegisterEventer();
 			RegisterGridCleaner();
 			RegisterContentAnimator();
+			RegisterGridAnimator();
+			RegisterRestartButtonAnimator();
 			RegisterFXCreator();
+			RegisterHelperUtility();
 		}
 
 		private void RegisterGenerators()
@@ -146,7 +151,16 @@ namespace Installers
 		private void RegisterContentAnimator() => 
 			Container.Bind<IContentAnimator>().To<ContentAnimator>().AsSingle();
 
+		private void RegisterGridAnimator() => 
+			Container.Bind<IGridAnimator>().To<GridAnimator>().AsSingle();
+
+		private void RegisterRestartButtonAnimator() => 
+			Container.Bind<IRestartButtonAnimator>().To<RestartButtonAnimator>().AsSingle();
+
 		private void RegisterFXCreator() => 
 			Container.Bind<IFXCreator>().To<FXCreator>().AsSingle();
+
+		private void RegisterHelperUtility() => 
+			Container.Bind<IHelperUtility>().To<HelperUtility>().AsSingle();
 	}
 }
