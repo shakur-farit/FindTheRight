@@ -60,7 +60,7 @@ namespace Infrastructure.States.Game
 
 			CleanLists();
 
-			await CloseGameCompleteWindow();
+			//await CloseGameCompleteWindow();
 
 			DestroyUIObjects();
 
@@ -75,11 +75,12 @@ namespace Infrastructure.States.Game
 		public void DestroyFXObjects() =>
 			_fxFactory.DestroyStarFx();
 
-		private async UniTask CloseGameCompleteWindow()
-		{
-			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
-			_windowService.Close(WindowId.GameComplete);
-		}
+		//private async UniTask CloseGameCompleteWindow()
+		//{
+		//	await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
+		//	_windowService.Close(WindowId.GameComplete);
+		//}
+
 		public void DestroyGameObjects()
 		{
 			_gridFactory.DestroyGridParent();

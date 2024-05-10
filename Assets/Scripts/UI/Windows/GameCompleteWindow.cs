@@ -1,16 +1,14 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Events;
+using UI.Services.Window;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace UI.Windows
 {
-	public class GameCompleteWindow : MonoBehaviour
+	public class GameCompleteWindow : WindowBase
 	{
-		public Button RestartButton;
-
 		private IGameRestartEvent _gameRestartEvent;
 		private IRestartButtonAnimator _restartButtonAnimator;
 
@@ -21,11 +19,13 @@ namespace UI.Windows
 			_restartButtonAnimator = restartButtonAnimator;
 		}
 
-		private void Awake() => 
-			RestartButton.onClick.AddListener(Restart);
+		protected override void OnAwake()
+		{
+			ActionButton.onClick.AddListener(Restart);
+		}
 
 		private void OnDestroy() => 
-			DOTween.Kill(RestartButton.transform);
+			DOTween.Kill(ActionButton.transform);
 
 		private async void Restart()
 		{
@@ -34,12 +34,21 @@ namespace UI.Windows
 			DisableButton();
 
 			await PlayButtonAnimation();
+
+			//CloseWindow();
 		}
 
 		private async UniTask PlayButtonAnimation() => 
-			await _restartButtonAnimator.Animate(RestartButton.transform);
+			await _restartButtonAnimator.Animate(ActionButton.transform);
 
 		private void DisableButton() => 
-			RestartButton.interactable = false;
+			ActionButton.interactable = false;
+
+		protected override async void CloseWindow()
+		{
+			await Animator.DoFadeOut();
+			Debug.Log("Her");
+			WindowsService.Close(WindowId.GameComplete);
+		}
 	}
 }
