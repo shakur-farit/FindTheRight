@@ -16,10 +16,12 @@ namespace UI.Services.Window
 			{
 				case WindowId.None:
 					break;
+				case WindowId.MainMenu:
+					await _uiFactory.CreateMainMenuWindow(_uiFactory.UIRoot);
+					break;
 				case WindowId.GameComplete:
 					await _uiFactory.CreateGameCompleteWindow(_uiFactory.UIRoot);
 					break;
-
 			}
 		}
 
@@ -28,6 +30,9 @@ namespace UI.Services.Window
 			switch (windowId)
 			{
 				case WindowId.None:
+					break;
+				case WindowId.MainMenu:
+					_uiFactory.DestroyMainMenuWindow();
 					break;
 				case WindowId.GameComplete:
 					 _uiFactory.DestroyGameCompleteWindow();

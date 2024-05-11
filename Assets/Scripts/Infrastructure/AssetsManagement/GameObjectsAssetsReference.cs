@@ -13,6 +13,7 @@ namespace Infrastructure.AssetsManagement
 		public string ContentAddress;
 		public string HudAddress;
 		public string UIRootAddress;
+		public string MainMenuWindowAddress;
 		public string GameCompleteWindowAddress;
 	}
 }

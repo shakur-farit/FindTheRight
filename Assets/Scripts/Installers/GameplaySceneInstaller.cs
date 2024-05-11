@@ -131,7 +131,7 @@ namespace Installers
 			Container.Bind<IGameObjectsCreateService>().To<GameObjectsCreateService>().AsSingle();
 
 		private void RegisterEventer() => 
-			Container.BindInterfacesAndSelfTo<Eventer>().AsSingle();
+			Container.BindInterfacesAndSelfTo<Eventor>().AsSingle();
 
 		private void RegisterGridGenerator() => 
 			Container.Bind<IGridGenerator>().To<GridGenerator>().AsSingle();

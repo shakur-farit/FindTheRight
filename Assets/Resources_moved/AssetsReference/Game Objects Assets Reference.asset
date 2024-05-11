@@ -20,4 +20,5 @@ MonoBehaviour:
   ContentAddress: Content
   HudAddress: Hud
   UIRootAddress: UIRoot
+  MainMenuWindowAddress: MainMenuWindow
   GameCompleteWindowAddress: GameCompleteWindow

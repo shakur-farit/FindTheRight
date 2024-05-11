@@ -31,21 +31,31 @@ namespace Infrastructure
 
 		private void RegisterStates()
 		{
+			RegisterGameStates();
+
+			RegisterLevelStates();
+		}
+
+		private void RegisterGameStates()
+		{
 			_gameStateMachine.RegisterState(_statesFactory.Create<WarmUpState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadStaticDataState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<GamePlayLoopState>());
 			_gameStateMachine.RegisterState(_statesFactory.Create<GameCompleteState>());
+		}
 
+		private void RegisterLevelStates()
+		{
 			_levelStateMachine.RegisterState(_statesFactory.Create<EasyLevelState>());
 			_levelStateMachine.RegisterState(_statesFactory.Create<MediumLevelState>());
 			_levelStateMachine.RegisterState(_statesFactory.Create<HardLevelState>());
 		}
 
-		private void EnterInLoadStaticDataState()
-		{
+		private void EnterInLoadStaticDataState() =>
 			_gameStateMachine.Enter<LoadStaticDataState>();
-		}
 	}
 }
 

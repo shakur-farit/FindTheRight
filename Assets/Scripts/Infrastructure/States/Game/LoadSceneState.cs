@@ -1,57 +1,39 @@
+using System.Threading.Tasks;
 using ClickDetector.Factory;
 using Cysharp.Threading.Tasks;
-using GridLogic.Factory;
-using Hud.Factory;
 using Infrastructure.States.LevelDifficultly;
 using UI.Services.Factory;
+using Zenject;
 
 namespace Infrastructure.States.Game
 {
 	public class LoadSceneState : IState
 	{
-		private readonly IGridFactory _gridFactory;
 		private readonly IUIFactory _uiFactory;
-		private readonly LevelStateMachine _levelStateMachine;
-		private readonly IHudFactory _hudFactory;
-		private readonly IClickDetectorFactory _clickDetectorFactory;
+		private readonly GameStateMachine _gameStateMachine;
+		private readonly IClickDetectorFactory _detectorFactory;
 
-		public LoadSceneState(LevelStateMachine levelStateMachine, IGridFactory gridFactory, IUIFactory uiFactory, 
-			IHudFactory hudFactory, IClickDetectorFactory clickDetectorFactory)
+		public LoadSceneState(IUIFactory uiFactory, GameStateMachine gameStateMachine, IClickDetectorFactory detectorFactory)
 		{
-			_gridFactory = gridFactory;
 			_uiFactory = uiFactory;
-			_levelStateMachine = levelStateMachine;
-			_hudFactory = hudFactory;
-			_clickDetectorFactory = clickDetectorFactory;
+			_gameStateMachine = gameStateMachine;
+			_detectorFactory = detectorFactory;
 		}
 
 		public async void Enter()
 		{
-			await LoadSceneGameObjects();
-			EnterInEasyLevelState();
-		}
-
-		private async UniTask LoadSceneGameObjects()
-		{
-			await CreateGridParent();
 			await CreateUIRoot();
-			await CreateHud();
-			CreateClickDetector();
+
+			EnterInMainMenuState();
 		}
 
-		private async UniTask CreateGridParent() => 
-			await _gridFactory.CreateGridParent();
-
-		private async UniTask CreateHud() => 
-			await _hudFactory.CreateHud();
+		private async UniTask CreateClickDetector() => 
+			await _detectorFactory.CreateClickDetector();
 
 		private async UniTask CreateUIRoot() => 
 			await _uiFactory.CreateUIRoot();
 
-		private async void CreateClickDetector() => 
-			await _clickDetectorFactory.CreateClickDetector();
-
-		private void EnterInEasyLevelState() =>
-			_levelStateMachine.Enter<EasyLevelState>();
+		private void EnterInMainMenuState() =>
+			_gameStateMachine.Enter<GamePlayLoopState>();
 	}
 }

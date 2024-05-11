@@ -19,10 +19,8 @@ namespace UI.Windows
 			_restartButtonAnimator = restartButtonAnimator;
 		}
 
-		protected override void OnAwake()
-		{
+		protected override void OnAwake() => 
 			ActionButton.onClick.AddListener(Restart);
-		}
 
 		private void OnDestroy() => 
 			DOTween.Kill(ActionButton.transform);
@@ -33,9 +31,9 @@ namespace UI.Windows
 
 			DisableButton();
 
-			await PlayButtonAnimation();
+			CloseWindow();
 
-			//CloseWindow();
+			await PlayButtonAnimation();
 		}
 
 		private async UniTask PlayButtonAnimation() => 
@@ -47,7 +45,6 @@ namespace UI.Windows
 		protected override async void CloseWindow()
 		{
 			await Animator.DoFadeOut();
-			Debug.Log("Her");
 			WindowsService.Close(WindowId.GameComplete);
 		}
 	}

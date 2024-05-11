@@ -1,5 +1,4 @@
 using ClickDetector.Factory;
-using Cysharp.Threading.Tasks;
 using Events;
 using FX;
 using GridLogic.Factory;
@@ -53,33 +52,20 @@ namespace Infrastructure.States.Game
 			_persistentProgressService.Progress.ClickDetectorData.CanClick = false;
 
 
-		public async void GameRestartScene()
+		public void GameRestartScene()
 		{
 			DestroyGameObjects();
 			DestroyFXObjects();
 
 			CleanLists();
 
-			//await CloseGameCompleteWindow();
-
-			DestroyUIObjects();
-
 			_gameRestartEvent.GameRestarted -= GameRestartScene;
 			
-			_gameStateMachine.Enter<LoadStaticDataState>();
+			_gameStateMachine.Enter<GamePlayLoopState>();
 		}
-
-		private void DestroyUIObjects() => 
-			_uiFactory.DestroyUIRoot();
 
 		public void DestroyFXObjects() =>
 			_fxFactory.DestroyStarFx();
-
-		//private async UniTask CloseGameCompleteWindow()
-		//{
-		//	await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeOut();
-		//	_windowService.Close(WindowId.GameComplete);
-		//}
 
 		public void DestroyGameObjects()
 		{
