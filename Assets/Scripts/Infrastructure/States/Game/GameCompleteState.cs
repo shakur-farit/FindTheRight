@@ -4,9 +4,7 @@ using FX;
 using GridLogic.Factory;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
-using UI.Services.Factory;
 using UI.Services.Window;
-using UI.Windows;
 
 namespace Infrastructure.States.Game
 {
@@ -15,7 +13,6 @@ namespace Infrastructure.States.Game
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly WindowService _windowService;
 		private readonly PersistentProgressService _persistentProgressService;
-		private readonly IUIFactory _uiFactory;
 		private readonly IGridFactory _gridFactory;
 		private readonly IFXFactory _fxFactory;
 		private readonly IGameRestartEvent _gameRestartEvent;
@@ -23,13 +20,12 @@ namespace Infrastructure.States.Game
 		private readonly IClickDetectorFactory _clickerDetectorFactory;
 
 		public GameCompleteState(GameStateMachine gameStateMachine, WindowService windowService, 
-			PersistentProgressService persistentProgressService, IUIFactory uiFactory, IGridFactory gridFactory, IFXFactory fxFactory, 
+			PersistentProgressService persistentProgressService, IGridFactory gridFactory, IFXFactory fxFactory, 
 			IHudFactory hudFactory, IClickDetectorFactory clickerDetectorFactory, IGameRestartEvent gameRestartEvent)
 		{
 			_gameStateMachine = gameStateMachine;
 			_windowService = windowService;
 			_persistentProgressService = persistentProgressService;
-			_uiFactory = uiFactory;
 			_gridFactory = gridFactory;
 			_fxFactory = fxFactory;
 			_hudFactory = hudFactory;
@@ -42,8 +38,6 @@ namespace Infrastructure.States.Game
 			_gameRestartEvent.GameRestarted += GameRestartScene;
 
 			await _windowService.Open(WindowId.GameComplete);
-
-			await _uiFactory.GameCompleteWindow.GetComponent<WindowAnimator>().DoFadeIn();
 
 			ReturnClicks();
 		}

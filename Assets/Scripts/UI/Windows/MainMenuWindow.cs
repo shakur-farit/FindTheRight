@@ -18,8 +18,6 @@ namespace UI.Windows
 
 		public void StartGamePlay()
 		{
-			Debug.Log("Press");
-
 			_eventor.CallGameStartedEvent();
 
 			CloseWindow();

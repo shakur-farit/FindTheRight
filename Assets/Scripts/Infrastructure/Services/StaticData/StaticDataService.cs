@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using StaticData;
+using StaticData.Animation;
+using UnityEditor.PackageManager.UI;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -16,6 +18,9 @@ namespace Infrastructure.Services.StaticData
 
 		private const string RestartButtonRotateAnimation = "Restart Button Rotate Animation Static Data";
 
+		private const string GameCompleteWindowFadeInAnimationPath = "Complete Window Fade In Animation Static Data";
+		private const string GameCompleteWindowFadeOutAnimationPath = "Complete Window Fade Out Animation Static Data";
+
 		private readonly AssetsProvider _assetsProvider;
 
 		public LevelStaticDataList ForLevels { get; private set; }
@@ -27,6 +32,9 @@ namespace Infrastructure.Services.StaticData
 		public BounceAnimationStaticData ForGridBounceAnimation { get; private set; }
 
 		public RotateAnimationStaticData ForRestartButtonRotateAnimation { get; private set; }
+
+		public FadeInOutAnimationStaticData ForGameCompleteWindowFadeInAnimation { get; private set; }
+		public FadeInOutAnimationStaticData ForGameCompleteWindowFadeOutAnimation { get; private set; }
 
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
@@ -44,6 +52,11 @@ namespace Infrastructure.Services.StaticData
 			ForGridBounceAnimation = await _assetsProvider.Load<BounceAnimationStaticData>(GridBounceAnimationPath);
 
 			ForRestartButtonRotateAnimation = await _assetsProvider.Load<RotateAnimationStaticData>(RestartButtonRotateAnimation);
+
+			ForGameCompleteWindowFadeInAnimation = 
+				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeInAnimationPath);
+			ForGameCompleteWindowFadeOutAnimation = 
+				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeOutAnimationPath);
 		}
 
 		private async UniTask WarmUp()
@@ -57,6 +70,9 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<BounceAnimationStaticData>(GridBounceAnimationPath);
 
 			await _assetsProvider.Load<RotateAnimationStaticData>(RestartButtonRotateAnimation);
+
+			await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeInAnimationPath);
+			await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeOutAnimationPath);
 		}
 	}
 }

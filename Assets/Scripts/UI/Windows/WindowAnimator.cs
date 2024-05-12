@@ -1,35 +1,46 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Infrastructure.Services.Animation;
+using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace UI.Windows
 {
-	public class WindowAnimator : MonoBehaviour
+	public abstract class WindowsAnimator
 	{
-		[SerializeField] private CanvasGroup _canvasGroup;
-		[SerializeField] private float _alphaStartValue = 0f;
-		[SerializeField] private float _endFadeInValue = 1f;
-		[SerializeField] private float _endFadeOutValue = 0f;
-		[SerializeField] private float _duration = 0.5f;
+		protected float EndFadeInValue;
+		protected float EndFadeOutValue;
+		protected float Duration;
 
-		private IFadeInOut _fadeInOut;
+		protected StaticDataService StaticData;
+		public readonly IFadeInOut FadeInOut;
 
-		[Inject]
-		public void Constructor(IFadeInOut fadeInOut) =>
-			_fadeInOut = fadeInOut;
+		protected WindowsAnimator(StaticDataService staticData, IFadeInOut fadeInOut)
+		{
+			StaticData = staticData;
+			FadeInOut = fadeInOut;
+		}
 
-		private void Awake() => 
-			_canvasGroup.alpha = _alphaStartValue;
+		//private IFadeInOut _fadeInOut;
 
-		private void OnDestroy() => 
-			DOTween.Kill(_canvasGroup);
+		//[Inject]
+		//public void Constructor(IFadeInOut fadeInOut) =>
+		//	_fadeInOut = fadeInOut;
 
-		public async UniTask DoFadeIn() => 
-			await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
+		//private void Awake() => 
+		//	_canvasGroup.alpha = _alphaStartValue;
 
-		public async UniTask DoFadeOut() => 
-			await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
+		//private void OnDestroy() => 
+		//	DOTween.Kill(_canvasGroup);
+
+		//public async UniTask DoFadeIn() => 
+		//	await _fadeInOut.DoFade(_canvasGroup, _endFadeInValue, _duration);
+
+		//public async UniTask DoFadeOut() => 
+		//	await _fadeInOut.DoFade(_canvasGroup, _endFadeOutValue, _duration);
+
+		public abstract UniTask DoFadeIn(CanvasGroup canvasGroup);
+		public abstract UniTask DoFadeOut(CanvasGroup canvasGroup);
 	}
 }

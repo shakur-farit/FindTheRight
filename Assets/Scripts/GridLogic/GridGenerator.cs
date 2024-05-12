@@ -1,10 +1,7 @@
-using System.Threading.Tasks;
 using CellLogic;
 using Cysharp.Threading.Tasks;
 using GridLogic.Factory;
-using Infrastructure.Services.Animation;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 using UnityEngine;
 
 namespace GridLogic
@@ -21,18 +18,14 @@ namespace GridLogic
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly ICellGenerator _cellGenerator;
 		private readonly IGridAnimator _gridAnimator;
-		private readonly StaticDataService _staticDataService;
-		private readonly IBouncer _bouncer;
 
 		public GridGenerator(IGridFactory gridFactory, PersistentProgressService persistentProgressService,
-			ICellGenerator cellGenerator, IGridAnimator gridAnimator, StaticDataService staticDataService, IBouncer bouncer)
+			ICellGenerator cellGenerator, IGridAnimator gridAnimator)
 		{
 			_gridFactory = gridFactory;
 			_persistentProgressService = persistentProgressService;
 			_cellGenerator = cellGenerator;
 			_gridAnimator = gridAnimator;
-			_staticDataService = staticDataService;
-			_bouncer = bouncer;
 		}
 
 		public async UniTask GenerateGrid(bool canAnimate)

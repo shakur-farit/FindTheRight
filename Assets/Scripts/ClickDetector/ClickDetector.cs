@@ -38,6 +38,8 @@ namespace ClickDetector
 
 				if (collider != null && collider.TryGetComponent(out Content content)) 
 					_contentCompareService.Compare(content);
+
+				Debug.Log("Detected");
 			}
 		}
 	}

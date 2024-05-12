@@ -102,6 +102,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c89e18a330abf9f408db53477f5bfd50
+    m_Address: Complete Window Fade In Animation Static Data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1025ed2e533cb5439622c839d3e2017
+    m_Address: Complete Window Fade Out Animation Static Data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e408391096458aa40ad82262c54a3cdc, type: 2}
   m_SchemaSet:

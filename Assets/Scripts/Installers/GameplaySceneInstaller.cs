@@ -35,6 +35,7 @@ namespace Installers
 			RegisterStateMachines();
 			RegisterServices();
 			RegisterGenerators();
+			RegisterAnimators();
 		}
 
 		private void RegisterStateMachines()
@@ -67,9 +68,6 @@ namespace Installers
 			RegisterGameObjectsCreateService();
 			RegisterEventer();
 			RegisterGridCleaner();
-			RegisterContentAnimator();
-			RegisterGridAnimator();
-			RegisterRestartButtonAnimator();
 			RegisterFXCreator();
 			RegisterHelperUtility();
 		}
@@ -87,6 +85,14 @@ namespace Installers
 
 		private void RegisterGridFactory() => 
 			Container.Bind<IGridFactory>().To<GridFactory>().AsSingle();
+
+		private void RegisterAnimators()
+		{
+			RegisterContentAnimator();
+			RegisterGridAnimator();
+			RegisterRestartButtonAnimator();
+			RegisterGameCompleteAnimator();
+		}
 
 		private void RegisterCellFactory() => 
 			Container.Bind<ICellFactory>().To<CellFactory>().AsSingle();
@@ -162,5 +168,8 @@ namespace Installers
 
 		private void RegisterHelperUtility() => 
 			Container.Bind<IHelperUtility>().To<HelperUtility>().AsSingle();
+
+		private void RegisterGameCompleteAnimator() => 
+			Container.Bind<GameCompleteWindowAnimator>().AsSingle();
 	}
 }

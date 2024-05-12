@@ -7,9 +7,9 @@ namespace UI.Windows
 {
 	public abstract class WindowBase : MonoBehaviour
 	{
-		public Button ActionButton;
-		public Button QuitButton;
-		public WindowAnimator Animator;
+		[SerializeField] protected Button ActionButton;
+		[SerializeField] protected Button QuitButton;
+		[SerializeField] protected CanvasGroup CanvasGroup;
 
 		protected WindowService WindowsService;
 

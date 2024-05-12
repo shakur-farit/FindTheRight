@@ -34,6 +34,6 @@ namespace Infrastructure.States.Game
 			await _uiFactory.CreateUIRoot();
 
 		private void EnterInMainMenuState() =>
-			_gameStateMachine.Enter<GamePlayLoopState>();
+			_gameStateMachine.Enter<MainMenuState>();
 	}
 }
