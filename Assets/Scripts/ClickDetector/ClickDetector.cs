@@ -36,10 +36,8 @@ namespace ClickDetector
 				Vector2 clickPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 				Collider2D collider = Physics2D.OverlapPoint(clickPosition);
 
-				if (collider != null && collider.TryGetComponent(out Content content)) 
+				if (collider != null && collider.TryGetComponent(out Content content))
 					_contentCompareService.Compare(content);
-
-				Debug.Log("Detected");
 			}
 		}
 	}

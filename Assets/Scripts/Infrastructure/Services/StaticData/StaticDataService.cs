@@ -21,6 +21,8 @@ namespace Infrastructure.Services.StaticData
 		private const string GameCompleteWindowFadeInAnimationPath = "Complete Window Fade In Animation Static Data";
 		private const string GameCompleteWindowFadeOutAnimationPath = "Complete Window Fade Out Animation Static Data";
 
+		private const string MainMenuWindowFadeOutAnimationPath = "Main Menu Window Fade Out Animation Static Data";
+
 		private readonly AssetsProvider _assetsProvider;
 
 		public LevelStaticDataList ForLevels { get; private set; }
@@ -35,6 +37,8 @@ namespace Infrastructure.Services.StaticData
 
 		public FadeInOutAnimationStaticData ForGameCompleteWindowFadeInAnimation { get; private set; }
 		public FadeInOutAnimationStaticData ForGameCompleteWindowFadeOutAnimation { get; private set; }
+
+		public FadeInOutAnimationStaticData ForMainMenuWindowFadeOutAnimation { get; private set; }
 
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
@@ -57,6 +61,8 @@ namespace Infrastructure.Services.StaticData
 				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeInAnimationPath);
 			ForGameCompleteWindowFadeOutAnimation = 
 				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeOutAnimationPath);
+
+			ForMainMenuWindowFadeOutAnimation = await _assetsProvider.Load<FadeInOutAnimationStaticData>(MainMenuWindowFadeOutAnimationPath);
 		}
 
 		private async UniTask WarmUp()
@@ -73,6 +79,8 @@ namespace Infrastructure.Services.StaticData
 
 			await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeInAnimationPath);
 			await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeOutAnimationPath);
+
+			await _assetsProvider.Load<FadeInOutAnimationStaticData>(MainMenuWindowFadeOutAnimationPath);
 		}
 	}
 }

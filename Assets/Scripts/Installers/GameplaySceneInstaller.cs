@@ -92,6 +92,7 @@ namespace Installers
 			RegisterGridAnimator();
 			RegisterRestartButtonAnimator();
 			RegisterGameCompleteAnimator();
+			RegisterMainMenuAnimator();
 		}
 
 		private void RegisterCellFactory() => 
@@ -171,5 +172,8 @@ namespace Installers
 
 		private void RegisterGameCompleteAnimator() => 
 			Container.Bind<GameCompleteWindowAnimator>().AsSingle();
+
+		private void RegisterMainMenuAnimator() =>
+			Container.Bind<MainMenuWindowsAnimator>().AsSingle();
 	}
 }
