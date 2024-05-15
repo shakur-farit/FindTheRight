@@ -126,11 +126,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Animation
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a16d1b24a937e4949b2e63fa875b9f35
-    m_Address: Assets Reference
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e408391096458aa40ad82262c54a3cdc, type: 2}
   m_SchemaSet:

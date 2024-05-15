@@ -62,4 +62,6 @@ namespace CellContent
 		private void NormalizeContentSprite() => 
 			_helper.NumberSpriteNormalize(_type, _mainContentSprite.transform, _id);
 	}
+
+	public class ContentView : MonoBehaviour{}
 }
