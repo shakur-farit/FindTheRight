@@ -1,5 +1,6 @@
 using Events;
 using UI.Services.Window;
+using UI.Windows.Animation;
 using Zenject;
 
 namespace UI.Windows
@@ -16,8 +17,11 @@ namespace UI.Windows
 			_windowsAnimator = windowsAnimator;
 		}
 
-		protected override void OnAwake() => 
+		protected override void OnAwake()
+		{
 			ActionButton.onClick.AddListener(StartGamePlay);
+			QuitButton.onClick.AddListener(QuitGame);
+		}
 
 		public void StartGamePlay()
 		{
@@ -32,5 +36,8 @@ namespace UI.Windows
 
 			WindowsService.Close(WindowId.MainMenu);
 		}
+
+		protected override void QuitGame() => 
+			Quitable.Quit();
 	}
 }

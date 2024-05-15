@@ -14,6 +14,7 @@ using Infrastructure.Services.ContentCompare;
 using Infrastructure.Services.GameObjectsCreate;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
+using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.Factory;
 using Infrastructure.States.Game;
@@ -22,6 +23,7 @@ using SearchIntent;
 using UI.Services.Factory;
 using UI.Services.Window;
 using UI.Windows;
+using UI.Windows.Animation;
 using Utility;
 using Zenject;
 
@@ -70,6 +72,7 @@ namespace Installers
 			RegisterGridCleaner();
 			RegisterFXCreator();
 			RegisterHelperUtility();
+			RegisterSceneService();
 		}
 
 		private void RegisterGenerators()
@@ -139,6 +142,9 @@ namespace Installers
 
 		private void RegisterEventer() => 
 			Container.BindInterfacesAndSelfTo<Eventor>().AsSingle();
+
+		private void RegisterSceneService() => 
+			Container.BindInterfacesAndSelfTo<SceneService>().AsSingle();
 
 		private void RegisterGridGenerator() => 
 			Container.Bind<IGridGenerator>().To<GridGenerator>().AsSingle();

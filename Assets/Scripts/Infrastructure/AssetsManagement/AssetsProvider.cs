@@ -7,8 +7,8 @@ namespace Infrastructure.AssetsManagement
 {
 	public class AssetsProvider
 	{
-		private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new Dictionary<string, AsyncOperationHandle>();
-		private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new Dictionary<string, List<AsyncOperationHandle>>();
+		private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new();
+		private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new();
 
 		public void Initialize() =>
 			Addressables.InitializeAsync();

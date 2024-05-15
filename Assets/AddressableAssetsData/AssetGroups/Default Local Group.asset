@@ -60,12 +60,14 @@ MonoBehaviour:
   - m_GUID: ba1e1a1603f87c44f8989aae9616ebbd
     m_Address: Levels Static Data List
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Levels
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16e5d36f1905c4a48b3e58578acf1ab0
     m_Address: Content Static Data List
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Levels
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1790b01fcfeb00340a20c7de5c0331db
     m_Address: GridParent
@@ -80,22 +82,26 @@ MonoBehaviour:
   - m_GUID: 187db1a324b4d6b44b21efd034d7d250
     m_Address: Grid Bounce Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: adcdf63ba42ffd04b88990a9382f86d0
     m_Address: Content Bounce Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 04e6cc10df54c12449ac28ce57a90737
     m_Address: Content Shake Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0fff5ba1fa83d2148a9e9e6619c01711
     m_Address: Restart Button Rotate Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67de30194e8f16842901661d87df1706
     m_Address: MainMenuWindow
@@ -105,15 +111,23 @@ MonoBehaviour:
   - m_GUID: c89e18a330abf9f408db53477f5bfd50
     m_Address: Complete Window Fade In Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1025ed2e533cb5439622c839d3e2017
     m_Address: Complete Window Fade Out Animation Static Data
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Animation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2fe197c994bf1ac40b7d6a4a55b7cb5c
     m_Address: Main Menu Window Fade Out Animation Static Data
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Animation
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a16d1b24a937e4949b2e63fa875b9f35
+    m_Address: Assets Reference
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -2,7 +2,9 @@ using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Events;
+using Infrastructure.Services.SceneManagement;
 using UI.Services.Window;
+using UI.Windows.Animation;
 using UnityEngine;
 using Zenject;
 
@@ -23,8 +25,11 @@ namespace UI.Windows
 			_windowsAnimator = windowsAnimator;
 		}
 
-		protected override void OnAwake() => 
+		protected override void OnAwake()
+		{
 			ActionButton.onClick.AddListener(Restart);
+			QuitButton.onClick.AddListener(QuitGame);
+		}
 
 		private void Start() => 
 			FadeInWindow();
@@ -51,6 +56,9 @@ namespace UI.Windows
 			await _windowsAnimator.DoFadeOut(CanvasGroup);
 			WindowsService.Close(WindowId.GameComplete);
 		}
+
+		protected override void QuitGame() => 
+			Quitable.Quit();
 
 		private async void FadeInWindow() => 
 			await _windowsAnimator.DoFadeIn(CanvasGroup);

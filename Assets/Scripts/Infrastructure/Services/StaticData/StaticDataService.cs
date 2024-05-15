@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.AssetsManagement;
 using StaticData;
 using StaticData.Animation;
-using UnityEditor.PackageManager.UI;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -47,9 +46,9 @@ namespace Infrastructure.Services.StaticData
 		{
 			await WarmUp();
 
-			ForLevels =  await _assetsProvider.Load<LevelStaticDataList>(LevelsListPath);
+			ForLevels = await _assetsProvider.Load<LevelStaticDataList>(LevelsListPath);
 			ForContent = await _assetsProvider.Load<ContentStaticDataList>(ContentListPath);
-			
+
 			ForContentBounceAnimation = await _assetsProvider.Load<BounceAnimationStaticData>(ContentBounceAnimationPath);
 			ForContentShakeAnimation = await _assetsProvider.Load<ShakeAnimationStaticData>(ContentShakeAnimationPath);
 
@@ -57,9 +56,9 @@ namespace Infrastructure.Services.StaticData
 
 			ForRestartButtonRotateAnimation = await _assetsProvider.Load<RotateAnimationStaticData>(RestartButtonRotateAnimation);
 
-			ForGameCompleteWindowFadeInAnimation = 
+			ForGameCompleteWindowFadeInAnimation =
 				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeInAnimationPath);
-			ForGameCompleteWindowFadeOutAnimation = 
+			ForGameCompleteWindowFadeOutAnimation =
 				await _assetsProvider.Load<FadeInOutAnimationStaticData>(GameCompleteWindowFadeOutAnimationPath);
 
 			ForMainMenuWindowFadeOutAnimation = await _assetsProvider.Load<FadeInOutAnimationStaticData>(MainMenuWindowFadeOutAnimationPath);
@@ -69,7 +68,7 @@ namespace Infrastructure.Services.StaticData
 		{
 			await _assetsProvider.Load<LevelStaticDataList>(LevelsListPath);
 			await _assetsProvider.Load<ContentStaticDataList>(ContentListPath);
-			
+
 			await _assetsProvider.Load<BounceAnimationStaticData>(ContentBounceAnimationPath);
 			await _assetsProvider.Load<ShakeAnimationStaticData>(ContentShakeAnimationPath);
 
